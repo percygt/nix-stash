@@ -1,0 +1,93 @@
+{
+  "nodes": {
+    "better-escape": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1704485128,
+        "narHash": "sha256-2Q8t2FTMlt9NkQ+n3jNFxAh9eJpn7LU/NwLaoFiz2Ts=",
+        "owner": "max397574",
+        "repo": "better-escape.nvim",
+        "rev": "d62cf3c04163a46f3895c70cc807f5ae68dd8ca1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "max397574",
+        "repo": "better-escape.nvim",
+        "type": "github"
+      }
+    },
+    "neovim-session-manager": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1696875507,
+        "narHash": "sha256-WOJQ6RIibOby+Pmzr6kQxcT2NCGrq1roWkh4QKJECks=",
+        "owner": "Shatur",
+        "repo": "neovim-session-manager",
+        "rev": "68dde355a4304d83b40cf073f53915604bdd8e70",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Shatur",
+        "repo": "neovim-session-manager",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1704626572,
+        "narHash": "sha256-VwRTEKzK4wSSv64G+g3RLF3t6yBHrhR2VK3kZ5UWisU=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "24fe8bb4f552ad3926274d29e083b79d84707da6",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "type": "indirect"
+      }
+    },
+    "nvim-web-devicons": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1704631786,
+        "narHash": "sha256-BDUU6Lf/u1rs1sHobcgd/fJzJHgE5dHdiTzXi05Z54g=",
+        "owner": "percygt",
+        "repo": "nvim-web-devicons",
+        "rev": "c9f1e6d6663a9d305886f5deb0606062e89cfa99",
+        "type": "github"
+      },
+      "original": {
+        "owner": "percygt",
+        "repo": "nvim-web-devicons",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "better-escape": "better-escape",
+        "neovim-session-manager": "neovim-session-manager",
+        "nixpkgs": "nixpkgs",
+        "nvim-web-devicons": "nvim-web-devicons",
+        "vim-maximizer": "vim-maximizer"
+      }
+    },
+    "vim-maximizer": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1440196645,
+        "narHash": "sha256-+VPcMn4NuxLRpY1nXz7APaXlRQVZD3Y7SprB/hvNKww=",
+        "owner": "szw",
+        "repo": "vim-maximizer",
+        "rev": "2e54952fe91e140a2e69f35f22131219fcd9c5f1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "szw",
+        "repo": "vim-maximizer",
+        "type": "github"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
