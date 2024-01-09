@@ -1,8 +1,12 @@
 {
-  description = "Neovim plugin overlay";
+  description = "My Nix overlays";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
     codeium.url = "github:Exafunction/codeium.nvim";
+    tmux-onedark-theme = {
+      url = "github:percygt/tmux-onedark-theme";
+      flake = false;
+    };
     hmts = {
       url = "github:calops/hmts.nvim";
       flake = false;
@@ -35,13 +39,13 @@
   } @ inputs: let
     forAllSystems = nixpkgs.lib.genAttrs ["aarch64-linux" "x86_64-linux"];
     overlays = final: prev: let
-      mkPlugin = name: value:
+      mkNvimPlugin = name: value:
         prev.pkgs.vimUtils.buildVimPlugin {
           pname = name;
           version = value.lastModifiedDate;
           src = value;
         };
-      plugins = {
+      nvPlugins = {
         inherit
           (inputs)
           neovim-session-manager
@@ -52,15 +56,30 @@
           hmts
           ;
       };
+      mkTmuxPlugin = name: value:
+        prev.pkgs.tmuxPlugins.mkTmuxPlugin {
+          pluginName = name;
+          version = value.lastModifiedDate;
+          rtpFilePath = "${name}.tmux";
+          src = value;
+        };
+      tmPlugins = {
+        inherit
+          (inputs)
+          tmux-onedark-theme
+          ;
+      };
       vimPlugins =
         prev.vimPlugins
-        // builtins.mapAttrs mkPlugin plugins
+        // builtins.mapAttrs mkNvimPlugin nvPlugins
         // {
           inherit (inputs.codeium.packages."${prev.system}".vimPlugins) codeium-nvim;
         };
+      tmuxPlugins = prev.tmuxPlugins // builtins.mapAttrs mkTmuxPlugin tmPlugins;
     in {
       percygt = {
         inherit vimPlugins;
+        inherit tmuxPlugins;
       };
     };
   in {

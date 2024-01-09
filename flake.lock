@@ -53,6 +53,22 @@
         "type": "github"
       }
     },
+    "hmts": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1693226725,
+        "narHash": "sha256-jUuztOqNBltC3axa7s3CPJz9Cmukfwkf846+Z/gAxCU=",
+        "owner": "calops",
+        "repo": "hmts.nvim",
+        "rev": "14fd941d7ec2bb98314a1aacaa2573d97f1629ab",
+        "type": "github"
+      },
+      "original": {
+        "owner": "calops",
+        "repo": "hmts.nvim",
+        "type": "github"
+      }
+    },
     "neovim-session-manager": {
       "flake": false,
       "locked": {
@@ -121,9 +137,12 @@
       "inputs": {
         "better-escape": "better-escape",
         "codeium": "codeium",
+        "hmts": "hmts",
         "neovim-session-manager": "neovim-session-manager",
         "nixpkgs": "nixpkgs_2",
         "nvim-web-devicons": "nvim-web-devicons",
+        "tmux-onedark-theme": "tmux-onedark-theme",
+        "ts-context-commentstring": "ts-context-commentstring",
         "vim-maximizer": "vim-maximizer"
       }
     },
@@ -139,6 +158,38 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "tmux-onedark-theme": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1704643380,
+        "narHash": "sha256-AjIDVDVSfHj3pwT0SZIpjvFFZQzKeNNavfwHDG3bZsI=",
+        "owner": "percygt",
+        "repo": "tmux-onedark-theme",
+        "rev": "00a33ca898ee6fb48411c0b234779609c7d44fda",
+        "type": "github"
+      },
+      "original": {
+        "owner": "percygt",
+        "repo": "tmux-onedark-theme",
+        "type": "github"
+      }
+    },
+    "ts-context-commentstring": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1701364374,
+        "narHash": "sha256-60kCTkN8LqzL3xzkgIdfr5GpgMBnnX9EMKbmM9B6www=",
+        "owner": "JoosepAlviste",
+        "repo": "nvim-ts-context-commentstring",
+        "rev": "1277b4a1f451b0f18c0790e1a7f12e1e5fdebfee",
+        "type": "github"
+      },
+      "original": {
+        "owner": "JoosepAlviste",
+        "repo": "nvim-ts-context-commentstring",
         "type": "github"
       }
     },
