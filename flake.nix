@@ -3,6 +3,14 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
     codeium.url = "github:Exafunction/codeium.nvim";
+    hmts = {
+      url = "github:calops/hmts.nvim";
+      flake = false;
+    };
+    ts-context-commentstring = {
+      url = "github:JoosepAlviste/nvim-ts-context-commentstring";
+      flake = false;
+    };
     neovim-session-manager = {
       url = "github:Shatur/neovim-session-manager";
       flake = false;
@@ -40,16 +48,19 @@
           nvim-web-devicons
           vim-maximizer
           better-escape
+          ts-context-commentstring
+          hmts
           ;
       };
+      vimPlugins =
+        prev.vimPlugins
+        // builtins.mapAttrs mkPlugin plugins
+        // {
+          inherit (inputs.codeium.packages."${prev.system}".vimPlugins) codeium-nvim;
+        };
     in {
       percygt = {
-        vimPlugins =
-          prev.vimPlugins
-          // builtins.mapAttrs mkPlugin plugins
-          // {
-            inherit (inputs.codeium.packages."${prev.system}".vimPlugins) codeium-nvim;
-          };
+        inherit vimPlugins;
       };
     };
   in {
