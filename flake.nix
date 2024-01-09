@@ -2,6 +2,7 @@
   description = "Neovim plugin overlay";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
+    codeium.url = "github:Exafunction/codeium.nvim";
     neovim-session-manager = {
       url = "github:Shatur/neovim-session-manager";
       flake = false;
@@ -25,22 +26,35 @@
     ...
   } @ inputs: let
     forAllSystems = nixpkgs.lib.genAttrs ["aarch64-linux" "x86_64-linux"];
-    overlay = final: prev: let
+    overlays = final: prev: let
       mkPlugin = name: value:
         prev.pkgs.vimUtils.buildVimPlugin {
           pname = name;
           version = value.lastModifiedDate;
           src = value;
         };
-      plugins = prev.lib.filterAttrs (name: _: name != "self" && name != "nixpkgs") inputs;
+      plugins = {
+        inherit
+          (inputs)
+          neovim-session-manager
+          nvim-web-devicons
+          vim-maximizer
+          better-escape
+          ;
+      };
     in {
       percygt = {
-        vimPlugins = prev.vimPlugins // builtins.mapAttrs mkPlugin plugins;
+        vimPlugins =
+          prev.vimPlugins
+          // builtins.mapAttrs mkPlugin plugins
+          // {
+            inherit (inputs.codeium.packages."${prev.system}".vimPlugins) codeium-nvim;
+          };
       };
     };
   in {
     formatter = forAllSystems (system: nixpkgs.legacyPackages."${system}".alejandra);
-    overlays.default = overlay;
+    overlays.default = overlays;
 
     #TODO:Add github actions
     # legacyPackages = forAllSystems (
