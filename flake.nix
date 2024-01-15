@@ -3,6 +3,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
     codeium.url = "github:Exafunction/codeium.nvim";
+    tmuxinoicer.url = "github:percygt/tmuxinoicer";
     tmux-onedark-theme = {
       url = "github:percygt/tmux-onedark-theme";
       flake = false;
@@ -75,7 +76,12 @@
         // {
           inherit (inputs.codeium.packages."${prev.system}".vimPlugins) codeium-nvim;
         };
-      tmuxPlugins = prev.tmuxPlugins // builtins.mapAttrs mkTmuxPlugin tmPlugins;
+      tmuxPlugins =
+        prev.tmuxPlugins
+        // builtins.mapAttrs mkTmuxPlugin tmPlugins
+        // {
+          tmuxinoicer = inputs.tmuxinoicer.packages."${prev.system}".default;
+        };
     in {
       percygt = {
         inherit vimPlugins;
@@ -86,7 +92,7 @@
     formatter = forAllSystems (system: nixpkgs.legacyPackages."${system}".alejandra);
     overlays.default = overlays;
 
-    #TODO:Add github actions
+    # TODO:Add github actions
     # legacyPackages = forAllSystems (
     #   system:
     #     import inputs.nixpkgs {

@@ -142,6 +142,7 @@
         "nixpkgs": "nixpkgs_2",
         "nvim-web-devicons": "nvim-web-devicons",
         "tmux-onedark-theme": "tmux-onedark-theme",
+        "tmuxinoicer": "tmuxinoicer",
         "ts-context-commentstring": "ts-context-commentstring",
         "vim-maximizer": "vim-maximizer"
       }
@@ -174,6 +175,24 @@
       "original": {
         "owner": "percygt",
         "repo": "tmux-onedark-theme",
+        "type": "github"
+      }
+    },
+    "tmuxinoicer": {
+      "flake": false,
+      "locked": {
+        "dir": "packages",
+        "lastModified": 1705390418,
+        "narHash": "sha256-k0q9q0TKyracoe6a9w+tWVEoBgpTQ2PDYeg5qpOYi4E=",
+        "owner": "percygt",
+        "repo": "tmuxinoicer",
+        "rev": "9f151223dba0001349ef0b27a75ac07c64d6d127",
+        "type": "github"
+      },
+      "original": {
+        "dir": "packages",
+        "owner": "percygt",
+        "repo": "tmuxinoicer",
         "type": "github"
       }
     },
