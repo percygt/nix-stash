@@ -8,6 +8,10 @@
       url = "github:percygt/tmux-onedark-theme";
       flake = false;
     };
+    tmux-fzf-url= {
+      url = "github:wfxr/tmux-fzf-url";
+      flake = false;
+    };
     hmts = {
       url = "github:calops/hmts.nvim";
       flake = false;
@@ -68,6 +72,7 @@
         inherit
           (inputs)
           tmux-onedark-theme
+          tmux-fzf-url
           ;
       };
       vimPlugins =
