@@ -1,14 +1,17 @@
 {
-  description = "My Nix overlays";
+  description = "My stash of nix overlays";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     codeium.url = "github:Exafunction/codeium.nvim";
+    nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
     tmuxinoicer.url = "github:percygt/tmuxinoicer";
+    # wezterm.url = "github:wez/wezterm?dir=nix";
     tmux-onedark-theme = {
       url = "github:percygt/tmux-onedark-theme";
       flake = false;
     };
-    tmux-fzf-url= {
+    tmux-fzf-url = {
       url = "github:wfxr/tmux-fzf-url";
       flake = false;
     };
@@ -88,7 +91,8 @@
           tmuxinoicer = inputs.tmuxinoicer.packages."${prev.system}".default;
         };
     in {
-      percygt = {
+      stash = {
+        inherit (inputs.nix-vscode-extensions.extensions."${prev.system}") vscode-marketplace;
         inherit vimPlugins;
         inherit tmuxPlugins;
       };
