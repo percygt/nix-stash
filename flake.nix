@@ -40,13 +40,14 @@
       flake = false;
     };
   };
-  outputs = {
-    self,
+  outputs = inputs @ {
+    flake-parts,
     nixpkgs,
+    self,
     ...
-  } @ inputs: let
+  }: let
     forAllSystems = nixpkgs.lib.genAttrs ["aarch64-linux" "x86_64-linux"];
-    overlays = final: prev: let
+    overlay = final: prev: let
       mkNvimPlugin = name: value:
         prev.pkgs.vimUtils.buildVimPlugin {
           pname = name;
@@ -93,34 +94,51 @@
         inherit tmuxPlugins;
       };
     };
-  in {
-    formatter = forAllSystems (system: nixpkgs.legacyPackages."${system}".alejandra);
-    overlays.default = overlays;
+  in
+    flake-parts.lib.mkFlake {inherit inputs;} {
+      systems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin"];
+      perSystem = {
+        config,
+        self',
+        inputs',
+        pkgs,
+        system,
+        ...
+      }: {
+        devShells = {
+          default = pkgs.mkShell {
+            buildInputs = with pkgs; [act];
+          };
+        };
+      };
+      flake = {
+        formatter = forAllSystems (system: nixpkgs.legacyPackages."${system}".alejandra);
+        overlays.default = overlay;
 
-    # TODO:Add github actions
-    # legacyPackages = forAllSystems (
-    #   system:
-    #     import inputs.nixpkgs {
-    #       inherit system;
-    #       overlays = [overlay];
-    #       config.allowUnfree = true;
-    #     }
-    # );
-    # nixosConfigurations.test = nixpkgs.lib.nixosSystem {
-    #   system = "x86_64-linux";
-    #   modules = [
-    #     ({pkgs, ...}: {
-    #       boot.isContainer = true;
-    #       nixpkgs.overlays = [overlay];
-    #       system.stateVersion = "22.11";
-    #       programs.neovim = {
-    #         enable = true;
-    #         configure.packages.myVimPackage = {
-    #           opt = builtins.attrValues pkgs.nvimPlugins;
-    #         };
-    #       };
-    #     })
-    #   ];
-    # };
-  };
+        legacyPackages = forAllSystems (
+          system:
+            import inputs.nixpkgs {
+              inherit system;
+              overlays = [overlay];
+              config.allowUnfree = true;
+            }
+        );
+        nixosConfigurations.test = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ({pkgs, ...}: {
+              boot.isContainer = true;
+              nixpkgs.overlays = [overlay];
+              system.stateVersion = "22.11";
+              programs.neovim = {
+                enable = true;
+                configure.packages.vimPackage = {
+                  opt = builtins.attrValues pkgs.stash.vimPlugins;
+                };
+              };
+            })
+          ];
+        };
+      };
+    };
 }
