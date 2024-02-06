@@ -11,7 +11,7 @@
       url = "github:percygt/tmux-onedark-theme";
       flake = false;
     };
-    tmux-fzf-url = {
+    fzf-url = {
       url = "github:wfxr/tmux-fzf-url";
       flake = false;
     };
@@ -72,11 +72,7 @@
           src = value;
         };
       tmPlugins = {
-        inherit
-          (inputs)
-          tmux-onedark-theme
-          tmux-fzf-url
-          ;
+        inherit (inputs) tmux-onedark-theme fzf-url;
       };
       vimPlugins =
         prev.vimPlugins
