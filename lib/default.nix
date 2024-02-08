@@ -57,4 +57,10 @@ in {
   in
     builtins.mapAttrs mkStashVimPlugin vimPluginSrc
     // extraVimPluginSrc;
+  # stachVscodeExtensions = {system}: let
+  #   inherit (inputs.nix-vscode-extensions.extensions."${system}") vscode-marketplace;
+  #
+  # in {
+  #   inherit vscode-marketplace)
+  # };
 }
