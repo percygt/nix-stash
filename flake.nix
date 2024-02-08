@@ -71,10 +71,14 @@
         packages =
           self.lib.stashVimPlugins {inherit system;}
           // self.lib.stashTmuxPlugins {inherit system;}
-          // self.lib.stashVscodeExtensions {inherit system;};
+          // {
+            vscode-with-extensions = pkgs.vscode-with-extensions.override {
+              vscodeExtensions = self.lib.vscodeExtensions {inherit system;};
+            };
+          };
         overlayAttrs = {
           stash = {
-            vscode-marketplace =  self.lib.stashVscodeExtensions {inherit system;};
+            inherit (inputs.nix-vscode-extensions.extensions."${system}") vscode-marketplace;
             vimPlugins = pkgs.vimPlugins // self.lib.stashVimPlugins {inherit system;};
             tmuxPlugins = pkgs.tmuxPlugins // self.lib.stashTmuxPlugins {inherit system;};
           };

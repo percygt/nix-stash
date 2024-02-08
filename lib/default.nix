@@ -1,6 +1,6 @@
 {inputs}: let
   inherit (inputs.nixpkgs) legacyPackages;
-in rec {
+in {
   ## TMUX PLUGINS
   stashTmuxPlugins = {system}: let
     pkgs = legacyPackages.${system};
@@ -57,65 +57,62 @@ in rec {
   in
     builtins.mapAttrs mkStashVimPlugin vimPluginSrc
     // extraVimPluginSrc;
-  stashVscodeExtensions = {system}: let
+  vscodeExtensions = {system}: let
     inherit (inputs.nix-vscode-extensions.extensions."${system}") vscode-marketplace;
   in
-    with vscode-marketplace; {
-      inherit (adpyke) codesnap;
-      inherit (anderseandersen) html-class-suggestions;
-      inherit (antfu) iconify;
-      inherit (astro-build) astro-vscode;
-      inherit (asvetliakov) vscode-neovim;
-      inherit (bbenoist) nix;
-      inherit (bernardogualberto) solidjs;
-      inherit (britesnow) vscode-toggle-quotes;
-      inherit (charliermarsh) ruff;
-      inherit (christian-kohler) npm-intellisense;
-      inherit (christian-kohler) path-intellisense;
-      inherit (codezombiech) gitignore;
-      inherit (dbaeumer) vscode-eslint;
-      inherit (donjayamanne) python-environment-manager;
-      inherit (esbenp) prettier-vscode;
-      inherit (formulahendry) auto-close-tag;
-      inherit (formulahendry) auto-rename-tag;
-      inherit (foxundermoon) shell-format;
-      inherit (github) vscode-pull-request-github;
-      inherit (gitlab) gitlab-workflow;
-      inherit (helixquar) randomeverything;
-      inherit (jock) svg;
-      inherit (kamadorueda) alejandra;
-      inherit (kastorcode) kastorcode-dark-purple-theme;
-      inherit (kevinrose) vsc-python-indent;
-      inherit (mads-hartmann) bash-ide-vscode;
-      inherit (mgesbert) python-path;
-      inherit (mikestead) dotenv;
-      inherit (mkhl) direnv;
-      inherit (mohsen1) prettify-json;
-      inherit (mrmlnc) vscode-scss;
-      inherit (ms-azuretools) vscode-docker;
-      inherit (ms-python) python;
-      inherit (ms-vscode-remote) remote-ssh;
-      inherit (ms-vscode) remote-explorer;
-      inherit (oderwat) indent-rainbow;
-      inherit (patbenatar) advanced-new-file;
-      inherit (pmneo) tsimporter;
-      inherit (pranaygp) vscode-css-peek;
-      inherit (redhat) vscode-yaml;
-      inherit (sibiraj-s) vscode-scss-formatter;
-      inherit (simonsiefke) svg-preview;
-      inherit (sleistner) vscode-fileutils;
-      inherit (solnurkarim) html-to-css-autocompletion;
-      inherit (steoates) autoimport;
-      inherit (sumneko) lua;
-      inherit (tamasfe) even-better-toml;
-      inherit (timonwong) shellcheck;
-      inherit (usernamehw) errorlens;
-      inherit (vscode-icons-team) vscode-icons;
-      inherit (vunguyentuan) vscode-css-variables;
-      inherit (tobias-z) vscode-harpoon;
-      inherit (johnnymorganz) stylua;
-    };
-  mkHMVscodeExtensions = {system}: {
-    extensions = builtins.mapAttrsToList (name: value: {name = value;}) (stashVscodeExtensions {inherit system;});
-  };
+    with vscode-marketplace; [
+      adpyke.codesnap
+      anderseandersen.html-class-suggestions
+      antfu.iconify
+      astro-build.astro-vscode
+      asvetliakov.vscode-neovim
+      bbenoist.nix
+      bernardogualberto.solidjs
+      britesnow.vscode-toggle-quotes
+      christian-kohler.npm-intellisense
+      christian-kohler.path-intellisense
+      codezombiech.gitignore
+      dbaeumer.vscode-eslint
+      donjayamanne.python-environment-manager
+      esbenp.prettier-vscode
+      formulahendry.auto-close-tag
+      formulahendry.auto-rename-tag
+      foxundermoon.shell-format
+      github.vscode-pull-request-github
+      gitlab.gitlab-workflow
+      helixquar.randomeverything
+      jock.svg
+      kamadorueda.alejandra
+      kastorcode.kastorcode-dark-purple-theme
+      kevinrose.vsc-python-indent
+      mads-hartmann.bash-ide-vscode
+      mgesbert.python-path
+      mikestead.dotenv
+      mkhl.direnv
+      mohsen1.prettify-json
+      mrmlnc.vscode-scss
+      ms-azuretools.vscode-docker
+      ms-python.python
+      charliermarsh.ruff
+      ms-vscode-remote.remote-ssh
+      ms-vscode.remote-explorer
+      oderwat.indent-rainbow
+      patbenatar.advanced-new-file
+      pmneo.tsimporter
+      pranaygp.vscode-css-peek
+      redhat.vscode-yaml
+      sibiraj-s.vscode-scss-formatter
+      simonsiefke.svg-preview
+      sleistner.vscode-fileutils
+      solnurkarim.html-to-css-autocompletion
+      steoates.autoimport
+      sumneko.lua
+      tamasfe.even-better-toml
+      timonwong.shellcheck
+      usernamehw.errorlens
+      vscode-icons-team.vscode-icons
+      vunguyentuan.vscode-css-variables
+      tobias-z.vscode-harpoon
+      johnnymorganz.stylua
+    ];
 }
