@@ -13,12 +13,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: DeterminateSystems/nix-installer-action@main
-      - uses: DeterminateSystems/magic-nix-cache-action@main
-      - uses: DeterminateSystems/flake-checker-action@main
-      - name: Update lock
+      - uses: determinatesystems/nix-installer-action@main
+      - uses: determinatesystems/magic-nix-cache-action@main
+      - uses: determinatesystems/flake-checker-action@main
+      - name: update lock
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
           nix flake update --commit-lock-file
           git push
+
+  build:
+    needs:
+      - update
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: determinatesystems/nix-installer-action@main
+      - uses: determinatesystems/magic-nix-cache-action@main
+      - name: check package build
+        run: nix build
