@@ -97,6 +97,10 @@
   in
     flake-parts.lib.mkFlake {inherit inputs;} {
       systems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin"];
+      flake = {
+        stashVimPlugins = import ./lib/stashVimPlugins.nix {inherit inputs;};
+        stashTmuxPlugins = import ./lib/stashTmuxPlugins.nix {inherit inputs;};
+      };
       perSystem = {
         config,
         self',
@@ -105,39 +109,21 @@
         system,
         ...
       }: {
+        imports = [
+          inputs.flake-parts.flakeModules.easyOverlay
+        ];
         devShells = {
           default = pkgs.mkShell {
             buildInputs = with pkgs; [act];
           };
         };
-      };
-      flake = {
-        formatter = forAllSystems (system: nixpkgs.legacyPackages."${system}".alejandra);
-        overlays.default = overlay;
-
-        legacyPackages = forAllSystems (
-          system:
-            import inputs.nixpkgs {
-              inherit system;
-              overlays = [overlay];
-              config.allowUnfree = true;
-            }
-        );
-        nixosConfigurations.test = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            ({pkgs, ...}: {
-              boot.isContainer = true;
-              nixpkgs.overlays = [overlay];
-              system.stateVersion = "22.11";
-              programs.neovim = {
-                enable = true;
-                configure.packages.vimPackage = {
-                  opt = builtins.attrValues pkgs.stash.vimPlugins;
-                };
-              };
-            })
-          ];
+        formatter = pkgs.alejandra;
+        packages = {
+          stashVimPlugins = self.stashVimPlugins {inherit system;};
+          stashTmuxPlugins = self.stashTmuxPlugins {inherit system;};
+        };
+        overlayAttrs = {
+          inherit (config.packages) stashvimPlugins stashTmuxPlugins;
         };
       };
     };
