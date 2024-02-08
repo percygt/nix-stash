@@ -74,8 +74,8 @@
         overlayAttrs = {
           stash = {
             inherit (inputs.nix-vscode-extensions.extensions."${system}") vscode-marketplace;
-            vimPlugins = pkgs.vimPlugins // self.lib.stashVimPlugins {inherit system;};
-            tmuxPlugins = pkgs.tmuxPlugins // self.lib.stashTmuxPlugins {inherit system;};
+            vimPlugins = pkgs.vimPlugins // config.packages.vimPlugins;
+            tmuxPlugins = pkgs.tmuxPlugins // config.packages.tmuxPlugins;
           };
         };
       };

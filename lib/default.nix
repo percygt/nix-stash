@@ -1,22 +1,17 @@
 {inputs}: let
   inherit (inputs.nixpkgs) legacyPackages;
 in {
-  # imports = [
-  #   ./stashTmuxPlugins.nix
-  #   {inherit inputs;}
-  #   ./stashVimPlugins.nix
-  #   {inherit inputs;}
-  # ];
+  ## TMUX PLUGINS
   stashTmuxPlugins = {system}: let
     pkgs = legacyPackages.${system};
-    pluginSrc = {
+    tmuxPluginSrc = {
       inherit
         (inputs)
         tmux-onedark-theme
         fzf-url
         ;
     };
-    extraPluginSrc = {
+    extraTmuxPluginSrc = {
       tmuxinoicer = inputs.tmuxinoicer.packages."${system}".default;
     };
     mkStashTmuxPlugin = name: value: let
@@ -30,12 +25,13 @@ in {
         src = value;
       };
   in
-    builtins.mapAttrs mkStashTmuxPlugin pluginSrc
-    // extraPluginSrc;
-    
+    builtins.mapAttrs mkStashTmuxPlugin tmuxPluginSrc
+    // extraTmuxPluginSrc;
+
+  ## VIM PLUGINS
   stashVimPlugins = {system}: let
     pkgs = legacyPackages.${system};
-    pluginSrc = {
+    vimPluginSrc = {
       inherit
         (inputs)
         neovim-session-manager
@@ -46,7 +42,7 @@ in {
         hmts
         ;
     };
-    extraPluginSrc = {
+    extraVimPluginSrc = {
       inherit (inputs.codeium.packages."${system}".vimPlugins) codeium-nvim;
     };
     mkStashVimPlugin = name: value: let
@@ -59,6 +55,6 @@ in {
         src = value;
       };
   in
-    builtins.mapAttrs mkStashVimPlugin pluginSrc
-    // extraPluginSrc;
+    builtins.mapAttrs mkStashVimPlugin vimPluginSrc
+    // extraVimPluginSrc;
 }
