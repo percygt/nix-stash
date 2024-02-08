@@ -57,6 +57,8 @@ in {
   in
     builtins.mapAttrs mkStashVimPlugin vimPluginSrc
     // extraVimPluginSrc;
+    
+  ## VSCODE EXTENSIONS
   vscodeExtensions = {system}: let
     inherit (inputs.nix-vscode-extensions.extensions."${system}") vscode-marketplace;
   in
@@ -65,7 +67,7 @@ in {
       anderseandersen.html-class-suggestions
       antfu.iconify
       astro-build.astro-vscode
-      asvetliakov.vscode-neovim
+      vscodevim.vim
       bbenoist.nix
       bernardogualberto.solidjs
       britesnow.vscode-toggle-quotes
