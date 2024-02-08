@@ -45,62 +45,15 @@
     nixpkgs,
     self,
     ...
-  }: let
-    forAllSystems = nixpkgs.lib.genAttrs ["aarch64-linux" "x86_64-linux"];
-    overlay = final: prev: let
-      mkNvimPlugin = name: value:
-        prev.pkgs.vimUtils.buildVimPlugin {
-          pname = name;
-          version = value.lastModifiedDate;
-          src = value;
-        };
-      nvPlugins = {
-        inherit
-          (inputs)
-          neovim-session-manager
-          nvim-web-devicons
-          vim-maximizer
-          better-escape
-          ts-context-commentstring
-          hmts
-          ;
-      };
-      mkTmuxPlugin = name: value:
-        prev.pkgs.tmuxPlugins.mkTmuxPlugin {
-          pluginName = name;
-          version = value.lastModifiedDate;
-          rtpFilePath = "${name}.tmux";
-          src = value;
-        };
-      tmPlugins = {
-        inherit (inputs) tmux-onedark-theme fzf-url;
-      };
-      vimPlugins =
-        prev.vimPlugins
-        // builtins.mapAttrs mkNvimPlugin nvPlugins
-        // {
-          inherit (inputs.codeium.packages."${prev.system}".vimPlugins) codeium-nvim;
-        };
-      tmuxPlugins =
-        prev.tmuxPlugins
-        // builtins.mapAttrs mkTmuxPlugin tmPlugins
-        // {
-          tmuxinoicer = inputs.tmuxinoicer.packages."${prev.system}".default;
-        };
-    in {
-      stash = {
-        inherit (inputs.nix-vscode-extensions.extensions."${prev.system}") vscode-marketplace;
-        inherit vimPlugins;
-        inherit tmuxPlugins;
-      };
-    };
-  in
+  }:
     flake-parts.lib.mkFlake {inherit inputs;} {
       systems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin"];
       flake = {
-        stashVimPlugins = import ./lib/stashVimPlugins.nix {inherit inputs;};
-        stashTmuxPlugins = import ./lib/stashTmuxPlugins.nix {inherit inputs;};
+        lib = import ./lib {inherit inputs;};
       };
+      imports = [
+        inputs.flake-parts.flakeModules.easyOverlay
+      ];
       perSystem = {
         config,
         self',
@@ -109,21 +62,21 @@
         system,
         ...
       }: {
-        imports = [
-          inputs.flake-parts.flakeModules.easyOverlay
-        ];
         devShells = {
           default = pkgs.mkShell {
             buildInputs = with pkgs; [act];
           };
         };
         formatter = pkgs.alejandra;
-        packages = {
-          stashVimPlugins = self.stashVimPlugins {inherit system;};
-          stashTmuxPlugins = self.stashTmuxPlugins {inherit system;};
-        };
+        packages =
+          self.lib.stashVimPlugins {inherit system;}
+          // self.lib.stashTmuxPlugins {inherit system;};
         overlayAttrs = {
-          inherit (config.packages) stashvimPlugins stashTmuxPlugins;
+          stash = {
+            inherit (inputs.nix-vscode-extensions.extensions."${system}") vscode-marketplace;
+            vimPlugins = pkgs.vimPlugins // self.lib.stashVimPlugins {inherit system;};
+            tmuxPlugins = pkgs.tmuxPlugins // self.lib.stashTmuxPlugins {inherit system;};
+          };
         };
       };
     };
