@@ -14,34 +14,33 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: determinatesystems/nix-installer-action@main
-      - uses: determinatesystems/magic-nix-cache-action@main
       - uses: determinatesystems/flake-checker-action@main
-      - name: update lock
-        run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          nix flake update --commit-lock-file
-          git push
+      - uses: determinatesystems/update-flake-lock@main
+        with:
+          pr-title: "Update flake.lock"
+          pr-labels: |
+            dependencies
+            automated
 
-  flake-lock:
+  flake-change:
     runs-on: ubuntu-latest
     needs: update
     permissions:
       pull-requests: read
     outputs:
-      lock-changed: ${{ steps.changes.outputs.lock-changed }}
+      changed: ${{ steps.changes.outputs.changed }}
     steps:
       - uses: actions/checkout@v4
       - uses: dorny/paths-filter@v3
         id: changes
         with:
           filters: |
-            lock-changed:
-              - 'flake.lock'
+            changed:
+              - 'flake.*'
 
   archive:
-    needs: flake-lock
-    if: ${{ needs.flake-lock.outputs.lock-changed == 'true' }}
+    needs: flake-change
+    if: ${{ needs.flake-change.outputs.changed == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
