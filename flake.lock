@@ -224,22 +224,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-unstable": {
-      "locked": {
-        "lastModified": 1707423438,
-        "narHash": "sha256-6URYQs2deyXOa6q9SuV2OgKtjx1q7Jnr0mgmO3DFqfw=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "a1eec211fcb06ae6eb9a46b399878cb1cc1717c0",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "ref": "nixpkgs-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1684570954,
@@ -314,7 +298,6 @@
         "neovim-session-manager": "neovim-session-manager",
         "nix-vscode-extensions": "nix-vscode-extensions",
         "nixpkgs": "nixpkgs_3",
-        "nixpkgs-unstable": "nixpkgs-unstable",
         "nvim-web-devicons": "nvim-web-devicons",
         "tmux-onedark-theme": "tmux-onedark-theme",
         "tmuxinoicer": "tmuxinoicer",
