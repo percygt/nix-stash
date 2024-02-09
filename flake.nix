@@ -76,13 +76,14 @@
               vscode = pkgs.vscodium;
               vscodeExtensions = self.lib.vscodeExtensions {inherit system;};
             };
+            wezterm = inputs.wezterm.packages.${system}.default;
           };
         overlayAttrs = {
           stash = {
+            inherit (config.packages) wezterm;
             inherit (inputs.nix-vscode-extensions.extensions.${system}) vscode-marketplace;
             vimPlugins = pkgs.vimPlugins // self.lib.stashVimPlugins {inherit system;};
             tmuxPlugins = pkgs.tmuxPlugins // self.lib.stashTmuxPlugins {inherit system;};
-            wezterm = inputs.wezterm.packages.${system}.default;
           };
         };
       };

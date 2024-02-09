@@ -49,7 +49,6 @@ jobs:
 
   build:
     needs: archive
-    if: ${{ needs.archive.outputs.make-build == 'yes' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
