@@ -2,7 +2,7 @@
   description = "My stash of nix overlays";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    # nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     codeium.url = "github:Exafunction/codeium.nvim";
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
     tmuxinoicer.url = "github:percygt/tmuxinoicer";
@@ -74,12 +74,12 @@
           // {
             vscode-with-extensions = pkgs.vscode-with-extensions.override {
               vscode = pkgs.vscodium;
-              vscodeExtensions = self.lib.vscodeExtensions {inherit system;};
+              vscodeExtensions = self.lib.vscodeExtensions system;
             };
           };
         overlayAttrs = {
           stash = {
-            inherit (inputs.nix-vscode-extensions.extensions."${system}") vscode-marketplace;
+            inherit (inputs.nix-vscode-extensions.extensions.${system}) vscode-marketplace;
             vimPlugins = pkgs.vimPlugins // self.lib.stashVimPlugins {inherit system;};
             tmuxPlugins = pkgs.tmuxPlugins // self.lib.stashTmuxPlugins {inherit system;};
           };

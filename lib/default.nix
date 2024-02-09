@@ -59,10 +59,8 @@ in {
     // extraVimPluginSrc;
 
   ## VSCODE EXTENSIONS
-  vscodeExtensions = {system}: let
-    inherit (inputs.nix-vscode-extensions.extensions."${system}") vscode-marketplace;
-  in
-    with vscode-marketplace; [
+  vscodeExtensions = system:
+    with inputs.nix-vscode-extensions.extensions.${system}.vscode-marketplace; [
       adpyke.codesnap
       JohnnyMorganz.luau-lsp
       anderseandersen.html-class-suggestions
