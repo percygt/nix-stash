@@ -18,13 +18,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: determinatesystems/nix-installer-action@main
+      - uses: determinatesystems/magic-nix-cache-action@main
       - uses: determinatesystems/flake-checker-action@main
-      - uses: determinatesystems/update-flake-lock@main
-        with:
-          pr-title: "Update flake.lock"
-          pr-labels: |
-            dependencies
-            automated
+      - name: update lock
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          nix flake update --commit-lock-file
+          git push
       - uses: dorny/paths-filter@v3
         id: changes
         with:
