@@ -73,6 +73,7 @@
           // self.lib.stashTmuxPlugins {inherit system;}
           // {
             vscode-with-extensions = pkgs.vscode-with-extensions.override {
+              vscode = pkgs.vscodium;
               vscodeExtensions = self.lib.vscodeExtensions {inherit system;};
             };
           };
