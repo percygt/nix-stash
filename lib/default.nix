@@ -59,7 +59,7 @@ in {
     // extraVimPluginSrc;
 
   ## VSCODE EXTENSIONS
-  vscodeExtensions = system:
+  vscodeExtensions = {system}:
     with inputs.nix-vscode-extensions.extensions.${system}.vscode-marketplace; [
       adpyke.codesnap
       JohnnyMorganz.luau-lsp

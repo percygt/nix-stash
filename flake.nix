@@ -70,13 +70,7 @@
         formatter = pkgs.alejandra;
         packages =
           self.lib.stashVimPlugins {inherit system;}
-          // self.lib.stashTmuxPlugins {inherit system;}
-          // {
-            vscode-with-extensions = pkgs.vscode-with-extensions.override {
-              vscode = pkgs.vscodium;
-              vscodeExtensions = self.lib.vscodeExtensions system;
-            };
-          };
+          // self.lib.stashTmuxPlugins {inherit system;};
         overlayAttrs = {
           stash = {
             inherit (inputs.nix-vscode-extensions.extensions.${system}) vscode-marketplace;
