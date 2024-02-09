@@ -37,6 +37,4 @@ jobs:
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
           name: percygtdev
       - name: check and cache package build
-        run: nix flake show --json \
-          | jq  '.packages."x86_64-linux"|keys[]' \
-          | xargs -I {} nix build --json --no-link --print-build-logs .#{}
+        run: nix flake show --json | jq  '.packages."x86_64-linux"|keys[]'| xargs -I {} nix build --json --no-link --print-build-logs .#{}
