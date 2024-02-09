@@ -11,8 +11,6 @@ name: Test and cache flake
 jobs:
   update:
     runs-on: ubuntu-latest
-    permissions:
-      pull-requests: read
     outputs:
       changed: ${{ steps.changes.outputs.changed }}
     steps:
