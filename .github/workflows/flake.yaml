@@ -1,5 +1,5 @@
 ---
-name: Update flake.lock
+name: Test and cache flake
 
 "on":
   push:
@@ -23,18 +23,47 @@ jobs:
           nix flake update --commit-lock-file
           git push
 
-  build:
-    env:
-      CACHIX_BINARY_CACHE: percygtdev
-    needs:
-      - update
+  flake-lock:
+    runs-on: ubuntu-latest
+    needs: update
+    permissions:
+      pull-requests: read
+    outputs:
+      lock-changed: ${{ steps.changes.outputs.lock-changed }}
+    steps:
+      - uses: dorny/paths-filter@v3
+        id: changes
+        with:
+          filters: |
+            lock-changed:
+              - 'flake.lock'
+
+  archive:
+    needs: flake-lock
+    if: ${{ needs.flake-lock.outputs.lock-changed == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: determinatesystems/nix-installer-action@main
-      - uses: cachix/cachix-action@v12
+      - uses: cachix/cachix-action@v14
         with:
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
           name: percygtdev
-      - name: check and cache package build
+      - name: Archive flake inputs
+        run: nix flake archive --json
+      - name: Ready to build
+        run: echo "make-build=yes" >> "$GITHUB_OUTPUT"
+
+  build:
+    needs: archive
+    if: ${{ needs.archive.outputs.make-build == 'yes' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: determinatesystems/nix-installer-action@main
+      - uses: cachix/cachix-action@v14
+        with:
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+          name: percygtdev
+      - name: Build packages
         run: nix flake show --json | jq  '.packages."x86_64-linux"|keys[]'| xargs -I {} nix build --json --no-link --print-build-logs .#{}
