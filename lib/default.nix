@@ -62,7 +62,7 @@ in {
   vscodeExtensions = {system}:
     with inputs.nix-vscode-extensions.extensions.${system}.vscode-marketplace; [
       adpyke.codesnap
-      JohnnyMorganz.luau-lsp
+      johnnymorganz.luau-lsp
       anderseandersen.html-class-suggestions
       antfu.iconify
       astro-build.astro-vscode
