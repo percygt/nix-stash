@@ -1,5 +1,5 @@
 ---
-name: Test flake
+name: Update flake.lock
 
 "on":
   push:
@@ -12,11 +12,11 @@ jobs:
   update:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - uses: determinatesystems/nix-installer-action@main
       - uses: determinatesystems/magic-nix-cache-action@main
       - uses: determinatesystems/flake-checker-action@main
-      - uses: actions/checkout@v4
-      - name: update flake.lock
+      - name: update lock
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
@@ -30,16 +30,16 @@ jobs:
       - update
     runs-on: ubuntu-latest
     steps:
-      - uses: determinatesystems/nix-installer-action@main
-      - uses: determinatesystems/magic-nix-cache-action@main
-      - uses: determinatesystems/flake-checker-action@main
-      # - uses: cachix/cachix-action@v12
-      # with:
-      #   authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-      #   name: percygtdev
       - uses: actions/checkout@v4
+      - uses: determinatesystems/nix-installer-action@main
+      - uses: cachix/cachix-action@v12
+        with:
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+          name: percygtdev
       - name: check and cache package build
-        run: |
-          nix flake show --json \
-            | jq  '.packages."x86_64-linux"|keys[]' \
-            | xargs -I {} nix build --json --no-link --print-build-logs .#{}
+        run: nix flake show --json \
+          | jq  '.packages."x86_64-linux"|keys[]' \
+          | xargs -I {} nix build --json --no-link --print-build-logs .#{} \
+          | jq -r '.[].outputs \
+          | to_entries[].value' \
+          | cachix push "$CACHIX_BINARY_CACHE"
