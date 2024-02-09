@@ -6,7 +6,7 @@
     codeium.url = "github:Exafunction/codeium.nvim";
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
     tmuxinoicer.url = "github:percygt/tmuxinoicer";
-    wezterm.url = "github:wez/wezterm?dir=nix";
+    # wezterm.url = "github:wez/wezterm?dir=nix";
     tmux-onedark-theme = {
       url = "github:percygt/tmux-onedark-theme";
       flake = false;
