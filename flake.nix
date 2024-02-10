@@ -75,13 +75,15 @@
         hmts
         ;
     };
-    lib = import ./lib {inherit inputs vimPluginSrc tmuxPluginSrc;};
-  in
+      in
     flake-parts.lib.mkFlake {inherit inputs;} {
       systems = ["x86_64-linux"];
       imports = [
         inputs.flake-parts.flakeModules.easyOverlay
       ];
+      flake = {
+        lib = import ./lib {inherit inputs vimPluginSrc tmuxPluginSrc;};
+      };
       perSystem = {
         config,
         self',
@@ -96,10 +98,9 @@
           };
         };
         formatter = pkgs.alejandra;
-        inherit (lib) flake;
         packages =
-          lib.flake.stashVimPlugins {inherit system;}
-          // lib.flake.stashTmuxPlugins {inherit system;}
+          self.lib.stashVimPlugins {inherit system;}
+          // self.lib.stashTmuxPlugins {inherit system;}
           // {
             #tmux flake plugin
             tmuxinoicer = inputs.tmuxinoicer.packages."${system}".default;
@@ -108,12 +109,12 @@
             #vscodium
             vscode-with-extensions = pkgs.vscode-with-extensions.override {
               vscode = pkgs.vscodium;
-              vscodeExtensions = lib.flake.vscodeExtensions {inherit system;};
+              vscodeExtensions = self.lib.vscodeExtensions {inherit system;};
             };
             #nixgl wrapper
             inherit (inputs.nixgl.packages.${system}) nixVulkanIntel nixGLIntel;
             #wezterm
-            wezterm = lib.flake.wrapped_wezterm {
+            wezterm = self.lib.wrapped_wezterm {
               inherit system;
               inherit (self'.packages) nixVulkanIntel nixGLIntel;
             };
@@ -126,12 +127,12 @@
               inherit (inputs.nix-vscode-extensions.extensions.${system}) vscode-marketplace;
               vimPlugins =
                 pkgs.vimPlugins
-                // lib.flake.stashVimPlugins {inherit system;}
+                // self.lib.stashVimPlugins {inherit system;}
                 # // builtins.mapAttrs (name: value: {${name} = self'.packages.${name};}) vimPluginSrc
                 // {inherit (self'.packages) codeium-nvim;};
               tmuxPlugins =
                 pkgs.tmuxPlugins
-                // lib.flake.stashTmuxPlugins {inherit system;}
+                // self.lib.stashTmuxPlugins {inherit system;}
                 # // builtins.mapAttrs (name: value: {${name} = self'.packages.${name};}) tmuxPluginSrc
                 // {inherit (self'.packages) tmuxinoicer;};
             };
