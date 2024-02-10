@@ -1,13 +1,23 @@
 {
   description = "My stash of nix overlays";
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    
     codeium.url = "github:Exafunction/codeium.nvim";
+    codeium.inputs.nixpkgs.follows = "nixpkgs-stable";
+
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+    nix-vscode-extensions.inputs.nixpkgs.follows = "nixpkgs";
+
     nixgl.url = "github:guibou/nixgl";
-    nix-stash.url = "github:percygt/nix-stash";
+    nixgl.inputs.nixpkgs.follows = "nixpkgs";
+
     tmuxinoicer.url = "github:percygt/tmuxinoicer";
+
     wezterm.url = "github:wez/wezterm?dir=nix";
+    wezterm.inputs.nixpkgs.follows = "nixpkgs";
+
     tmux-onedark-theme = {
       url = "github:percygt/tmux-onedark-theme";
       flake = false;
@@ -43,7 +53,6 @@
   };
   outputs = inputs @ {
     flake-parts,
-    nixpkgs,
     self,
     ...
   }: let
@@ -76,11 +85,15 @@
               vscode = pkgs.vscodium;
               vscodeExtensions = lib.flake.vscodeExtensions {inherit system;};
             };
-            wezterm = lib.flake.wrapped_wezterm {inherit system;};
+            inherit (inputs.nixgl.packages.${system}) nixVulkanIntel nixGLIntel;
+            wezterm = lib.flake.wrapped_wezterm {
+              inherit system;
+              inherit (self'.packages) nixVulkanIntel nixGLIntel;
+            };
           };
         overlayAttrs = {
-          stash = {
-            nixgl = inputs.nixgl.overlay;
+          stash = inputs.nixpkgs-stable.legacyPackages.${system} // {
+            inherit (self'.packages) nixVulkanIntel nixGLIntel;
             inherit (self'.packages) wezterm;
             inherit (inputs.nix-vscode-extensions.extensions.${system}) vscode-marketplace;
             vimPlugins = pkgs.vimPlugins // lib.flake.stashVimPlugins {inherit system;};

@@ -1,12 +1,11 @@
 {inputs}: {
   flake = let
     inherit (inputs) nixpkgs;
-    inherit (nixpkgs) legacyPackages lib;
   in {
     # Wezterm
-    wrapped_wezterm = {system}: let
+    wrapped_wezterm = {system, nixVulkanIntel, nixGLIntel}: let
+      inherit (nixpkgs) legacyPackages lib;
       pkgs = legacyPackages.${system};
-      nixgl = inputs.nixgl.packages.${system};
       wezterm = inputs.wezterm.packages.${system}.default;
       nixGLVulkanMesaWrap = pkg:
         pkgs.runCommand "${pkg.name}-nixgl-wrapper" {} ''
@@ -16,8 +15,8 @@
           mkdir $out/bin
           for bin in ${pkg}/bin/*; do
            wrapped_bin=$out/bin/$(basename $bin)
-           echo "${lib.getExe nixgl.nixGLIntel} ${
-            lib.getExe nixgl.nixVulkanIntel
+           echo "${lib.getExe nixGLIntel} ${
+            lib.getExe nixVulkanIntel
           } $bin \$@" > $wrapped_bin
            chmod +x $wrapped_bin
           done
@@ -26,6 +25,7 @@
       nixGLVulkanMesaWrap wezterm;
     ## TMUX PLUGINS
     stashTmuxPlugins = {system}: let
+      inherit (nixpkgs) legacyPackages;
       pkgs = legacyPackages.${system};
       tmuxPluginSrc = {
         inherit
@@ -53,6 +53,7 @@
 
     ## VIM PLUGINS
     stashVimPlugins = {system}: let
+      inherit (nixpkgs) legacyPackages;
       pkgs = legacyPackages.${system};
       vimPluginSrc = {
         inherit
