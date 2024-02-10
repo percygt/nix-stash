@@ -2,9 +2,10 @@
   description = "My stash of nix overlays";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
-    # nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     codeium.url = "github:Exafunction/codeium.nvim";
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+    nixgl.url = "github:guibou/nixgl";
+    nix-stash.url = "github:percygt/nix-stash";
     tmuxinoicer.url = "github:percygt/tmuxinoicer";
     wezterm.url = "github:wez/wezterm?dir=nix";
     tmux-onedark-theme = {
@@ -45,12 +46,11 @@
     nixpkgs,
     self,
     ...
-  }:
+  }: let
+    lib = import ./lib {inherit inputs;};
+  in
     flake-parts.lib.mkFlake {inherit inputs;} {
       systems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin"];
-      flake = {
-        lib = import ./lib {inherit inputs;};
-      };
       imports = [
         inputs.flake-parts.flakeModules.easyOverlay
       ];
@@ -69,21 +69,22 @@
         };
         formatter = pkgs.alejandra;
         packages =
-          self.lib.stashVimPlugins {inherit system;}
-          // self.lib.stashTmuxPlugins {inherit system;}
+          lib.flake.stashVimPlugins {inherit system;}
+          // lib.flake.stashTmuxPlugins {inherit system;}
           // {
             vscode-with-extensions = pkgs.vscode-with-extensions.override {
               vscode = pkgs.vscodium;
-              vscodeExtensions = self.lib.vscodeExtensions {inherit system;};
+              vscodeExtensions = lib.flake.vscodeExtensions {inherit system;};
             };
-            wezterm = inputs.wezterm.packages.${system}.default;
+            wezterm = lib.flake.wrapped_wezterm {inherit system;};
           };
         overlayAttrs = {
           stash = {
-            inherit (config.packages) wezterm;
+            nixgl = inputs.nixgl.overlay;
+            inherit (self'.packages) wezterm;
             inherit (inputs.nix-vscode-extensions.extensions.${system}) vscode-marketplace;
-            vimPlugins = pkgs.vimPlugins // self.lib.stashVimPlugins {inherit system;};
-            tmuxPlugins = pkgs.tmuxPlugins // self.lib.stashTmuxPlugins {inherit system;};
+            vimPlugins = pkgs.vimPlugins // lib.flake.stashVimPlugins {inherit system;};
+            tmuxPlugins = pkgs.tmuxPlugins // lib.flake.stashTmuxPlugins {inherit system;};
           };
         };
       };

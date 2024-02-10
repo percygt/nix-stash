@@ -1,11 +1,11 @@
 ---
-name: Test and cache flake
+name: Test and cache flake packages
 
 "on":
   push:
   pull_request:
   schedule:
-    - cron: 0 0 * * *
+    - cron: 0 0 * * 1,4
   workflow_dispatch:
 
 jobs:
@@ -29,12 +29,14 @@ jobs:
         with:
           filters: |
             changed:
-              - 'flake.*'
+              - 'flake.lock'
 
   archive:
     needs: update
     if: ${{ needs.update.outputs.changed == 'true' }}
     runs-on: ubuntu-latest
+    env:
+      CACHIX_BINARY_CACHE: percygtdev
     steps:
       - uses: actions/checkout@v4
       - uses: determinatesystems/nix-installer-action@main
@@ -42,10 +44,12 @@ jobs:
         with:
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
           name: percygtdev
+      - name: Use cachix cache
+        run: cachix use "$CACHIX_BINARY_CACHE"
       - name: Archive flake inputs
-        run: nix flake archive --json
-      - name: Ready to build
-        run: echo "make-build=yes" >> "$GITHUB_OUTPUT"
+        run: nix flake archive --json \
+          | jq -r '.path,(.inputs|to_entries[].value.path)' \
+          | cachix push "$CACHIX_BINARY_CACHE"
 
   build:
     needs: archive
@@ -57,5 +61,11 @@ jobs:
         with:
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
           name: percygtdev
+      - name: Use cachix cache
+        run: cachix use "$CACHIX_BINARY_CACHE"
       - name: Build packages
-        run: nix flake show --json | jq  '.packages."x86_64-linux"|keys[]'| xargs -I {} nix build --json --no-link --print-build-logs .#{}
+        run: nix flake show --json \
+          | jq  '.packages."x86_64-linux"|keys[]'\
+          | xargs -I {} nix build --json --no-link --print-build-logs .#{} \
+          | jq -r '.[].outputs | to_entries[].value' \
+          | cachix push "$CACHIX_BINARY_CACHE"
