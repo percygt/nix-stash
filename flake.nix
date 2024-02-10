@@ -117,8 +117,8 @@
             // {
               inherit (self'.packages) nixVulkanIntel nixGLIntel wezterm;
               inherit (inputs.nix-vscode-extensions.extensions.${system}) vscode-marketplace;
-              vimPlugins = pkgs.vimPlugins // self'.packages.lib.flake.stashVimPlugins;
-              tmuxPlugins = pkgs.tmuxPlugins // self'.packages.lib.flake.stashTmuxPlugins;
+              vimPlugins = pkgs.vimPlugins // builtins.mapAttrs (name: value: {${name} = self'.packages.${name};}) vimPluginSrc;
+              tmuxPlugins = pkgs.tmuxPlugins // builtins.mapAttrs (name: value: {${name} = self'.packages.${name};}) tmuxPluginSrc;
             };
         };
       };
