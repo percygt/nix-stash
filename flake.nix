@@ -82,7 +82,6 @@
       imports = [
         inputs.flake-parts.flakeModules.easyOverlay
       ];
-      inherit (lib) flake;
       perSystem = {
         config,
         self',
@@ -97,6 +96,7 @@
           };
         };
         formatter = pkgs.alejandra;
+        inherit (lib) flake;
         packages =
           lib.flake.stashVimPlugins {inherit system;}
           // lib.flake.stashTmuxPlugins {inherit system;}
