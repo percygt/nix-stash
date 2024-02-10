@@ -54,6 +54,8 @@ jobs:
   build:
     needs: archive
     runs-on: ubuntu-latest
+    env:
+      CACHIX_BINARY_CACHE: percygtdev
     steps:
       - uses: actions/checkout@v4
       - uses: determinatesystems/nix-installer-action@main
