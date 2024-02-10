@@ -3,7 +3,7 @@
   inputs = {
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.11";
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    
+
     codeium.url = "github:Exafunction/codeium.nvim";
     codeium.inputs.nixpkgs.follows = "nixpkgs-stable";
 
@@ -54,15 +54,35 @@
   outputs = inputs @ {
     flake-parts,
     self,
+    nixpkgs,
     ...
   }: let
-    lib = import ./lib {inherit inputs;};
+    tmuxPluginSrc = {
+      inherit
+        (inputs)
+        tmux-onedark-theme
+        fzf-url
+        ;
+    };
+    vimPluginSrc = {
+      inherit
+        (inputs)
+        neovim-session-manager
+        nvim-web-devicons
+        vim-maximizer
+        better-escape
+        ts-context-commentstring
+        hmts
+        ;
+    };
+    lib = import ./lib {inherit inputs vimPluginSrc tmuxPluginSrc;};
   in
     flake-parts.lib.mkFlake {inherit inputs;} {
       systems = ["x86_64-linux"];
       imports = [
         inputs.flake-parts.flakeModules.easyOverlay
       ];
+      inherit (lib) flake;
       perSystem = {
         config,
         self',
@@ -92,13 +112,14 @@
             };
           };
         overlayAttrs = {
-          stash = inputs.nixpkgs-stable.legacyPackages.${system} // {
-            inherit (self'.packages) nixVulkanIntel nixGLIntel;
-            inherit (self'.packages) wezterm;
-            inherit (inputs.nix-vscode-extensions.extensions.${system}) vscode-marketplace;
-            vimPlugins = pkgs.vimPlugins // lib.flake.stashVimPlugins {inherit system;};
-            tmuxPlugins = pkgs.tmuxPlugins // lib.flake.stashTmuxPlugins {inherit system;};
-          };
+          stash =
+            inputs.nixpkgs-stable.legacyPackages.${system}
+            // {
+              inherit (self'.packages) nixVulkanIntel nixGLIntel wezterm;
+              inherit (inputs.nix-vscode-extensions.extensions.${system}) vscode-marketplace;
+              vimPlugins = pkgs.vimPlugins // self'.packages.lib.flake.stashVimPlugins;
+              tmuxPlugins = pkgs.tmuxPlugins // self'.packages.lib.flake.stashTmuxPlugins;
+            };
         };
       };
     };

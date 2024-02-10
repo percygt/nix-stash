@@ -1,4 +1,4 @@
-{inputs}: {
+{inputs, vimPluginSrc, tmuxPluginSrc}: {
   flake = let
     inherit (inputs) nixpkgs;
   in {
@@ -27,13 +27,6 @@
     stashTmuxPlugins = {system}: let
       inherit (nixpkgs) legacyPackages;
       pkgs = legacyPackages.${system};
-      tmuxPluginSrc = {
-        inherit
-          (inputs)
-          tmux-onedark-theme
-          fzf-url
-          ;
-      };
       extraTmuxPluginSrc = {
         tmuxinoicer = inputs.tmuxinoicer.packages."${system}".default;
       };
@@ -55,17 +48,6 @@
     stashVimPlugins = {system}: let
       inherit (nixpkgs) legacyPackages;
       pkgs = legacyPackages.${system};
-      vimPluginSrc = {
-        inherit
-          (inputs)
-          neovim-session-manager
-          nvim-web-devicons
-          vim-maximizer
-          better-escape
-          ts-context-commentstring
-          hmts
-          ;
-      };
       extraVimPluginSrc = {
         inherit (inputs.codeium.packages."${system}".vimPlugins) codeium-nvim;
       };
