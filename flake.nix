@@ -126,11 +126,13 @@
               inherit (inputs.nix-vscode-extensions.extensions.${system}) vscode-marketplace;
               vimPlugins =
                 pkgs.vimPlugins
-                // builtins.mapAttrs (name: value: {${name} = self'.packages.${name};}) vimPluginSrc
+                // lib.flake.stashVimPlugins {inherit system;}
+                # // builtins.mapAttrs (name: value: {${name} = self'.packages.${name};}) vimPluginSrc
                 // {inherit (self'.packages) codeium-nvim;};
               tmuxPlugins =
                 pkgs.tmuxPlugins
-                // builtins.mapAttrs (name: value: {${name} = self'.packages.${name};}) tmuxPluginSrc
+                // lib.flake.stashTmuxPlugins {inherit system;}
+                # // builtins.mapAttrs (name: value: {${name} = self'.packages.${name};}) tmuxPluginSrc
                 // {inherit (self'.packages) tmuxinoicer;};
             };
         };
