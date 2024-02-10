@@ -114,9 +114,10 @@
             #nixgl wrapper
             inherit (inputs.nixgl.packages.${system}) nixVulkanIntel nixGLIntel;
             #wezterm
+            wezterm_unwrapped = inputs.wezterm.packages.${system}.default;
             wezterm = self.lib.wrapped_wezterm {
               inherit system;
-              inherit (self'.packages) nixVulkanIntel nixGLIntel;
+              inherit (self'.packages) nixVulkanIntel nixGLIntel wezterm_unwrapped;
             };
           };
         overlayAttrs = {

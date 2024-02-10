@@ -10,10 +10,10 @@ in {
     system,
     nixVulkanIntel,
     nixGLIntel,
+    wezterm_unwrapped,
   }: let
     inherit (nixpkgs) legacyPackages lib;
     pkgs = legacyPackages.${system};
-    wezterm = inputs.wezterm.packages.${system}.default;
     nixGLVulkanMesaWrap = pkg:
       pkgs.runCommand "${pkg.name}-nixgl-wrapper" {} ''
         mkdir $out
@@ -29,7 +29,7 @@ in {
         done
       '';
   in
-    nixGLVulkanMesaWrap wezterm;
+    nixGLVulkanMesaWrap wezterm_unwrapped;
   ## TMUX PLUGINS
   stashTmuxPlugins = {system}: let
     inherit (nixpkgs) legacyPackages;
