@@ -10,7 +10,7 @@ in {
     system,
     nixVulkanIntel,
     nixGLIntel,
-    wezterm_unwrapped,
+    wezterm_nightly,
   }: let
     inherit (nixpkgs) legacyPackages lib;
     pkgs = legacyPackages.${system};
@@ -29,7 +29,7 @@ in {
         done
       '';
   in
-    nixGLVulkanMesaWrap wezterm_unwrapped;
+    nixGLVulkanMesaWrap wezterm_nightly;
   ## TMUX PLUGINS
   stashTmuxPlugins = {system}: let
     inherit (nixpkgs) legacyPackages;

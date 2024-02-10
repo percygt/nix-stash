@@ -75,7 +75,7 @@
         hmts
         ;
     };
-      in
+  in
     flake-parts.lib.mkFlake {inherit inputs;} {
       systems = ["x86_64-linux"];
       imports = [
@@ -114,17 +114,17 @@
             #nixgl wrapper
             inherit (inputs.nixgl.packages.${system}) nixVulkanIntel nixGLIntel;
             #wezterm
-            wezterm_unwrapped = inputs.wezterm.packages.${system}.default;
-            wezterm = self.lib.wrapped_wezterm {
+            wezterm_nightly = inputs.wezterm.packages.${system}.default;
+            wezterm_wrapped = self.lib.wrapped_wezterm {
               inherit system;
-              inherit (self'.packages) nixVulkanIntel nixGLIntel wezterm_unwrapped;
+              inherit (self'.packages) nixVulkanIntel nixGLIntel wezterm_nightly;
             };
           };
         overlayAttrs = {
           stash =
             inputs.nixpkgs-stable.legacyPackages.${system}
             // {
-              inherit (self'.packages) nixVulkanIntel nixGLIntel wezterm;
+              inherit (self'.packages) nixVulkanIntel nixGLIntel wezterm_wrapped;
               inherit (inputs.nix-vscode-extensions.extensions.${system}) vscode-marketplace;
               vimPlugins =
                 pkgs.vimPlugins
