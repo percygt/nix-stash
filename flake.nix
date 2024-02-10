@@ -129,12 +129,10 @@
               vimPlugins =
                 pkgs.vimPlugins
                 // self.lib.stashVimPlugins {inherit system;}
-                # // builtins.mapAttrs (name: value: {${name} = self'.packages.${name};}) vimPluginSrc
                 // {inherit (self'.packages) codeium-nvim;};
               tmuxPlugins =
                 pkgs.tmuxPlugins
                 // self.lib.stashTmuxPlugins {inherit system;}
-                # // builtins.mapAttrs (name: value: {${name} = self'.packages.${name};}) tmuxPluginSrc
                 // {inherit (self'.packages) tmuxinoicer;};
             };
         };
