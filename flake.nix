@@ -50,7 +50,7 @@
     lib = import ./lib {inherit inputs;};
   in
     flake-parts.lib.mkFlake {inherit inputs;} {
-      systems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin"];
+      systems = ["x86_64-linux"];
       imports = [
         inputs.flake-parts.flakeModules.easyOverlay
       ];

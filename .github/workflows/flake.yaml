@@ -47,7 +47,8 @@ jobs:
       - name: Use cachix cache
         run: cachix use "$CACHIX_BINARY_CACHE"
       - name: Archive flake inputs
-        run: nix flake archive --json \
+        run: |
+          nix flake archive --json \
           | jq -r '.path,(.inputs|to_entries[].value.path)' \
           | cachix push "$CACHIX_BINARY_CACHE"
 
@@ -66,7 +67,9 @@ jobs:
       - name: Use cachix cache
         run: cachix use "$CACHIX_BINARY_CACHE"
       - name: Build packages
-        run:
-          nix flake show --json | jq  '.packages."x86_64-linux"|keys[]'| xargs -I {} nix build --json --no-link --print-build-logs .#{} \
-          | jq -r '.[].outputs | to_entries[].value' \
-          | cachix push "$CACHIX_BINARY_CACHE"
+        run: |
+          nix flake show --json \
+            | jq  '.packages."x86_64-linux"|keys[]' \
+            | xargs -I '{}' nix build --json --no-link --print-build-logs '.#{}' \
+            | jq -r '.[].outputs | to_entries[].value' \
+            | cachix push "$CACHIX_BINARY_CACHE"
