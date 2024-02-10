@@ -1,9 +1,17 @@
-{inputs, vimPluginSrc, tmuxPluginSrc}: {
+{
+  inputs,
+  vimPluginSrc,
+  tmuxPluginSrc,
+}: {
   flake = let
     inherit (inputs) nixpkgs;
   in {
     # Wezterm
-    wrapped_wezterm = {system, nixVulkanIntel, nixGLIntel}: let
+    wrapped_wezterm = {
+      system,
+      nixVulkanIntel,
+      nixGLIntel,
+    }: let
       inherit (nixpkgs) legacyPackages lib;
       pkgs = legacyPackages.${system};
       wezterm = inputs.wezterm.packages.${system}.default;
@@ -38,8 +46,7 @@
           src = value;
         };
     in
-      builtins.mapAttrs mkStashTmuxPlugin tmuxPluginSrc
-      // extraTmuxPluginSrc;
+      builtins.mapAttrs mkStashTmuxPlugin tmuxPluginSrc;
 
     ## VIM PLUGINS
     stashVimPlugins = {system}: let
@@ -55,8 +62,7 @@
           src = value;
         };
     in
-      builtins.mapAttrs mkStashVimPlugin vimPluginSrc
-      // extraVimPluginSrc;
+      builtins.mapAttrs mkStashVimPlugin vimPluginSrc;
 
     ## VSCODE EXTENSIONS
     vscodeExtensions = {system}:
