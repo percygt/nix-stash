@@ -27,9 +27,6 @@
     stashTmuxPlugins = {system}: let
       inherit (nixpkgs) legacyPackages;
       pkgs = legacyPackages.${system};
-      extraTmuxPluginSrc = {
-        tmuxinoicer = inputs.tmuxinoicer.packages."${system}".default;
-      };
       mkStashTmuxPlugin = name: value: let
         inherit (pkgs) tmuxPlugins;
         inherit (tmuxPlugins) mkTmuxPlugin;
@@ -48,9 +45,6 @@
     stashVimPlugins = {system}: let
       inherit (nixpkgs) legacyPackages;
       pkgs = legacyPackages.${system};
-      extraVimPluginSrc = {
-        inherit (inputs.codeium.packages."${system}".vimPlugins) codeium-nvim;
-      };
       mkStashVimPlugin = name: value: let
         inherit (pkgs) vimUtils;
         inherit (vimUtils) buildVimPlugin;

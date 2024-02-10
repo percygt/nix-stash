@@ -101,11 +101,18 @@
           lib.flake.stashVimPlugins {inherit system;}
           // lib.flake.stashTmuxPlugins {inherit system;}
           // {
+            #tmux flake plugin
+            tmuxinoicer = inputs.tmuxinoicer.packages."${system}".default;
+            #vim flake plugin
+            inherit (inputs.codeium.packages."${system}".vimPlugins) codeium-nvim;
+            #vscodium
             vscode-with-extensions = pkgs.vscode-with-extensions.override {
               vscode = pkgs.vscodium;
               vscodeExtensions = lib.flake.vscodeExtensions {inherit system;};
             };
+            #nixgl wrapper
             inherit (inputs.nixgl.packages.${system}) nixVulkanIntel nixGLIntel;
+            #wezterm
             wezterm = lib.flake.wrapped_wezterm {
               inherit system;
               inherit (self'.packages) nixVulkanIntel nixGLIntel;
