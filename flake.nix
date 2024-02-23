@@ -124,7 +124,7 @@
           stash =
             inputs.nixpkgs-stable.legacyPackages.${system}
             // {
-              inherit (self'.packages) nixVulkanIntel nixGLIntel wezterm_wrapped;
+              inherit (self'.packages) nixVulkanIntel nixGLIntel wezterm_wrapped wezterm_nightly;
               inherit (inputs.nix-vscode-extensions.extensions.${system}) vscode-marketplace;
               vimPlugins =
                 pkgs.vimPlugins
