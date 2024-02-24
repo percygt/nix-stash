@@ -119,7 +119,7 @@
               inherit system;
               inherit (self'.packages) nixVulkanIntel nixGLIntel wezterm_nightly;
             };
-            rounded-windows-corner = pkgs.callPackage ./packages/gnome/extensions/rounded-windows-corner.nix;
+            rounded-window-corners = pkgs.callPackage ./packages/gnome/extensions/rounded-window-corners.nix {};
           };
         overlayAttrs = {
           stash =

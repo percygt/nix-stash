@@ -29,7 +29,8 @@ jobs:
         with:
           filters: |
             changed:
-              - 'flake.lock'
+              - 'flake.*'
+              - 'packages/**'
 
   archive:
     needs: update
