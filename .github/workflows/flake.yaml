@@ -26,11 +26,10 @@ jobs:
           git push
       - uses: dorny/paths-filter@v3
         id: changes
-        with:
-          filters: |
-            changed:
-              - 'flake.*'
-              - 'packages/**'
+        # with:
+        #   filters: |
+        #     changed:
+        #       - 'flake.*'
 
   archive:
     needs: update
