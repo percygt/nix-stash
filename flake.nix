@@ -30,10 +30,6 @@
       url = "github:calops/hmts.nvim";
       flake = false;
     };
-    ts-context-commentstring = {
-      url = "github:JoosepAlviste/nvim-ts-context-commentstring";
-      flake = false;
-    };
     neovim-session-manager = {
       url = "github:Shatur/neovim-session-manager";
       flake = false;
