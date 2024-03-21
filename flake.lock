@@ -396,7 +396,6 @@
         "nvim-web-devicons": "nvim-web-devicons",
         "tmux-onedark-theme": "tmux-onedark-theme",
         "tmuxinoicer": "tmuxinoicer",
-        "ts-context-commentstring": "ts-context-commentstring",
         "vim-maximizer": "vim-maximizer",
         "wezterm": "wezterm"
       }
@@ -518,22 +517,6 @@
       "original": {
         "owner": "percygt",
         "repo": "tmuxinoicer",
-        "type": "github"
-      }
-    },
-    "ts-context-commentstring": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1706896266,
-        "narHash": "sha256-RiisnhiyY/+yVc7Cqn8VFOaa4J7iXGCTguX6eRNIDNQ=",
-        "owner": "JoosepAlviste",
-        "repo": "nvim-ts-context-commentstring",
-        "rev": "7ab799a9792f7cf3883cf28c6a00ad431f3d382a",
-        "type": "github"
-      },
-      "original": {
-        "owner": "JoosepAlviste",
-        "repo": "nvim-ts-context-commentstring",
         "type": "github"
       }
     },
