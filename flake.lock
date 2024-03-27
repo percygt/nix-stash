@@ -488,11 +488,11 @@
     "tmux-onedark-theme": {
       "flake": false,
       "locked": {
-        "lastModified": 1710933448,
-        "narHash": "sha256-VHmjhf2EuLTeajkehviaA5cNyZr+RUZJejQL4POUH6g=",
+        "lastModified": 1711531723,
+        "narHash": "sha256-NRRX+eX/NTMwo93Ik+c/VwOho4Bcl8KDC8eazsi/A9A=",
         "owner": "percygt",
         "repo": "tmux-onedark-theme",
-        "rev": "1f11e07d394296128716d82097bb28e066df9ee0",
+        "rev": "301880a251220484f695359f47b0f8645a7d9586",
         "type": "github"
       },
       "original": {
