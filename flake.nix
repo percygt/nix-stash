@@ -67,7 +67,6 @@
         nvim-web-devicons
         vim-maximizer
         better-escape
-        ts-context-commentstring
         hmts
         ;
     };
