@@ -66,10 +66,8 @@ in {
   ## VSCODE EXTENSIONS
   vscodeExtensions = {system}:
     with inputs.nix-vscode-extensions.extensions.${system}.vscode-marketplace; [
-      adpyke.codesnap
       johnnymorganz.luau-lsp
       anderseandersen.html-class-suggestions
-      antfu.iconify
       astro-build.astro-vscode
       asvetliakov.vscode-neovim
       bbenoist.nix
@@ -77,15 +75,12 @@ in {
       britesnow.vscode-toggle-quotes
       christian-kohler.npm-intellisense
       christian-kohler.path-intellisense
-      codezombiech.gitignore
       dbaeumer.vscode-eslint
       donjayamanne.python-environment-manager
       esbenp.prettier-vscode
       formulahendry.auto-close-tag
       formulahendry.auto-rename-tag
       foxundermoon.shell-format
-      github.vscode-pull-request-github
-      gitlab.gitlab-workflow
       helixquar.randomeverything
       jock.svg
       kamadorueda.alejandra
@@ -97,14 +92,10 @@ in {
       mkhl.direnv
       mohsen1.prettify-json
       mrmlnc.vscode-scss
-      ms-azuretools.vscode-docker
       ms-python.python
       charliermarsh.ruff
-      ms-vscode-remote.remote-ssh
-      ms-vscode.remote-explorer
       oderwat.indent-rainbow
       patbenatar.advanced-new-file
-      pmneo.tsimporter
       pranaygp.vscode-css-peek
       redhat.vscode-yaml
       sibiraj-s.vscode-scss-formatter
