@@ -5,7 +5,7 @@
   tmuxPluginSrc = {
     inherit
       (inputs)
-      tmux-onedark-theme
+      tmuxst
       fzf-url
       ;
   };
