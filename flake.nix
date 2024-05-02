@@ -21,8 +21,8 @@
     nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
     nixpkgs-wayland.inputs.nixpkgs.follows = "nixpkgs";
 
-    tmux-onedark-theme = {
-      url = "github:percygt/tmux-onedark-theme";
+    tmuxst = {
+      url = "github:percygt/tmuxst";
       flake = false;
     };
     fzf-url = {
