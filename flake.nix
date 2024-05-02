@@ -21,6 +21,12 @@
     nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
     nixpkgs-wayland.inputs.nixpkgs.follows = "nixpkgs";
 
+    yazi.url = "github:sxyazi/yazi";
+    yazi.inputs.nixpkgs.follows = "nixpkgs";
+
+    yaml2nix.url = "github:euank/yaml2nix";
+    yaml2nix.inputs.nixpkgs.follows = "nixpkgs";
+
     tmuxst = {
       url = "github:percygt/tmuxst";
       flake = false;
@@ -55,6 +61,7 @@
     self,
     ...
   } @ inputs: let
+    inherit (self) outputs;
     systems = ["aarch64-linux" "i686-linux" "x86_64-linux" "aarch64-darwin" "x86_64-darwin"];
     forEachSystem = inputs.nixpkgs.lib.genAttrs systems;
   in {
@@ -64,6 +71,6 @@
     }));
 
     formatter = forEachSystem (system: nixpkgs.legacyPackages.${system}.alejandra);
-    overlays = import ./overlays {inherit inputs;};
+    overlays = import ./overlays {inherit inputs outputs;};
   };
 }

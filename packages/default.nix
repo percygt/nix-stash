@@ -6,6 +6,8 @@
   inherit (inputs.nixpkgs) lib;
 in
   rec {
+    yazi = inputs.yazi.packages.${system}.default;
+    yaml2nix = inputs.yaml2nix.packages."${system}".default;
     tmuxinoicer = inputs.tmuxinoicer.packages."${system}".default;
     inherit (inputs.codeium.packages."${system}".vimPlugins) codeium-nvim;
     inherit (inputs.nixgl.packages.${system}) nixVulkanIntel nixGLIntel;
