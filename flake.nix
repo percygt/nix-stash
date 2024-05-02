@@ -18,6 +18,9 @@
     wezterm.url = "github:wez/wezterm?dir=nix";
     wezterm.inputs.nixpkgs.follows = "nixpkgs";
 
+    nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
+    nixpkgs-wayland.inputs.nixpkgs.follows = "nixpkgs";
+
     tmux-onedark-theme = {
       url = "github:percygt/tmux-onedark-theme";
       flake = false;
@@ -47,90 +50,20 @@
       flake = false;
     };
   };
-  outputs = inputs @ {
-    flake-parts,
-    self,
+  outputs = {
     nixpkgs,
+    self,
     ...
-  }: let
-    tmuxPluginSrc = {
-      inherit
-        (inputs)
-        tmux-onedark-theme
-        fzf-url
-        ;
-    };
-    vimPluginSrc = {
-      inherit
-        (inputs)
-        neovim-session-manager
-        nvim-web-devicons
-        vim-maximizer
-        better-escape
-        hmts
-        ;
-    };
-  in
-    flake-parts.lib.mkFlake {inherit inputs;} {
-      systems = ["x86_64-linux"];
-      imports = [
-        inputs.flake-parts.flakeModules.easyOverlay
-      ];
-      flake = {
-        lib = import ./lib {inherit inputs vimPluginSrc tmuxPluginSrc;};
-      };
-      perSystem = {
-        config,
-        self',
-        inputs',
-        pkgs,
-        system,
-        ...
-      }: {
-        devShells = {
-          default = pkgs.mkShell {
-            buildInputs = with pkgs; [act];
-          };
-        };
-        formatter = pkgs.alejandra;
-        packages =
-          self.lib.stashVimPlugins {inherit system;}
-          // self.lib.stashTmuxPlugins {inherit system;}
-          // {
-            #tmux flake plugin
-            tmuxinoicer = inputs.tmuxinoicer.packages."${system}".default;
-            #vim flake plugin
-            inherit (inputs.codeium.packages."${system}".vimPlugins) codeium-nvim;
-            #vscodium
-            vscode-with-extensions = pkgs.vscode-with-extensions.override {
-              vscode = pkgs.vscodium;
-              vscodeExtensions = self.lib.vscodeExtensions {inherit system;};
-            };
-            #nixgl wrapper
-            inherit (inputs.nixgl.packages.${system}) nixVulkanIntel nixGLIntel;
-            #wezterm
-            wezterm_nightly = inputs.wezterm.packages.${system}.default;
-            wezterm_wrapped = self.lib.wrapped_wezterm {
-              inherit system;
-              inherit (self'.packages) nixVulkanIntel nixGLIntel wezterm_nightly;
-            };
-          };
-        overlayAttrs = {
-          stash =
-            inputs.nixpkgs-stable.legacyPackages.${system}
-            // {
-              inherit (self'.packages) nixVulkanIntel nixGLIntel wezterm_wrapped wezterm_nightly;
-              inherit (inputs.nix-vscode-extensions.extensions.${system}) vscode-marketplace;
-              vimPlugins =
-                pkgs.vimPlugins
-                // self.lib.stashVimPlugins {inherit system;}
-                // {inherit (self'.packages) codeium-nvim;};
-              tmuxPlugins =
-                pkgs.tmuxPlugins
-                // self.lib.stashTmuxPlugins {inherit system;}
-                // {inherit (self'.packages) tmuxinoicer;};
-            };
-        };
-      };
-    };
+  } @ inputs: let
+    systems = ["aarch64-linux" "i686-linux" "x86_64-linux" "aarch64-darwin" "x86_64-darwin"];
+    forEachSystem = inputs.nixpkgs.lib.genAttrs systems;
+  in {
+    packages = forEachSystem (system: (import ./packages {
+      pkgs = nixpkgs.legacyPackages.${system};
+      inherit system inputs;
+    }));
+
+    formatter = forEachSystem (system: nixpkgs.legacyPackages.${system}.alejandra);
+    overlays = import ./overlays {inherit inputs;};
+  };
 }

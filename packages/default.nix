@@ -1,19 +1,21 @@
 {
+  pkgs ? (import ./nixpkgs.nix) {},
+  system,
   inputs,
-  vimPluginSrc,
-  tmuxPluginSrc,
-  pkgs ? (import ../nixpkgs.nix) {},
-  ...
 }: let
-  inherit (pkgs) system;
-in rec {
-  stashTmuxPlugins = pkgs.callPackage ./tmuxPlugins.nix {inherit pkgs tmuxPluginSrc;};
-  stashVimPlugins = pkgs.callPackage ./vimPlugins.nix {inherit pkgs vimPluginSrc;};
-  wezterm_nightly = inputs.wezterm.packages.${system}.default;
-  wrapped_wezterm = pkgs.callPackage ./wrapped_wezterm.nix {inherit pkgs wezterm_nightly;};
-  vscode-with-extensions = pkgs.vscode-with-extensions.override {
-    vscode = pkgs.vscodium;
-    vscodeExtensions = pkgs.callPackage ./vscode_extensions.nix {inherit inputs system;};
-  };
-  inherit (inputs.nixgl.packages.${system}) nixVulkanIntel nixGLIntel;
-}
+  inherit (inputs.nixpkgs) lib;
+in
+  rec {
+    tmuxinoicer = inputs.tmuxinoicer.packages."${system}".default;
+    inherit (inputs.codeium.packages."${system}".vimPlugins) codeium-nvim;
+    inherit (inputs.nixgl.packages.${system}) nixVulkanIntel nixGLIntel;
+    wezterm_nightly = inputs.wezterm.packages.${system}.default;
+    wezterm_wrapped = (import ./nixGLMesaVulkanWrap.nix {inherit nixGLIntel nixVulkanIntel pkgs lib;}).nixGLMesaVulkanWrap wezterm_nightly;
+    vscode-with-extensions = pkgs.vscode-with-extensions.override {
+      vscode = pkgs.vscodium;
+      vscodeExtensions = import ./vscode_extensions.nix {inherit inputs system;};
+    };
+    inherit (inputs.nixpkgs-wayland.packages.${system}) waybar;
+  }
+  // (import ./vimPlugins.nix {inherit inputs pkgs;})
+  // (import ./tmuxPlugins.nix {inherit inputs pkgs;})

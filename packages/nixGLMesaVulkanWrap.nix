@@ -3,9 +3,8 @@
   lib,
   nixVulkanIntel,
   nixGLIntel,
-  wezterm_nightly,
-}: let
-  nixGLVulkanMesaWrap = pkg:
+}: {
+  nixGLMesaVulkanWrap = pkg:
     pkgs.runCommand "${pkg.name}-nixgl-wrapper" {} ''
       mkdir $out
       ln -s ${pkg}/* $out
@@ -19,5 +18,4 @@
        chmod +x $wrapped_bin
       done
     '';
-in
-  nixGLVulkanMesaWrap wezterm_nightly
+}
