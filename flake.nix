@@ -69,8 +69,8 @@
       pkgs = nixpkgs.legacyPackages.${system};
       inherit system inputs;
     }));
-
     formatter = forEachSystem (system: nixpkgs.legacyPackages.${system}.alejandra);
     overlays = import ./overlays {inherit inputs outputs;};
+    pkgLib = import ./packages/lib.nix {inherit inputs;};
   };
 }
