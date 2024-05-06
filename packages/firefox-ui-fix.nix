@@ -1,9 +1,11 @@
 {
-  sources,
+  firefox-ui-fix,
   stdenv,
 }:
 stdenv.mkDerivation {
-  inherit (sources.firefox-ui-fix) pname version src;
+  name = "firefox-ui-fix";
+  version = firefox-ui-fix.rev;
+  src = firefox-ui-fix;
 
   installPhase = ''
     mkdir -p $out/
