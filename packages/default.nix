@@ -7,6 +7,7 @@
 in
   rec {
     yazi = inputs.yazi.packages.${system}.default;
+    firefox-ui-fix = pkgs.callPackage ./firefox-ui-fix.nix {};
     yaml2nix = inputs.yaml2nix.packages."${system}".default;
     tmuxinoicer = inputs.tmuxinoicer.packages."${system}".default;
     inherit (inputs.codeium.packages."${system}".vimPlugins) codeium-nvim;
