@@ -14,6 +14,9 @@
       flake = false;
     };
 
+    aagl.url = "github:ezKEa/aagl-gtk-on-nix";
+    aagl.inputs.nixpkgs.follows = "nixpkgs";
+
     codeium.url = "github:Exafunction/codeium.nvim";
     codeium.inputs.nixpkgs.follows = "nixpkgs-stable";
 
