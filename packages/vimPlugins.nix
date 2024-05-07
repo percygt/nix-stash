@@ -6,7 +6,6 @@
     inherit
       (inputs)
       neovim-session-manager
-      nvim-web-devicons
       vim-maximizer
       better-escape
       hmts

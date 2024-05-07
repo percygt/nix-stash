@@ -46,10 +46,6 @@
       url = "github:Shatur/neovim-session-manager";
       flake = false;
     };
-    nvim-web-devicons = {
-      url = "github:percygt/nvim-web-devicons";
-      flake = false;
-    };
     better-escape = {
       url = "github:max397574/better-escape.nvim";
       flake = false;

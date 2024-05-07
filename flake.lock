@@ -607,22 +607,6 @@
         "type": "github"
       }
     },
-    "nvim-web-devicons": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1704631786,
-        "narHash": "sha256-BDUU6Lf/u1rs1sHobcgd/fJzJHgE5dHdiTzXi05Z54g=",
-        "owner": "percygt",
-        "repo": "nvim-web-devicons",
-        "rev": "c9f1e6d6663a9d305886f5deb0606062e89cfa99",
-        "type": "github"
-      },
-      "original": {
-        "owner": "percygt",
-        "repo": "nvim-web-devicons",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "better-escape": "better-escape",
@@ -636,7 +620,6 @@
         "nixpkgs": "nixpkgs",
         "nixpkgs-stable": "nixpkgs-stable",
         "nixpkgs-wayland": "nixpkgs-wayland",
-        "nvim-web-devicons": "nvim-web-devicons",
         "tmuxinoicer": "tmuxinoicer",
         "tmuxst": "tmuxst",
         "vim-maximizer": "vim-maximizer",
