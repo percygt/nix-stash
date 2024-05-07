@@ -866,11 +866,11 @@
     "tmuxst": {
       "flake": false,
       "locked": {
-        "lastModified": 1715075122,
-        "narHash": "sha256-8AYkJxyyJjzq7J2LAvdvtUD2McB8q9CSj+dBzPVylBQ=",
+        "lastModified": 1715078721,
+        "narHash": "sha256-1ExHwfKNH2cVg7pen+zLXL4Nu/gfAX5OI5801aTFjp0=",
         "owner": "percygt",
         "repo": "tmuxst",
-        "rev": "79847b991e64115c464a44c9afa129cd45c4dfa6",
+        "rev": "e317f773dac47c0acf7b37e673f13f1953294203",
         "type": "github"
       },
       "original": {
