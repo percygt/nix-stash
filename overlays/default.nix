@@ -6,7 +6,19 @@
     stash =
       inputs.nixpkgs-stable.legacyPackages.${prev.system}
       // {
-        inherit (outputs.packages.${prev.system}) firefox-ui-fix nixVulkanIntel nixGLIntel wezterm_wrapped wezterm_nightly yaml2nix yazi swayfx swayfx-unwrapped;
+        inherit
+          (outputs.packages.${prev.system})
+          firefox-ui-fix
+          nixVulkanIntel
+          nixGLIntel
+          wezterm_wrapped
+          wezterm_nightly
+          yaml2nix
+          yazi
+          swayfx
+          swayfx-unwrapped
+          gauth
+          ;
         inherit (inputs.nix-vscode-extensions.extensions.${prev.system}) vscode-marketplace;
         vimPlugins =
           prev.vimPlugins

@@ -15,6 +15,7 @@ in
     });
     swayfx = pkgs.swayfx.override {inherit swayfx-unwrapped;};
     firefox-ui-fix = pkgs.callPackage ./firefox-ui-fix.nix {inherit (inputs) firefox-ui-fix;};
+    gauth = pkgs.callPackage ./gauth.nix {inherit (inputs) gauth;};
     yaml2nix = inputs.yaml2nix.packages."${system}".default;
     tmuxinoicer = inputs.tmuxinoicer.packages."${system}".default;
     inherit (inputs.codeium.packages."${system}".vimPlugins) codeium-nvim;

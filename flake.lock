@@ -318,6 +318,22 @@
         "type": "github"
       }
     },
+    "gauth": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1699899326,
+        "narHash": "sha256-GU6HKha7Y01HJX6pyYHORUkFKgl9mWtDd65d+3pYxjI=",
+        "owner": "pcarrier",
+        "repo": "gauth",
+        "rev": "c52e483b8a6dc3df1ff0fe5a763bec5de92ef889",
+        "type": "github"
+      },
+      "original": {
+        "owner": "pcarrier",
+        "repo": "gauth",
+        "type": "github"
+      }
+    },
     "harfbuzz": {
       "flake": false,
       "locked": {
@@ -613,6 +629,7 @@
         "codeium": "codeium",
         "firefox-ui-fix": "firefox-ui-fix",
         "fzf-url": "fzf-url",
+        "gauth": "gauth",
         "hmts": "hmts",
         "neovim-session-manager": "neovim-session-manager",
         "nix-vscode-extensions": "nix-vscode-extensions",
@@ -849,11 +866,11 @@
     "tmuxst": {
       "flake": false,
       "locked": {
-        "lastModified": 1714622528,
-        "narHash": "sha256-kmDdX9fCCGDm8aM07cFi94eBK5YdDZUQ6TpItXaOUxo=",
+        "lastModified": 1715075122,
+        "narHash": "sha256-8AYkJxyyJjzq7J2LAvdvtUD2McB8q9CSj+dBzPVylBQ=",
         "owner": "percygt",
         "repo": "tmuxst",
-        "rev": "6848a10448684a3895087472c497c2f49d533f3d",
+        "rev": "79847b991e64115c464a44c9afa129cd45c4dfa6",
         "type": "github"
       },
       "original": {

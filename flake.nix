@@ -9,6 +9,11 @@
       flake = false;
     };
 
+    gauth = {
+      url = "github:pcarrier/gauth";
+      flake = false;
+    };
+
     codeium.url = "github:Exafunction/codeium.nvim";
     codeium.inputs.nixpkgs.follows = "nixpkgs-stable";
 
