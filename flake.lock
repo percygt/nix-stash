@@ -391,11 +391,11 @@
     "hmts": {
       "flake": false,
       "locked": {
-        "lastModified": 1710430870,
-        "narHash": "sha256-bsOQX56ciQ8ni7Zh4ZNtTvptvy/YaDPG318AsEaZRpE=",
+        "lastModified": 1715076655,
+        "narHash": "sha256-vDTqJQzLyg0nmlC+CrLnPkYti1rPxmvRW8eQq/9Zg+M=",
         "owner": "calops",
         "repo": "hmts.nvim",
-        "rev": "473d74cf54da8f51aaa9993ec3e6bfae278eb47b",
+        "rev": "19a91816c123173a4551a6a04f2882338f20db1d",
         "type": "github"
       },
       "original": {
