@@ -4,6 +4,9 @@
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.11";
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
+    swayfx.url = "github:WillPower3309/swayfx";
+    swayfx.inputs.nixpkgs.follows = "nixpkgs";
+
     codeium.url = "github:Exafunction/codeium.nvim";
     codeium.inputs.nixpkgs.follows = "nixpkgs-stable";
 

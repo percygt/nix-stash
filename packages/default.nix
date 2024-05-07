@@ -7,6 +7,13 @@
 in
   rec {
     yazi = inputs.yazi.packages.${system}.default;
+    swayfx-unwrapped = (pkgs.swayfx-unwrapped.override {wlroots = pkgs.wlroots_0_17;}).overrideAttrs (old: {
+      version = "0.4.0-git";
+      src = pkgs.lib.cleanSource inputs.swayfx;
+      nativeBuildInputs = old.nativeBuildInputs ++ [pkgs.cmake];
+      buildInputs = old.buildInputs ++ [pkgs.scenefx];
+    });
+    swayfx = pkgs.swayfx.override {inherit swayfx-unwrapped;};
     firefox-ui-fix = pkgs.callPackage ./firefox-ui-fix.nix {inherit (inputs) firefox-ui-fix;};
     yaml2nix = inputs.yaml2nix.packages."${system}".default;
     tmuxinoicer = inputs.tmuxinoicer.packages."${system}".default;
