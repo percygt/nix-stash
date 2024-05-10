@@ -7,6 +7,7 @@
 in
   rec {
     yazi = inputs.yazi.packages.${system}.default;
+    keepmenu = inputs.keepmenu.packages.${system}.default;
     swayfx-unwrapped = inputs.swayfx.packages.${system}.default;
     swayfx = pkgs.swayfx.override {inherit swayfx-unwrapped;};
     anime-borb-launcher = inputs.aagl.packages.${system}.anime-borb-launcher;
