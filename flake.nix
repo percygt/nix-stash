@@ -29,7 +29,6 @@
     tmuxinoicer.url = "github:percygt/tmuxinoicer";
 
     wezterm.url = "github:wez/wezterm?dir=nix";
-    wezterm.inputs.nixpkgs.follows = "nixpkgs";
 
     nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
     nixpkgs-wayland.inputs.nixpkgs.follows = "nixpkgs";

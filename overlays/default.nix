@@ -11,8 +11,9 @@
           firefox-ui-fix
           nixVulkanIntel
           nixGLIntel
-          wezterm_wrapped
           wezterm_nightly
+          # wezterm_wrapped
+          
           yaml2nix
           yazi
           swayfx

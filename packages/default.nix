@@ -7,6 +7,7 @@
 in
   rec {
     yazi = inputs.yazi.packages.${system}.default;
+    wezterm_nightly = inputs.wezterm.packages.${system}.default;
     keepmenu = inputs.keepmenu.packages.${system}.default;
     swayfx-unwrapped = inputs.swayfx.packages.${system}.default;
     swayfx = pkgs.swayfx.override {inherit swayfx-unwrapped;};
@@ -17,8 +18,7 @@ in
     tmuxinoicer = inputs.tmuxinoicer.packages."${system}".default;
     inherit (inputs.codeium.packages."${system}".vimPlugins) codeium-nvim;
     inherit (inputs.nixgl.packages.${system}) nixVulkanIntel nixGLIntel;
-    wezterm_nightly = inputs.wezterm.packages.${system}.default;
-    wezterm_wrapped = (import ./nixGLMesaVulkanWrap.nix {inherit nixGLIntel nixVulkanIntel pkgs lib;}).nixGLMesaVulkanWrap wezterm_nightly;
+    # wezterm_wrapped = (import ./nixGLMesaVulkanWrap.nix {inherit nixGLIntel nixVulkanIntel pkgs lib;}).nixGLMesaVulkanWrap wezterm_nightly;
     vscode-with-extensions = pkgs.vscode-with-extensions.override {
       vscode = pkgs.vscodium;
       vscodeExtensions = import ./vscode_extensions.nix {inherit inputs system;};
