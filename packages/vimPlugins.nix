@@ -8,6 +8,7 @@
       neovim-session-manager
       vim-maximizer
       better-escape
+      multicursors-nvim
       hmts
       ;
   };

@@ -63,6 +63,10 @@
       url = "github:max397574/better-escape.nvim";
       flake = false;
     };
+    multicursors-nvim = {
+      url = "github:smoka7/multicursors.nvim";
+      flake = false;
+    };
     vim-maximizer = {
       url = "github:szw/vim-maximizer";
       flake = false;

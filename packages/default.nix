@@ -13,13 +13,13 @@ in
       nativeBuildInputs = old.nativeBuildInputs ++ [pkgs.cmake];
       buildInputs = old.buildInputs ++ [pkgs.scenefx];
     });
+    swayfx = pkgs.swayfx.override {inherit swayfx-unwrapped;};
     anime-borb-launcher = inputs.aagl.packages.${system}.anime-borb-launcher;
     anime-game-launcher = inputs.aagl.packages.${system}.anime-game-launcher;
     anime-games-launcher = inputs.aagl.packages.${system}.anime-games-launcher;
     honkers-railway-launcher = inputs.aagl.packages.${system}.honkers-railway-launcher;
     honkers-launcher = inputs.aagl.packages.${system}.honkers-launcher;
 
-    swayfx = pkgs.swayfx.override {inherit swayfx-unwrapped;};
     firefox-ui-fix = pkgs.callPackage ./firefox-ui-fix.nix {inherit (inputs) firefox-ui-fix;};
     gauth = pkgs.callPackage ./gauth.nix {inherit (inputs) gauth;};
     yaml2nix = inputs.yaml2nix.packages."${system}".default;
