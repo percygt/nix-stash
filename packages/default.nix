@@ -7,12 +7,7 @@
 in
   rec {
     yazi = inputs.yazi.packages.${system}.default;
-    swayfx-unwrapped = (pkgs.swayfx-unwrapped.override {wlroots = pkgs.wlroots_0_17;}).overrideAttrs (old: {
-      version = "0.4.0-git";
-      src = pkgs.lib.cleanSource inputs.swayfx;
-      nativeBuildInputs = old.nativeBuildInputs ++ [pkgs.cmake];
-      buildInputs = old.buildInputs ++ [pkgs.scenefx];
-    });
+    swayfx-unwrapped = inputs.swayfx.packages.${system}.default;
     swayfx = pkgs.swayfx.override {inherit swayfx-unwrapped;};
     anime-borb-launcher = inputs.aagl.packages.${system}.anime-borb-launcher;
     anime-game-launcher = inputs.aagl.packages.${system}.anime-game-launcher;

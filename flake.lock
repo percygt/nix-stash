@@ -440,6 +440,22 @@
         "type": "github"
       }
     },
+    "multicursors-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1712905190,
+        "narHash": "sha256-whC3e56+Wz1tgSal9nQQzGPAnIWA2bIxzwxzqO4Cm3Q=",
+        "owner": "smoka7",
+        "repo": "multicursors.nvim",
+        "rev": "b959ad0f38881e81e757208c6adfc9e6dc24dfc7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "smoka7",
+        "repo": "multicursors.nvim",
+        "type": "github"
+      }
+    },
     "neovim-session-manager": {
       "flake": false,
       "locked": {
@@ -669,6 +685,7 @@
         "fzf-url": "fzf-url",
         "gauth": "gauth",
         "hmts": "hmts",
+        "multicursors-nvim": "multicursors-nvim",
         "neovim-session-manager": "neovim-session-manager",
         "nix-vscode-extensions": "nix-vscode-extensions",
         "nixgl": "nixgl",
