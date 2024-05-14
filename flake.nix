@@ -14,8 +14,8 @@
     keepmenu.url = "github:percygt/keepmenu";
     keepmenu.inputs.nixpkgs.follows = "nixpkgs";
 
-    aagl.url = "github:ezKEa/aagl-gtk-on-nix";
-    aagl.inputs.nixpkgs.follows = "nixpkgs";
+    # aagl.url = "github:ezKEa/aagl-gtk-on-nix";
+    # aagl.inputs.nixpkgs.follows = "nixpkgs";
 
     codeium.url = "github:Exafunction/codeium.nvim";
     codeium.inputs.nixpkgs.follows = "nixpkgs-stable";

@@ -12,19 +12,24 @@
           nixVulkanIntel
           nixGLIntel
           wezterm_nightly
-          # wezterm_wrapped
-          
+          wezterm_wrapped
+          waybar
           yaml2nix
           yazi
           swayfx
           swayfx-unwrapped
           gauth
           keepmenu
-          anime-borb-launcher
-          anime-game-launcher
-          anime-games-launcher
-          honkers-railway-launcher
-          honkers-launcher
+          # anime-borb-launcher
+          
+          # anime-game-launcher
+          
+          # anime-games-launcher
+          
+          # honkers-railway-launcher
+          
+          # honkers-launcher
+          
           ;
         inherit (inputs.nix-vscode-extensions.extensions.${prev.system}) vscode-marketplace;
         vimPlugins =

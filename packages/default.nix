@@ -11,14 +11,14 @@ in
     keepmenu = inputs.keepmenu.packages.${system}.default;
     # swayfx-unwrapped = inputs.swayfx.packages.${system}.default;
     # swayfx = pkgs.swayfx.override {inherit swayfx-unwrapped;};
-    inherit (inputs.aagl.packages.${system}) honkers-launcher honkers-railway-launcher anime-borb-launcher anime-games-launcher anime-game-launcher;
+    # inherit (inputs.aagl.packages.${system}) honkers-launcher honkers-railway-launcher anime-borb-launcher anime-games-launcher anime-game-launcher;
     firefox-ui-fix = pkgs.callPackage ./firefox-ui-fix.nix {inherit (inputs) firefox-ui-fix;};
     gauth = pkgs.callPackage ./gauth.nix {inherit (inputs) gauth;};
     yaml2nix = inputs.yaml2nix.packages."${system}".default;
     tmuxinoicer = inputs.tmuxinoicer.packages."${system}".default;
     inherit (inputs.codeium.packages."${system}".vimPlugins) codeium-nvim;
     inherit (inputs.nixgl.packages.${system}) nixVulkanIntel nixGLIntel;
-    # wezterm_wrapped = (import ./nixGLMesaVulkanWrap.nix {inherit nixGLIntel nixVulkanIntel pkgs lib;}).nixGLMesaVulkanWrap wezterm_nightly;
+    wezterm_wrapped = (import ./nixGLMesaVulkanWrap.nix {inherit nixGLIntel nixVulkanIntel pkgs lib;}).nixGLMesaVulkanWrap wezterm_nightly;
     vscode-with-extensions = pkgs.vscode-with-extensions.override {
       vscode = pkgs.vscodium;
       vscodeExtensions = import ./vscode_extensions.nix {inherit inputs system;};
