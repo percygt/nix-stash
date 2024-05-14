@@ -4,7 +4,7 @@
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.11";
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
-    swayfx.url = "github:WillPower3309/swayfx";
+    # swayfx.url = "github:WillPower3309/swayfx";
 
     gauth = {
       url = "github:pcarrier/gauth";
