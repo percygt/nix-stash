@@ -30,8 +30,8 @@
 
     wezterm.url = "github:wez/wezterm?dir=nix";
 
-    nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
-    nixpkgs-wayland.inputs.nixpkgs.follows = "nixpkgs";
+    waybar.url = "github:Alexays/Waybar";
+    waybar.inputs.nixpkgs.follows = "nixpkgs";
 
     yazi.url = "github:sxyazi/yazi";
     yazi.inputs.nixpkgs.follows = "nixpkgs";

@@ -23,7 +23,7 @@ in
       vscode = pkgs.vscodium;
       vscodeExtensions = import ./vscode_extensions.nix {inherit inputs system;};
     };
-    inherit (inputs.nixpkgs-wayland.packages.${system}) waybar;
+    inherit (inputs.waybar.packages.${system}) waybar;
   }
   // (import ./vimPlugins.nix {inherit inputs pkgs;})
   // (import ./tmuxPlugins.nix {inherit inputs pkgs;})
