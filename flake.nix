@@ -62,6 +62,10 @@
       url = "github:max397574/better-escape.nvim";
       flake = false;
     };
+    mini-nvim = {
+      url = "github:echasnovski/mini.nvim";
+      flake = false;
+    };
     multicursors-nvim = {
       url = "github:smoka7/multicursors.nvim";
       flake = false;

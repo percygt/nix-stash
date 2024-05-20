@@ -10,6 +10,7 @@
       better-escape
       multicursors-nvim
       hmts
+      mini-nvim
       ;
   };
 
