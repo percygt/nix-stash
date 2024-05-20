@@ -365,6 +365,22 @@
         "type": "github"
       }
     },
+    "mini-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1716106623,
+        "narHash": "sha256-2wWQ8WJL+ZePwkYKSscI5QDxb8glU23IY5M9Vqij+Ns=",
+        "owner": "echasnovski",
+        "repo": "mini.nvim",
+        "rev": "cd3a08fbf987dabcfded35ebb612e82f8000f92a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "echasnovski",
+        "repo": "mini.nvim",
+        "type": "github"
+      }
+    },
     "multicursors-nvim": {
       "flake": false,
       "locked": {
@@ -529,6 +545,7 @@
         "gauth": "gauth",
         "hmts": "hmts",
         "keepmenu": "keepmenu",
+        "mini-nvim": "mini-nvim",
         "multicursors-nvim": "multicursors-nvim",
         "neovim-session-manager": "neovim-session-manager",
         "nix-vscode-extensions": "nix-vscode-extensions",
