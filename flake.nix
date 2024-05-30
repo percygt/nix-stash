@@ -84,6 +84,7 @@
     systems = ["aarch64-linux" "i686-linux" "x86_64-linux" "aarch64-darwin" "x86_64-darwin"];
     forEachSystem = inputs.nixpkgs.lib.genAttrs systems;
   in {
+    vscodeExtensions = forEachSystem (system: import ./packages/vscode_extensions.nix {inherit inputs system;});
     packages = forEachSystem (system: (import ./packages {
       pkgs = nixpkgs.legacyPackages.${system};
       inherit system inputs;
