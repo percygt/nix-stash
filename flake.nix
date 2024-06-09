@@ -58,6 +58,10 @@
       url = "github:Shatur/neovim-session-manager";
       flake = false;
     };
+    code_runner-nvim = {
+      url = "github:CRAG666/code_runner.nvim";
+      flake = false;
+    };
     better-escape = {
       url = "github:max397574/better-escape.nvim";
       flake = false;
