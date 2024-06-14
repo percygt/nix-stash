@@ -59,7 +59,7 @@
       flake = false;
     };
     git-worktree-nvim = {
-      url = "github:polarmutex/git-worktree.nvim";
+      url = "github:awerebea/git-worktree.nvim/handle_changes_in_telescope_api";
       flake = false;
     };
     code-runner-nvim = {
