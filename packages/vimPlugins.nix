@@ -11,7 +11,8 @@
       multicursors-nvim
       hmts
       mini-nvim
-      code_runner-nvim
+      code-runner-nvim
+      git-worktree-nvim
       ;
   };
 

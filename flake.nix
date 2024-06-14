@@ -58,7 +58,11 @@
       url = "github:Shatur/neovim-session-manager";
       flake = false;
     };
-    code_runner-nvim = {
+    git-worktree-nvim = {
+      url = "github:polarmutex/git-worktree.nvim";
+      flake = false;
+    };
+    code-runner-nvim = {
       url = "github:CRAG666/code_runner.nvim";
       flake = false;
     };
