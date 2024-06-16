@@ -919,11 +919,11 @@
       },
       "locked": {
         "dir": "nix",
-        "lastModified": 1718544714,
-        "narHash": "sha256-AXYiPN8SuQZRPko7fDg5WiHNZiZg58xaiVjTx8i9T9Y=",
+        "lastModified": 1718572182,
+        "narHash": "sha256-ljl612rTa5hbBTQufH9DxyUHvBuWxk9DWjjKijsIbtk=",
         "owner": "wez",
         "repo": "wezterm",
-        "rev": "404c1937ef1194a528d57f8096d7215a8faabc5e",
+        "rev": "1d3a459ca84bb4a05eef257a0ad5a8125d28441c",
         "type": "github"
       },
       "original": {
