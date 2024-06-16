@@ -1,9 +1,5 @@
-{
-  inputs,
-  system,
-  ...
-}:
-with inputs.nix-vscode-extensions.extensions.${system}.vscode-marketplace; [
+{pkgs, ...}:
+with pkgs.vscode-marketplace; [
   johnnymorganz.luau-lsp
   anderseandersen.html-class-suggestions
   astro-build.astro-vscode

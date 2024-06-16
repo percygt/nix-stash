@@ -42,10 +42,6 @@
       url = "github:nix-community/emacs-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    from-elisp = {
-      url = "github:o-santi/from-elisp";
-      flake = false;
-    };
     firefox-ui-fix = {
       url = "github:black7375/Firefox-UI-Fix";
       flake = false;
@@ -101,6 +97,7 @@
     forEachSystem = inputs.nixpkgs.lib.genAttrs systems;
     overlays = {
       emacs = inputs.emacs-overlay.overlay;
+      nix-vscode-extensions = inputs.nix-vscode-extensions.overlays.default;
     };
     legacyPackages = forEachSystem (
       system:

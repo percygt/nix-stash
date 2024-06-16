@@ -20,6 +20,7 @@
           swayfx-unwrapped
           gauth
           keepmenu
+          emacs-pgtk-unstable
           # anime-borb-launcher
           
           # anime-game-launcher

@@ -21,64 +21,9 @@ in
     wezterm_wrapped = (import ./nixGLMesaVulkanWrap.nix {inherit nixGLIntel nixVulkanIntel pkgs lib;}).nixGLMesaVulkanWrap wezterm_nightly;
     vscode-with-extensions = pkgs.vscode-with-extensions.override {
       vscode = pkgs.vscodium;
-      vscodeExtensions = import ./vscode_extensions.nix {inherit inputs system;};
+      vscodeExtensions = import ./vscode_extensions.nix {inherit pkgs;};
     };
-    emacsWithConfig = let
-      outside-emacs = with pkgs; [
-        (python3.withPackages (p: (with p; [
-          python-lsp-server
-          python-lsp-ruff
-          pylsp-mypy
-        ])))
-        nil
-        parallel
-        ripgrep
-      ];
-      org-tangle-elisp-blocks =
-        (pkgs.callPackage ./emacs/org.nix {
-          inherit pkgs;
-          from-elisp = inputs.from-elisp;
-        })
-        .org-tangle (
-          {
-            language,
-            flags,
-          }: let
-            is-elisp = (language == "emacs-lisp") || (language == "elisp");
-            is-tangle =
-              if flags ? ":tangle"
-              then flags.":tangle" == "yes" || flags.":tangle" == "y"
-              else false;
-          in
-            is-elisp && is-tangle
-        );
-      config-el = pkgs.writeText "config.el" (org-tangle-elisp-blocks (builtins.readFile ./emacs/config.org));
-    in
-      pkgs.callPackage
-      (
-        {emacsWithPackagesFromUsePackage}: (emacsWithPackagesFromUsePackage {
-          package = pkgs.emacs-pgtk;
-          config = config-el;
-          alwaysEnsure = true;
-          defaultInitFile = true;
-          extraEmacsPackages = epkgs:
-            with epkgs;
-              [
-                # (treesit-grammars.with-grammars (g:
-                #   with g; [
-                #     tree-sitter-rust
-                #     tree-sitter-python
-                #   ]))
-                treesit-grammars.with-all-grammars
-              ]
-              ++ outside-emacs;
-          override = final: prev: {
-            final.buildInputs = prev.buildInputs or [] ++ outside-emacs;
-          };
-        })
-      )
-      {};
-
+    emacs-unstable-pgtk = pkgs.callPackage ({emacs-unstable-pgtk}: emacs-unstable-pgtk) {};
     inherit (inputs.waybar.packages.${system}) waybar;
   }
   // (import ./vimPlugins.nix {inherit inputs pkgs;})
