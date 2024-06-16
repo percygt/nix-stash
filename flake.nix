@@ -108,7 +108,10 @@
         }
     );
   in {
-    vscodeExtensions = forEachSystem (system: import ./packages/vscode_extensions.nix {inherit inputs system;});
+    vscodeExtensions = forEachSystem (system:
+      import ./packages/vscode_extensions.nix {
+        pkgs = legacyPackages.${system};
+      });
     packages = forEachSystem (system: (import ./packages {
       pkgs = legacyPackages.${system};
       inherit system inputs;
