@@ -38,6 +38,14 @@
 
     yaml2nix.url = "github:euank/yaml2nix";
     yaml2nix.inputs.nixpkgs.follows = "nixpkgs";
+    emacs-overlay = {
+      url = "github:nix-community/emacs-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    from-elisp = {
+      url = "github:o-santi/from-elisp";
+      flake = false;
+    };
     firefox-ui-fix = {
       url = "github:black7375/Firefox-UI-Fix";
       flake = false;
@@ -91,10 +99,21 @@
     inherit (self) outputs;
     systems = ["aarch64-linux" "i686-linux" "x86_64-linux" "aarch64-darwin" "x86_64-darwin"];
     forEachSystem = inputs.nixpkgs.lib.genAttrs systems;
+    overlays = {
+      emacs = inputs.emacs-overlay.overlay;
+    };
+    legacyPackages = forEachSystem (
+      system:
+        import inputs.nixpkgs {
+          inherit system;
+          overlays = builtins.attrValues overlays;
+          config.allowUnfree = true;
+        }
+    );
   in {
     vscodeExtensions = forEachSystem (system: import ./packages/vscode_extensions.nix {inherit inputs system;});
     packages = forEachSystem (system: (import ./packages {
-      pkgs = nixpkgs.legacyPackages.${system};
+      pkgs = legacyPackages.${system};
       inherit system inputs;
     }));
     formatter = forEachSystem (system: nixpkgs.legacyPackages.${system}.alejandra);
