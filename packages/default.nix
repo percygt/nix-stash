@@ -24,6 +24,8 @@ in
       vscodeExtensions = import ./vscode_extensions.nix {inherit pkgs;};
     };
     emacs-unstable-pgtk = pkgs.callPackage ({emacs-unstable-pgtk}: emacs-unstable-pgtk) {};
+    emacs-unstable = pkgs.callPackage ({emacs-unstable}: emacs-unstable) {};
+    neovim = pkgs.callPackage ({neovim}: neovim) {};
     inherit (inputs.waybar.packages.${system}) waybar;
   }
   // (import ./vimPlugins.nix {inherit inputs pkgs;})

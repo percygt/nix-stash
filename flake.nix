@@ -1,9 +1,9 @@
 {
   description = "My stash of nix overlays";
   inputs = {
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.11";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-
+    flake-utils.url = "github:numtide/flake-utils";
     # swayfx.url = "github:WillPower3309/swayfx";
 
     gauth = {
@@ -38,9 +38,13 @@
 
     yaml2nix.url = "github:euank/yaml2nix";
     yaml2nix.inputs.nixpkgs.follows = "nixpkgs";
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     emacs-overlay = {
       url = "github:nix-community/emacs-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        nixpkgs-stable.follows = "nixpkgs-stable";
+      };
     };
     firefox-ui-fix = {
       url = "github:black7375/Firefox-UI-Fix";
@@ -98,6 +102,7 @@
     overlays = {
       emacs = inputs.emacs-overlay.overlay;
       nix-vscode-extensions = inputs.nix-vscode-extensions.overlays.default;
+      neovim-nightly = inputs.neovim-nightly-overlay.overlays.default;
     };
     legacyPackages = forEachSystem (
       system:
