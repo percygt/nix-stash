@@ -23,8 +23,10 @@ in
       vscode = pkgs.vscodium;
       vscodeExtensions = import ./vscode_extensions.nix {inherit pkgs;};
     };
-    emacs-unstable-pgtk = pkgs.callPackage ({emacs-unstable-pgtk}: emacs-unstable-pgtk) {};
-    emacs-unstable = pkgs.callPackage ({emacs-unstable}: emacs-unstable) {};
+    emacs-pgtk = pkgs.callPackage ({emacs-pgtk}: emacs-pgtk.override {withTreeSitter = true;}) {};
+    emacs-unstable-pgtk = pkgs.callPackage ({emacs-unstable-pgtk}: emacs-unstable-pgtk.override {withTreeSitter = true;}) {};
+    emacs-unstable = pkgs.callPackage ({emacs-unstable}: emacs-unstable.override {withTreeSitter = true;}) {};
+
     neovim = pkgs.callPackage ({neovim}: neovim) {};
     inherit (inputs.waybar.packages.${system}) waybar;
   }
