@@ -3,7 +3,7 @@ with pkgs.vscode-marketplace; [
   johnnymorganz.luau-lsp
   anderseandersen.html-class-suggestions
   astro-build.astro-vscode
-  asvetliakov.vscode-neovim
+  # asvetliakov.vscode-neovim
   bbenoist.nix
   bernardogualberto.solidjs
   britesnow.vscode-toggle-quotes
