@@ -13,6 +13,7 @@
       mini-nvim
       code-runner-nvim
       git-worktree-nvim
+      garbage-day-nvim
       ;
   };
 

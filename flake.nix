@@ -66,6 +66,10 @@
       url = "github:Shatur/neovim-session-manager";
       flake = false;
     };
+    garbage-day-nvim = {
+      url = "github:zeioth/garbage-day.nvim";
+      flake = false;
+    };
     git-worktree-nvim = {
       url = "github:awerebea/git-worktree.nvim/handle_changes_in_telescope_api";
       flake = false;
