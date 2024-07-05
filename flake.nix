@@ -11,6 +11,10 @@
     nixpkgs-stable.follows = "nix-sources/nixpkgs-stable";
     flake-utils.url = "github:numtide/flake-utils";
 
+    swayfx-unwrapped.follows = "nix-sources/swayfx-unwrapped";
+    neovim-nightly-overlay.follows = "nix-sources/neovim-nightly-overlay";
+    emacs-overlay.follows = "nix-sources/emacs-overlay";
+
     keepmenu.url = "github:percygt/keepmenu";
     keepmenu.inputs.nixpkgs.follows = "nixpkgs";
 

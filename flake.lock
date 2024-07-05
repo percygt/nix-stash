@@ -449,22 +449,6 @@
         "type": "github"
       }
     },
-    "gauth": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1699899326,
-        "narHash": "sha256-GU6HKha7Y01HJX6pyYHORUkFKgl9mWtDd65d+3pYxjI=",
-        "owner": "pcarrier",
-        "repo": "gauth",
-        "rev": "c52e483b8a6dc3df1ff0fe5a763bec5de92ef889",
-        "type": "github"
-      },
-      "original": {
-        "owner": "pcarrier",
-        "repo": "gauth",
-        "type": "github"
-      }
-    },
     "git-hooks": {
       "inputs": {
         "flake-compat": "flake-compat_2",
@@ -868,16 +852,23 @@
         "better-escape": "better-escape",
         "code-runner-nvim": "code-runner-nvim",
         "codeium": "codeium",
+        "emacs-overlay": [
+          "nix-sources",
+          "emacs-overlay"
+        ],
         "firefox-ui-fix": "firefox-ui-fix",
         "flake-utils": "flake-utils_2",
         "fzf-url": "fzf-url",
         "garbage-day-nvim": "garbage-day-nvim",
-        "gauth": "gauth",
         "git-worktree-nvim": "git-worktree-nvim",
         "hmts": "hmts",
         "keepmenu": "keepmenu",
         "mini-nvim": "mini-nvim",
         "multicursors-nvim": "multicursors-nvim",
+        "neovim-nightly-overlay": [
+          "nix-sources",
+          "neovim-nightly-overlay"
+        ],
         "neovim-session-manager": "neovim-session-manager",
         "nix-sources": "nix-sources",
         "nix-vscode-extensions": "nix-vscode-extensions",
@@ -889,6 +880,10 @@
         "nixpkgs-stable": [
           "nix-sources",
           "nixpkgs-stable"
+        ],
+        "swayfx-unwrapped": [
+          "nix-sources",
+          "swayfx-unwrapped"
         ],
         "tmuxinoicer": "tmuxinoicer",
         "tmuxst": "tmuxst",
