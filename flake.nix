@@ -1,9 +1,11 @@
 {
   description = "My stash of nix overlays";
   inputs = {
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nix-dots.url = "github:percygt/nix-dots";
+    nixpkgs.follows = "nix-dots/nixpkgs";
+    nixpkgs-stable.follows = "nix-dots/nixpkgs-stable";
     flake-utils.url = "github:numtide/flake-utils";
+
     # swayfx.url = "github:WillPower3309/swayfx";
 
     gauth = {
