@@ -9,9 +9,6 @@ in
     yazi = inputs.yazi.packages.${system}.default;
     wezterm_nightly = inputs.wezterm.packages.${system}.default;
     keepmenu = inputs.keepmenu.packages.${system}.default;
-    # swayfx-unwrapped = inputs.swayfx.packages.${system}.default;
-    # swayfx = pkgs.swayfx.override {inherit swayfx-unwrapped;};
-    # inherit (inputs.aagl.packages.${system}) honkers-launcher honkers-railway-launcher anime-borb-launcher anime-games-launcher anime-game-launcher;
     firefox-ui-fix = pkgs.callPackage ./firefox-ui-fix.nix {inherit (inputs) firefox-ui-fix;};
     gauth = pkgs.callPackage ./gauth.nix {inherit (inputs) gauth;};
     yaml2nix = inputs.yaml2nix.packages."${system}".default;

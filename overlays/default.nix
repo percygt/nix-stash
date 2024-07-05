@@ -16,9 +16,6 @@
           waybar
           yaml2nix
           yazi
-          swayfx
-          swayfx-unwrapped
-          gauth
           keepmenu
           # anime-borb-launcher
           

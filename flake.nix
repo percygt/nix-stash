@@ -11,13 +11,6 @@
     nixpkgs-stable.follows = "nix-sources/nixpkgs-stable";
     flake-utils.url = "github:numtide/flake-utils";
 
-    # swayfx.url = "github:WillPower3309/swayfx";
-
-    gauth = {
-      url = "github:pcarrier/gauth";
-      flake = false;
-    };
-
     keepmenu.url = "github:percygt/keepmenu";
     keepmenu.inputs.nixpkgs.follows = "nixpkgs";
 
