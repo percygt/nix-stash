@@ -101,22 +101,6 @@
         "type": "github"
       }
     },
-    "firefox-ui-fix": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1719817324,
-        "narHash": "sha256-19aivAOvXeFOnsP5XhitK3+xk1lwUyXoTK8BE84qbFQ=",
-        "owner": "black7375",
-        "repo": "Firefox-UI-Fix",
-        "rev": "362f34bece31a0e89b87d036547a56fc2c412d0c",
-        "type": "github"
-      },
-      "original": {
-        "owner": "black7375",
-        "repo": "Firefox-UI-Fix",
-        "type": "github"
-      }
-    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -856,7 +840,6 @@
           "nix-sources",
           "emacs-overlay"
         ],
-        "firefox-ui-fix": "firefox-ui-fix",
         "flake-utils": "flake-utils_2",
         "fzf-url": "fzf-url",
         "garbage-day-nvim": "garbage-day-nvim",

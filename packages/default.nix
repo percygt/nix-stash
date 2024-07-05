@@ -9,8 +9,6 @@ in
     yazi = inputs.yazi.packages.${system}.default;
     wezterm_nightly = inputs.wezterm.packages.${system}.default;
     keepmenu = inputs.keepmenu.packages.${system}.default;
-    firefox-ui-fix = pkgs.callPackage ./firefox-ui-fix.nix {inherit (inputs) firefox-ui-fix;};
-    gauth = pkgs.callPackage ./gauth.nix {inherit (inputs) gauth;};
     yaml2nix = inputs.yaml2nix.packages."${system}".default;
     tmuxinoicer = inputs.tmuxinoicer.packages."${system}".default;
     inherit (inputs.codeium.packages."${system}".vimPlugins) codeium-nvim;

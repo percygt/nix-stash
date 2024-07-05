@@ -8,7 +8,6 @@
       // {
         inherit
           (outputs.packages.${prev.system})
-          firefox-ui-fix
           nixVulkanIntel
           nixGLIntel
           wezterm_nightly

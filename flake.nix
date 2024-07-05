@@ -42,10 +42,7 @@
 
     yaml2nix.url = "github:euank/yaml2nix";
     yaml2nix.inputs.nixpkgs.follows = "nixpkgs";
-    firefox-ui-fix = {
-      url = "github:black7375/Firefox-UI-Fix";
-      flake = false;
-    };
+
     tmuxst = {
       url = "github:percygt/tmuxst";
       flake = false;
