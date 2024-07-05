@@ -836,10 +836,6 @@
         "better-escape": "better-escape",
         "code-runner-nvim": "code-runner-nvim",
         "codeium": "codeium",
-        "emacs-overlay": [
-          "nix-sources",
-          "emacs-overlay"
-        ],
         "flake-utils": "flake-utils_2",
         "fzf-url": "fzf-url",
         "garbage-day-nvim": "garbage-day-nvim",
@@ -848,10 +844,6 @@
         "keepmenu": "keepmenu",
         "mini-nvim": "mini-nvim",
         "multicursors-nvim": "multicursors-nvim",
-        "neovim-nightly-overlay": [
-          "nix-sources",
-          "neovim-nightly-overlay"
-        ],
         "neovim-session-manager": "neovim-session-manager",
         "nix-sources": "nix-sources",
         "nix-vscode-extensions": "nix-vscode-extensions",
@@ -863,10 +855,6 @@
         "nixpkgs-stable": [
           "nix-sources",
           "nixpkgs-stable"
-        ],
-        "swayfx-unwrapped": [
-          "nix-sources",
-          "swayfx-unwrapped"
         ],
         "tmuxinoicer": "tmuxinoicer",
         "tmuxst": "tmuxst",
