@@ -5,7 +5,7 @@ name: Test and cache flake packages
   push:
   pull_request:
   schedule:
-    - cron: 0 0 * * 1
+    - cron: 0 0 * * 1,3,7
   workflow_dispatch:
 
 jobs:
@@ -14,16 +14,26 @@ jobs:
     outputs:
       changed: ${{ steps.changes.outputs.changed }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4.1.7
       - uses: determinatesystems/nix-installer-action@main
       - uses: determinatesystems/magic-nix-cache-action@main
       - uses: determinatesystems/flake-checker-action@main
-      - name: update lock
+
+      - name: Configure Git
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
-          nix flake update --commit-lock-file
+
+      - name: Update flake inputs
+        run: |
+          nix flake update --accept-flake-config
+          git commit -m "Updated flake inputs" flake.lock || true
+
+      - name: Push commit with updated inputs
+        run: |
+          git pull --rebase --autostash
           git push
+
       - uses: dorny/paths-filter@v3
         id: changes
         with:
@@ -68,8 +78,8 @@ jobs:
         run: cachix use "$CACHIX_BINARY_CACHE"
       - name: Build packages
         run: |
-          nix flake show --json \
+          nix flake show --accept-flake-config --json \
             | jq  '.packages."x86_64-linux"|keys[]' \
-            | xargs -I '{}' nix build --json --no-link --print-build-logs '.#{}' \
+            | xargs -I '{}' nix build --accept-flake-config --json --no-link --print-build-logs '.#{}' \
             | jq -r '.[].outputs | to_entries[].value' \
             | cachix push "$CACHIX_BINARY_CACHE"

@@ -1,9 +1,14 @@
 {
   description = "My stash of nix overlays";
+  nixConfig = {
+    extra-substituters = ["https://nix-community.cachix.org"];
+    extra-trusted-public-keys = ["nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="];
+  };
+
   inputs = {
-    nix-dots.url = "github:percygt/nix-dots";
-    nixpkgs.follows = "nix-dots/nixpkgs";
-    nixpkgs-stable.follows = "nix-dots/nixpkgs-stable";
+    nix-sources.url = "github:percygt/nix-sources";
+    nixpkgs.follows = "nix-sources/nixpkgs";
+    nixpkgs-stable.follows = "nix-sources/nixpkgs-stable";
     flake-utils.url = "github:numtide/flake-utils";
 
     # swayfx.url = "github:WillPower3309/swayfx";
@@ -40,14 +45,6 @@
 
     yaml2nix.url = "github:euank/yaml2nix";
     yaml2nix.inputs.nixpkgs.follows = "nixpkgs";
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-    emacs-overlay = {
-      url = "github:nix-community/emacs-overlay";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        nixpkgs-stable.follows = "nixpkgs-stable";
-      };
-    };
     firefox-ui-fix = {
       url = "github:black7375/Firefox-UI-Fix";
       flake = false;
@@ -106,9 +103,7 @@
     systems = ["aarch64-linux" "i686-linux" "x86_64-linux" "aarch64-darwin" "x86_64-darwin"];
     forEachSystem = inputs.nixpkgs.lib.genAttrs systems;
     overlays = {
-      emacs = inputs.emacs-overlay.overlay;
       nix-vscode-extensions = inputs.nix-vscode-extensions.overlays.default;
-      neovim-nightly = inputs.neovim-nightly-overlay.overlays.default;
     };
     legacyPackages = forEachSystem (
       system:
