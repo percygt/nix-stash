@@ -598,11 +598,11 @@
     "mini-nvim": {
       "flake": false,
       "locked": {
-        "lastModified": 1720184337,
-        "narHash": "sha256-HeSNjZqk7OEkAtZvpYB+l1fRCPyE/Hq22Jur+d0tb1E=",
+        "lastModified": 1720287427,
+        "narHash": "sha256-kA8yDJrnKLlg27rKsAdxp3vTBF2ZT2uCIIY103unHeo=",
         "owner": "echasnovski",
         "repo": "mini.nvim",
-        "rev": "d187614ecee84ef8d7456339ed7ce1160d054310",
+        "rev": "45b3540003566e8f19c4cc4b1c9d0b8605a2697c",
         "type": "github"
       },
       "original": {
@@ -717,11 +717,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1720142793,
-        "narHash": "sha256-KhKF1VEMT5vz0vv1HZy0IOTEp2ZU1UD4ZgJAkOFbhIg=",
+        "lastModified": 1720229171,
+        "narHash": "sha256-Assq5h1UXEzRgQr/iv3+Cis8v0Raz/0t2MHvFnbKaUQ=",
         "owner": "nix-community",
         "repo": "nix-vscode-extensions",
-        "rev": "8d57c84024068180130f3c0a2103dda967a0ddc2",
+        "rev": "a3c96ad5286ba6ac643f2a130d24e0a1f0a69bf8",
         "type": "github"
       },
       "original": {
@@ -1163,11 +1163,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1719988875,
-        "narHash": "sha256-CGbGKSnby5YY3qOsWEXdvTWl5W4T8jUrCvbHmEHHQgE=",
+        "lastModified": 1720251602,
+        "narHash": "sha256-isr9Ht+QRuj89/0frJBEGVvm7A3yy0ml3jj57wGmiXM=",
         "owner": "Alexays",
         "repo": "Waybar",
-        "rev": "6f994c849d6ee36ae3e24dd17c7cef1a7f288e94",
+        "rev": "b26ab1f982c06ce48e96f3e4da8cde034296eb1d",
         "type": "github"
       },
       "original": {
