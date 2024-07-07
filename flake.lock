@@ -519,6 +519,22 @@
         "type": "github"
       }
     },
+    "harpoon-lualine": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1712988922,
+        "narHash": "sha256-VXPbcPwjyS1eti2p2BpoPYrweVc2iWKfZCPm3o1lUbs=",
+        "owner": "letieu",
+        "repo": "harpoon-lualine",
+        "rev": "d1b873c19b701fd80d60a67d086dbb3bcc4eb00e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "letieu",
+        "repo": "harpoon-lualine",
+        "type": "github"
+      }
+    },
     "hercules-ci-effects": {
       "inputs": {
         "flake-parts": "flake-parts_2",
@@ -592,6 +608,22 @@
         "owner": "glennrp",
         "repo": "libpng",
         "rev": "8439534daa1d3a5705ba92e653eda9251246dd61",
+        "type": "github"
+      }
+    },
+    "lualine-ext-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1716778810,
+        "narHash": "sha256-lDyVOd2bgCxtY80Ffx9qVuko6IiS6uN39gWQOlfMPlI=",
+        "owner": "Mr-LLLLL",
+        "repo": "lualine-ext.nvim",
+        "rev": "c407e6fe0b7ca4f1dd059235540d4c69a7a82ca1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Mr-LLLLL",
+        "repo": "lualine-ext.nvim",
         "type": "github"
       }
     },
@@ -831,6 +863,22 @@
         "type": "github"
       }
     },
+    "nvim-lsp-endhints": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1720273459,
+        "narHash": "sha256-EARd/uxrsQzkt9sDDAVnPSaADi5t/yiOzQkWhpHXpOg=",
+        "owner": "chrisgrieser",
+        "repo": "nvim-lsp-endhints",
+        "rev": "31fef782227c1fd74cc220f381cee752f1b3c380",
+        "type": "github"
+      },
+      "original": {
+        "owner": "chrisgrieser",
+        "repo": "nvim-lsp-endhints",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "better-escape": "better-escape",
@@ -840,8 +888,10 @@
         "fzf-url": "fzf-url",
         "garbage-day-nvim": "garbage-day-nvim",
         "git-worktree-nvim": "git-worktree-nvim",
+        "harpoon-lualine": "harpoon-lualine",
         "hmts": "hmts",
         "keepmenu": "keepmenu",
+        "lualine-ext-nvim": "lualine-ext-nvim",
         "mini-nvim": "mini-nvim",
         "multicursors-nvim": "multicursors-nvim",
         "neovim-session-manager": "neovim-session-manager",
@@ -856,6 +906,8 @@
           "nix-sources",
           "nixpkgs-stable"
         ],
+        "nvim-lsp-endhints": "nvim-lsp-endhints",
+        "tiny-inline-diagnostic": "tiny-inline-diagnostic",
         "tmuxinoicer": "tmuxinoicer",
         "tmuxst": "tmuxst",
         "vim-maximizer": "vim-maximizer",
@@ -1101,6 +1153,22 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "tiny-inline-diagnostic": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1720222536,
+        "narHash": "sha256-/w3JOusXtcOKZtxjB1wm2l7hC5cgyU0FKSeBKuzwFxU=",
+        "owner": "rachartier",
+        "repo": "tiny-inline-diagnostic.nvim",
+        "rev": "c9e8f98dbbb20c41716496bf37f69d29d3c91263",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rachartier",
+        "repo": "tiny-inline-diagnostic.nvim",
         "type": "github"
       }
     },

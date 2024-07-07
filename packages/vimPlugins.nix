@@ -14,6 +14,9 @@
       code-runner-nvim
       git-worktree-nvim
       garbage-day-nvim
+      harpoon-lualine
+      tiny-inline-diagnostic
+      lualine-so-fancy-nvim
       ;
   };
 

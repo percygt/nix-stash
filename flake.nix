@@ -61,8 +61,25 @@
       url = "github:Shatur/neovim-session-manager";
       flake = false;
     };
+    harpoon-lualine = {
+      url = "github:letieu/harpoon-lualine";
+      flake = false;
+    };
+    lualine-ext-nvim = {
+      url = "github:Mr-LLLLL/lualine-ext.nvim";
+      flake = false;
+    };
     garbage-day-nvim = {
       url = "github:zeioth/garbage-day.nvim";
+      flake = false;
+    };
+
+    nvim-lsp-endhints = {
+      url = "github:chrisgrieser/nvim-lsp-endhints";
+      flake = false;
+    };
+    tiny-inline-diagnostic = {
+      url = "github:rachartier/tiny-inline-diagnostic.nvim";
       flake = false;
     };
     git-worktree-nvim = {
