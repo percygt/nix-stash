@@ -1,19 +1,15 @@
-{
-  inputs,
-  pkgs,
-}: let
+{ inputs, pkgs }:
+let
   tmuxPluginSrc = {
-    inherit
-      (inputs)
-      tmuxst
-      fzf-url
-      ;
+    inherit (inputs) fzf-url;
   };
 
-  mkStashTmuxPlugin = name: value: let
-    inherit (pkgs) tmuxPlugins;
-    inherit (tmuxPlugins) mkTmuxPlugin;
-  in
+  mkStashTmuxPlugin =
+    name: value:
+    let
+      inherit (pkgs) tmuxPlugins;
+      inherit (tmuxPlugins) mkTmuxPlugin;
+    in
     mkTmuxPlugin {
       pluginName = name;
       version = value.lastModifiedDate;
@@ -21,4 +17,4 @@
       src = value;
     };
 in
-  builtins.mapAttrs mkStashTmuxPlugin tmuxPluginSrc
+builtins.mapAttrs mkStashTmuxPlugin tmuxPluginSrc

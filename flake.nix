@@ -16,7 +16,10 @@
     nixpkgs.follows = "nix-sources/nixpkgs";
     nixpkgs-stable.follows = "nix-sources/nixpkgs-stable";
     flake-utils.url = "github:numtide/flake-utils";
-
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     keepmenu.url = "github:percygt/keepmenu";
     keepmenu.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -32,111 +35,66 @@
     nixgl.url = "github:guibou/nixgl";
     nixgl.inputs.nixpkgs.follows = "nixpkgs";
 
-    tmuxinoicer.url = "github:percygt/tmuxinoicer";
-
-    wezterm.url = "github:wez/wezterm?dir=nix";
+    yazi = {
+      url = "github:sxyazi/yazi";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.rust-overlay.follows = "rust-overlay";
+    };
+    wezterm = {
+      url = "github:wez/wezterm?dir=nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.rust-overlay.follows = "rust-overlay";
+    };
 
     waybar.url = "github:Alexays/Waybar";
     waybar.inputs.nixpkgs.follows = "nixpkgs";
 
-    yazi.url = "github:sxyazi/yazi";
-    yazi.inputs.nixpkgs.follows = "nixpkgs";
-
     yaml2nix.url = "github:euank/yaml2nix";
     yaml2nix.inputs.nixpkgs.follows = "nixpkgs";
 
-    tmuxst = {
-      url = "github:percygt/tmuxst";
-      flake = false;
-    };
+    tmuxinoicer.url = "github:percygt/tmuxinoicer";
     fzf-url = {
       url = "github:wfxr/tmux-fzf-url";
       flake = false;
     };
-    hmts = {
-      url = "github:calops/hmts.nvim";
-      flake = false;
-    };
-    neovim-session-manager = {
-      url = "github:Shatur/neovim-session-manager";
-      flake = false;
-    };
-    harpoon-lualine = {
-      url = "github:letieu/harpoon-lualine";
-      flake = false;
-    };
-    lualine-ext-nvim = {
-      url = "github:Mr-LLLLL/lualine-ext.nvim";
-      flake = false;
-    };
-    garbage-day-nvim = {
-      url = "github:zeioth/garbage-day.nvim";
-      flake = false;
-    };
-
-    nvim-lsp-endhints = {
-      url = "github:chrisgrieser/nvim-lsp-endhints";
-      flake = false;
-    };
-    tiny-inline-diagnostic = {
-      url = "github:rachartier/tiny-inline-diagnostic.nvim";
-      flake = false;
-    };
-    git-worktree-nvim = {
-      url = "github:awerebea/git-worktree.nvim/handle_changes_in_telescope_api";
-      flake = false;
-    };
-    code-runner-nvim = {
-      url = "github:CRAG666/code_runner.nvim";
-      flake = false;
-    };
-    better-escape = {
-      url = "github:max397574/better-escape.nvim";
-      flake = false;
-    };
-    mini-nvim = {
-      url = "github:echasnovski/mini.nvim";
-      flake = false;
-    };
-    multicursors-nvim = {
-      url = "github:smoka7/multicursors.nvim";
-      flake = false;
-    };
-    vim-maximizer = {
-      url = "github:szw/vim-maximizer";
-      flake = false;
-    };
   };
-  outputs = {
-    nixpkgs,
-    self,
-    ...
-  } @ inputs: let
-    inherit (self) outputs;
-    systems = ["aarch64-linux" "i686-linux" "x86_64-linux" "aarch64-darwin" "x86_64-darwin"];
-    forEachSystem = inputs.nixpkgs.lib.genAttrs systems;
-    overlays = {
-      nix-vscode-extensions = inputs.nix-vscode-extensions.overlays.default;
-    };
-    legacyPackages = forEachSystem (
-      system:
+  outputs =
+    { nixpkgs, self, ... }@inputs:
+    let
+      inherit (self) outputs;
+      systems = [
+        "aarch64-linux"
+        "i686-linux"
+        "x86_64-linux"
+        "aarch64-darwin"
+        "x86_64-darwin"
+      ];
+      forEachSystem = inputs.nixpkgs.lib.genAttrs systems;
+      overlays = {
+        nix-vscode-extensions = inputs.nix-vscode-extensions.overlays.default;
+      };
+      legacyPackages = forEachSystem (
+        system:
         import inputs.nixpkgs {
           inherit system;
           overlays = builtins.attrValues overlays;
           config.allowUnfree = true;
         }
-    );
-  in {
-    vscodeExtensions = forEachSystem (system:
-      import ./packages/vscode_extensions.nix {
-        pkgs = legacyPackages.${system};
-      });
-    packages = forEachSystem (system: (import ./packages {
-      pkgs = legacyPackages.${system};
-      inherit system inputs;
-    }));
-    formatter = forEachSystem (system: nixpkgs.legacyPackages.${system}.alejandra);
-    overlays = import ./overlays {inherit inputs outputs;};
-    pkgLib = import ./packages/lib.nix {inherit inputs;};
-  };
+      );
+    in
+    {
+      vscodeExtensions = forEachSystem (
+        system: import ./packages/vscode_extensions.nix { pkgs = legacyPackages.${system}; }
+      );
+      packages = forEachSystem (
+        system:
+        (import ./packages {
+          pkgs = legacyPackages.${system};
+          inherit system inputs;
+        })
+      );
+      formatter = forEachSystem (system: nixpkgs.legacyPackages.${system}.alejandra);
+      overlays = import ./overlays { inherit inputs outputs; };
+      pkgLib = import ./packages/lib.nix { inherit inputs; };
+    };
 }
