@@ -53,6 +53,10 @@
     yaml2nix.inputs.nixpkgs.follows = "nixpkgs";
 
     tmuxinoicer.url = "github:percygt/tmuxinoicer";
+    tmux-window-name = {
+      url = "github:ofirgall/tmux-window-name";
+      flake = false;
+    };
     fzf-url = {
       url = "github:wfxr/tmux-fzf-url";
       flake = false;
