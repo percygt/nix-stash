@@ -10,7 +10,7 @@
         waybar
         yaml2nix
         yazi
-        keepmenu
+        # keepmenu
         # anime-borb-launcher
 
         # anime-game-launcher
