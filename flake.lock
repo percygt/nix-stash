@@ -455,17 +455,13 @@
       }
     },
     "keepmenu": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
+      "flake": false,
       "locked": {
-        "lastModified": 1710212607,
-        "narHash": "sha256-R9qqMsIcyuiMzVMjsjao1Jbh318cuBaeduq6pblo0Ec=",
+        "lastModified": 1720193052,
+        "narHash": "sha256-QufdabJX4ISUu+Pntj3sEp1jByRhozXUNTaIjTyXlQA=",
         "owner": "percygt",
         "repo": "keepmenu",
-        "rev": "e106b4fdeb908ef933a3b9044f76b37e338866a2",
+        "rev": "6d41ce956a11259df935b34f82dc5b0c5e7fd2ea",
         "type": "github"
       },
       "original": {
@@ -537,6 +533,7 @@
       "inputs": {
         "emacs-overlay": "emacs-overlay",
         "foot": "foot",
+        "keepmenu": "keepmenu",
         "neovim-nightly-overlay": "neovim-nightly-overlay",
         "nixpkgs": "nixpkgs",
         "nixpkgs-stable": "nixpkgs-stable",
@@ -544,11 +541,11 @@
         "swayfx-unwrapped": "swayfx-unwrapped"
       },
       "locked": {
-        "lastModified": 1722607773,
-        "narHash": "sha256-y74BWtSp4hkBwS5eFxJZ6rWjM9WoQJ6+u4gNz//lQMA=",
+        "lastModified": 1722621537,
+        "narHash": "sha256-Nv6ACRdeJODw8s5qoiUAgBJ67DLC9WzvFxGm0bUiXHo=",
         "owner": "percygt",
         "repo": "nix-sources",
-        "rev": "7fefce6e4630dcdd3c3eb37bbad9063d2920ce76",
+        "rev": "610983a2b230ba671e66e9b151cb5803fe7ef741",
         "type": "github"
       },
       "original": {
@@ -668,7 +665,6 @@
       "inputs": {
         "flake-utils": "flake-utils",
         "fzf-url": "fzf-url",
-        "keepmenu": "keepmenu",
         "nix-sources": "nix-sources",
         "nix-vscode-extensions": "nix-vscode-extensions",
         "nixgl": "nixgl",
@@ -883,11 +879,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1710926842,
-        "narHash": "sha256-UKohJGsAAPDTuPL0NbsBq7+ce8YZKuKOlyWCxL1nn2E=",
+        "lastModified": 1722620826,
+        "narHash": "sha256-AuTbvx7o00zFOtXKmz9ZXy12vhT1hy0cw98jsUfsuxQ=",
         "owner": "percygt",
         "repo": "tmuxinoicer",
-        "rev": "aead751a89d5f49eb57b0851a8f5ed079dac9d8f",
+        "rev": "f778799de33019c6962e06a04e7f538192b60593",
         "type": "github"
       },
       "original": {
