@@ -26,9 +26,6 @@
     # aagl.url = "github:ezKEa/aagl-gtk-on-nix";
     # aagl.inputs.nixpkgs.follows = "nixpkgs";
 
-    codeium.url = "github:Exafunction/codeium.nvim";
-    codeium.inputs.nixpkgs.follows = "nixpkgs-stable";
-
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
     nix-vscode-extensions.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -53,10 +50,6 @@
     yaml2nix.inputs.nixpkgs.follows = "nixpkgs";
 
     tmuxinoicer.url = "github:percygt/tmuxinoicer";
-    tmux-window-name = {
-      url = "github:ofirgall/tmux-window-name";
-      flake = false;
-    };
     fzf-url = {
       url = "github:wfxr/tmux-fzf-url";
       flake = false;

@@ -1,7 +1,7 @@
 { inputs, pkgs }:
 let
   tmuxPluginSrc = {
-    inherit (inputs) fzf-url tmux-window-name;
+    inherit (inputs) fzf-url;
   };
 
   mkStashTmuxPlugin =
