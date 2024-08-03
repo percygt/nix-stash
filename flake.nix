@@ -20,8 +20,8 @@
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # keepmenu.url = "github:percygt/keepmenu";
-    # keepmenu.inputs.nixpkgs.follows = "nixpkgs";
+    keepmenu.url = "github:percygt/keepmenu";
+    keepmenu.inputs.nixpkgs.follows = "nixpkgs";
 
     # aagl.url = "github:ezKEa/aagl-gtk-on-nix";
     # aagl.inputs.nixpkgs.follows = "nixpkgs";
