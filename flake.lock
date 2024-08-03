@@ -934,11 +934,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1722620826,
-        "narHash": "sha256-AuTbvx7o00zFOtXKmz9ZXy12vhT1hy0cw98jsUfsuxQ=",
+        "lastModified": 1722716742,
+        "narHash": "sha256-+sC3Dz58tTFwpFxn4X+lTU6PvBY97D0jJWwJQM2HcfA=",
         "owner": "percygt",
         "repo": "tmuxinoicer",
-        "rev": "f778799de33019c6962e06a04e7f538192b60593",
+        "rev": "3a46ef242f17245b9f9a68dedec851195a44403b",
         "type": "github"
       },
       "original": {
