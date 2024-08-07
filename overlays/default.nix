@@ -7,7 +7,7 @@
         nixGLIntel
         wezterm_nightly
         wezterm_wrapped
-        waybar
+        # waybar
         yaml2nix
         yazi
         # keepmenu

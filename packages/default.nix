@@ -28,27 +28,26 @@ rec {
     vscodeExtensions = import ./vscode_extensions.nix { inherit pkgs; };
   };
 
-  waybar = inputs.waybar.packages.${system}.waybar.override {
-    cavaSupport = false;
-    evdevSupport = true;
-    experimentalPatches = false;
-    hyprlandSupport = false;
-    inputSupport = false;
-    jackSupport = false;
-    mpdSupport = false;
-    mprisSupport = false;
-    nlSupport = true;
-    pulseSupport = true;
-    rfkillSupport = false;
-    runTests = false;
-    sndioSupport = false;
-    swaySupport = true;
-    traySupport = true;
-    udevSupport = false;
-    upowerSupport = false;
-    wireplumberSupport = false;
-    withMediaPlayer = false;
-  };
+  # waybar = (inputs.waybar.packages.${system}.waybar).override {
+  #   cavaSupport = false;
+  #   evdevSupport = true;
+  #   experimentalPatches = false;
+  #   hyprlandSupport = false;
+  #   inputSupport = false;
+  #   jackSupport = false;
+  #   mpdSupport = false;
+  #   mprisSupport = false;
+  #   nlSupport = true;
+  #   pulseSupport = true;
+  #   rfkillSupport = false;
+  #   sndioSupport = false;
+  #   swaySupport = true;
+  #   traySupport = true;
+  #   udevSupport = false;
+  #   upowerSupport = false;
+  #   wireplumberSupport = false;
+  #   withMediaPlayer = false;
+  # };
 }
 # // (import ./vimPlugins.nix {inherit inputs pkgs;})
 // (import ./tmuxPlugins.nix { inherit inputs pkgs; })

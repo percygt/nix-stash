@@ -43,8 +43,8 @@
       inputs.rust-overlay.follows = "rust-overlay";
     };
 
-    waybar.url = "github:Alexays/Waybar";
-    waybar.inputs.nixpkgs.follows = "nixpkgs";
+    # waybar.url = "github:Alexays/Waybar";
+    # waybar.inputs.nixpkgs.follows = "nixpkgs";
 
     yaml2nix.url = "github:euank/yaml2nix";
     yaml2nix.inputs.nixpkgs.follows = "nixpkgs";
