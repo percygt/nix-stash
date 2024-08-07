@@ -955,11 +955,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1722844295,
-        "narHash": "sha256-SaokQfNpyo+fgpEtIVTesZsmy5B5zzMZ0yygejqt3ug=",
+        "lastModified": 1723015353,
+        "narHash": "sha256-7FBkX2hJrnX1VSKiE1jawHWitA4hTHnSgD4g7RjvhM8=",
         "owner": "Alexays",
         "repo": "Waybar",
-        "rev": "79d3a1a2962cdad1ad02195916790ae1e63122c6",
+        "rev": "21906f07b312d56f51ce7cd2b26925cd12880ada",
         "type": "github"
       },
       "original": {
@@ -1035,11 +1035,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1722990420,
-        "narHash": "sha256-aSLi4rqNKb/Z6zvF7cYGy4l5GuwJpd+GOAh38d59a80=",
+        "lastModified": 1723004234,
+        "narHash": "sha256-w2KlzDdSGo5PR1awwxxtHThEUS4KkFONkKB/vcx+lM8=",
         "owner": "sxyazi",
         "repo": "yazi",
-        "rev": "f8659104814f183a1f580bd30cb481136105bf94",
+        "rev": "4aaca4c4329831f507a056ed7e776840f95b63af",
         "type": "github"
       },
       "original": {
