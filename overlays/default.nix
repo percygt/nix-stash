@@ -7,9 +7,9 @@
         nixGLIntel
         wezterm_nightly
         wezterm_wrapped
-        # waybar
         yaml2nix
-        yazi
+        # yazi
+        # waybar
         # keepmenu
         # anime-borb-launcher
 

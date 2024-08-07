@@ -32,11 +32,11 @@
     nixgl.url = "github:guibou/nixgl";
     nixgl.inputs.nixpkgs.follows = "nixpkgs";
 
-    yazi = {
-      url = "github:sxyazi/yazi";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.rust-overlay.follows = "rust-overlay";
-    };
+    # yazi = {
+    #   url = "github:sxyazi/yazi";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    #   inputs.rust-overlay.follows = "rust-overlay";
+    # };
     wezterm = {
       url = "github:wez/wezterm?dir=nix";
       inputs.nixpkgs.follows = "nixpkgs";

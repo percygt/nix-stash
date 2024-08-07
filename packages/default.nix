@@ -7,7 +7,7 @@ let
   inherit (inputs.nixpkgs) lib;
 in
 rec {
-  yazi = inputs.yazi.packages.${system}.default;
+  # yazi = inputs.yazi.packages.${system}.default;
   wezterm_nightly = inputs.wezterm.packages.${system}.default;
   # keepmenu = inputs.keepmenu.packages.${system}.default;
   yaml2nix = inputs.yaml2nix.packages."${system}".default;
