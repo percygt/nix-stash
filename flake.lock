@@ -529,11 +529,11 @@
         "swayfx-unwrapped": "swayfx-unwrapped"
       },
       "locked": {
-        "lastModified": 1723376874,
-        "narHash": "sha256-jIqpUBcUGXZcKLuzmD/vj27QNMgHSFv15FRpSngLdOs=",
+        "lastModified": 1723378186,
+        "narHash": "sha256-r1XA2tOGJZrlMkvjyUDRYGWTVb/yMR+O9UP77xDd4jQ=",
         "owner": "percygt",
         "repo": "nix-sources",
-        "rev": "b01ee23122e192c41976c627fda6c2d59225d643",
+        "rev": "efcf4b4562ff1c6efb012bcc5912872720fcaaa1",
         "type": "github"
       },
       "original": {
