@@ -15,7 +15,6 @@
     nix-sources.url = "github:percygt/nix-sources";
     nixpkgs.follows = "nix-sources/nixpkgs";
     nixpkgs-stable.follows = "nix-sources/nixpkgs-stable";
-    flake-utils.url = "github:numtide/flake-utils";
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -37,11 +36,11 @@
     #   inputs.nixpkgs.follows = "nixpkgs";
     #   inputs.rust-overlay.follows = "rust-overlay";
     # };
-    wezterm = {
-      url = "github:wez/wezterm?dir=nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.rust-overlay.follows = "rust-overlay";
-    };
+    # wezterm = {
+    #   url = "github:wez/wezterm?dir=nix";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    #   inputs.rust-overlay.follows = "rust-overlay";
+    # };
 
     # waybar.url = "github:Alexays/Waybar";
     # waybar.inputs.nixpkgs.follows = "nixpkgs";
