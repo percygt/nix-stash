@@ -1,7 +1,7 @@
 { inputs, outputs }:
 {
   default = final: prev: {
-    stash = inputs.nixpkgs-stable.legacyPackages.${prev.system} // {
+    stable = inputs.nixpkgs-stable.legacyPackages.${prev.system} // {
       inherit (outputs.packages.${prev.system})
         nixVulkanIntel
         nixGLIntel
