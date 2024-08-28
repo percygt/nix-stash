@@ -1,12 +1,14 @@
 { inputs, outputs }:
 {
   default = final: prev: {
+    inherit (outputs.packages.${prev.system})
+      nixVulkanIntel
+      nixGLIntel
+      wezterm_nightly
+      wezterm_wrapped
+      ;
     stable = inputs.nixpkgs-stable.legacyPackages.${prev.system} // {
       inherit (outputs.packages.${prev.system})
-        nixVulkanIntel
-        nixGLIntel
-        wezterm_nightly
-        wezterm_wrapped
         yaml2nix
         # yazi
         # waybar
