@@ -36,11 +36,11 @@
     #   inputs.nixpkgs.follows = "nixpkgs";
     #   inputs.rust-overlay.follows = "rust-overlay";
     # };
-    # wezterm = {
-    #   url = "github:wez/wezterm?dir=nix";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    #   inputs.rust-overlay.follows = "rust-overlay";
-    # };
+    wezterm = {
+      url = "github:wez/wezterm?dir=nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.rust-overlay.follows = "rust-overlay";
+    };
 
     # waybar.url = "github:Alexays/Waybar";
     # waybar.inputs.nixpkgs.follows = "nixpkgs";
@@ -79,9 +79,6 @@
       );
     in
     {
-      vscodeExtensions = forEachSystem (
-        system: import ./packages/vscode_extensions.nix { pkgs = legacyPackages.${system}; }
-      );
       packages = forEachSystem (
         system:
         (import ./packages {
