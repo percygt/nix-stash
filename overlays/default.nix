@@ -7,6 +7,7 @@
       wezterm_nightly
       wezterm_wrapped
       ;
+    master = inputs.nixpkgs-master.legacyPackages.${prev.system};
     stable = inputs.nixpkgs-stable.legacyPackages.${prev.system} // {
       inherit (outputs.packages.${prev.system})
         yaml2nix

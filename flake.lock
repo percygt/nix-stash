@@ -800,6 +800,10 @@
           "nix-sources",
           "nixpkgs"
         ],
+        "nixpkgs-master": [
+          "nix-sources",
+          "nixpkgs-master"
+        ],
         "nixpkgs-stable": [
           "nix-sources",
           "nixpkgs-stable"
