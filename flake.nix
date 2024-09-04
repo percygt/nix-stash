@@ -50,7 +50,7 @@
         "aarch64-linux"
         "x86_64-linux"
       ];
-      overlays = [ ];
+      # overlays = [ ];
       forEachSystem = inputs.nixpkgs.lib.genAttrs systems;
       packagesFrom =
         inputs-nixpkgs:
@@ -61,7 +61,7 @@
             function (
               import inputs-nixpkgs {
                 inherit system;
-                overlays = builtins.attrValues overlays;
+                # overlays = builtins.attrValues overlays;
                 config.allowUnfree = true;
               }
             )
@@ -70,7 +70,7 @@
       forAllSystems = packagesFrom inputs.nixpkgs;
     in
     {
-      packages = forAllSystems (pkgs: import ./packages { inherit pkgs; });
+      packages = forAllSystems (pkgs: import ./packages { inherit pkgs inputs; });
       formatter = forAllSystems (pkgs: pkgs.nixfmt-rfc-style);
       overlays = import ./overlays { inherit inputs outputs; };
     };
