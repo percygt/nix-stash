@@ -5,6 +5,7 @@
       nixVulkanIntel
       nixGLIntel
       wezterm_nightly
+      wezterm_nightly_wrapped
       wezterm_wrapped
       ;
     master = inputs.nixpkgs-master.legacyPackages.${prev.system};

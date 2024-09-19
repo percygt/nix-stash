@@ -21,6 +21,16 @@ rec {
         lib
         ;
     }).nixGLMesaVulkanWrap
+      pkgs.wezterm;
+  wezterm_nightly_wrapped =
+    (import ./nixGLMesaVulkanWrap.nix {
+      inherit
+        nixGLIntel
+        nixVulkanIntel
+        pkgs
+        lib
+        ;
+    }).nixGLMesaVulkanWrap
       wezterm_nightly;
 }
 // (import ./tmuxPlugins.nix { inherit inputs pkgs; })
