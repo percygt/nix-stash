@@ -6,6 +6,7 @@ let
   inherit (inputs.nixpkgs) lib;
 in
 rec {
+  clipmon = pkgs.callPackage ./clipmon.nix;
   # yazi = inputs.yazi.packages.${pkgs.system}.default;
   wezterm_nightly = inputs.wezterm.packages.${pkgs.system}.default;
   # keepmenu = inputs.keepmenu.packages.${system}.default;

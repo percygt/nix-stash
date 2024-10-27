@@ -12,6 +12,7 @@
     stable = inputs.nixpkgs-stable.legacyPackages.${prev.system} // {
       inherit (outputs.packages.${prev.system})
         yaml2nix
+        clipmon
         # yazi
         # waybar
         # keepmenu
