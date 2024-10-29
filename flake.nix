@@ -14,24 +14,8 @@
     nixpkgs.follows = "nix-sources/nixpkgs";
     nixpkgs-stable.follows = "nix-sources/nixpkgs-stable";
     nixpkgs-master.follows = "nix-sources/nixpkgs-master";
-    rust-overlay = {
-      url = "github:oxalica/rust-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    keepmenu.url = "github:percygt/keepmenu";
-    keepmenu.inputs.nixpkgs.follows = "nixpkgs";
-
     # aagl.url = "github:ezKEa/aagl-gtk-on-nix";
     # aagl.inputs.nixpkgs.follows = "nixpkgs";
-
-    nixgl.url = "github:guibou/nixgl";
-    nixgl.inputs.nixpkgs.follows = "nixpkgs";
-
-    wezterm = {
-      url = "github:wez/wezterm?dir=nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.rust-overlay.follows = "rust-overlay";
-    };
 
     yaml2nix.url = "github:euank/yaml2nix";
     yaml2nix.inputs.nixpkgs.follows = "nixpkgs";

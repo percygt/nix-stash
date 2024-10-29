@@ -2,20 +2,12 @@
 {
   default = final: prev: {
     inherit (outputs.packages.${prev.system})
-      nixVulkanIntel
-      nixGLIntel
-      wezterm_nightly
-      wezterm_nightly_wrapped
-      wezterm_wrapped
       clipmon
       ;
     master = inputs.nixpkgs-master.legacyPackages.${prev.system};
     stable = inputs.nixpkgs-stable.legacyPackages.${prev.system} // {
       inherit (outputs.packages.${prev.system})
         yaml2nix
-        # yazi
-        # waybar
-        # keepmenu
         # anime-borb-launcher
 
         # anime-game-launcher
@@ -28,13 +20,6 @@
 
         ;
       inherit (inputs.nix-vscode-extensions.extensions.${prev.system}) vscode-marketplace;
-      # vimPlugins =
-      #   prev.vimPlugins
-      #   // (import ../packages/vimPlugins.nix {
-      #     inherit inputs;
-      #     pkgs = prev;
-      #   })
-      #   // {inherit (outputs.packages.${prev.system}) codeium-nvim;};
       tmuxPlugins =
         prev.tmuxPlugins
         // (import ../packages/tmuxPlugins.nix) {
