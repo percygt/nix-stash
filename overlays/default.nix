@@ -3,6 +3,7 @@
   default = final: prev: {
     inherit (outputs.packages.${prev.system})
       clipmon
+      simple-completion-language-server
       ;
     master = inputs.nixpkgs-master.legacyPackages.${prev.system};
     stable = inputs.nixpkgs-stable.legacyPackages.${prev.system} // {

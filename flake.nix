@@ -28,6 +28,15 @@
       url = "github:wfxr/tmux-fzf-url";
       flake = false;
     };
+    naersk = {
+      url = "github:nix-community/naersk/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    simple-completion-language-server = {
+      url = "github:estin/simple-completion-language-server";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.naersk.follows = "naersk";
+    };
   };
   outputs =
     { self, ... }@inputs:
