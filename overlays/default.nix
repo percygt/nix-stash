@@ -27,7 +27,7 @@
           pkgs = prev;
         }
         // {
-          inherit (outputs.packages.${prev.system}) tmuxinoicer;
+          inherit (outputs.packages.${prev.system}) tmux-switcher;
         };
     };
   };

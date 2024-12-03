@@ -19,8 +19,11 @@
 
     yaml2nix.url = "github:euank/yaml2nix";
     yaml2nix.inputs.nixpkgs.follows = "nixpkgs";
-
-    tmuxinoicer.url = "github:percygt/tmuxinoicer";
+    nix-your-shell = {
+      url = "github:MercuryTechnologies/nix-your-shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    tmux-switcher.url = "github:percygt/tmux-switcher";
     fzf-url = {
       url = "github:wfxr/tmux-fzf-url";
       flake = false;
