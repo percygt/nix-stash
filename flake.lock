@@ -633,14 +633,6 @@
           "nix-sources",
           "nixpkgs"
         ],
-        "nixpkgs-master": [
-          "nix-sources",
-          "nixpkgs-master"
-        ],
-        "nixpkgs-stable": [
-          "nix-sources",
-          "nixpkgs-stable"
-        ],
         "simple-completion-language-server": "simple-completion-language-server",
         "tmux-switcher": "tmux-switcher",
         "yaml2nix": "yaml2nix"

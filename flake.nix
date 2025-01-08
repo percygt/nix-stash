@@ -12,8 +12,6 @@
   inputs = {
     nix-sources.url = "github:percygt/nix-sources";
     nixpkgs.follows = "nix-sources/nixpkgs";
-    nixpkgs-stable.follows = "nix-sources/nixpkgs-stable";
-    nixpkgs-master.follows = "nix-sources/nixpkgs-master";
     # aagl.url = "github:ezKEa/aagl-gtk-on-nix";
     # aagl.inputs.nixpkgs.follows = "nixpkgs";
 
