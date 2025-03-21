@@ -659,11 +659,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1742280673,
-        "narHash": "sha256-st6HvFWJMvwrg0zz1scn2wZVBQZX0Au2UkMwD15O7bs=",
+        "lastModified": 1742411270,
+        "narHash": "sha256-cITZdlDB03i7gOYbahV99wZOQ7tisnqdT/N2Z12oLFM=",
         "owner": "estin",
         "repo": "simple-completion-language-server",
-        "rev": "ccf0975e1509f8ec4d758f28561db54fd8816cf6",
+        "rev": "6c797949ad5a6e9548b60b5475d1c9977f26c811",
         "type": "github"
       },
       "original": {
