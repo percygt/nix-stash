@@ -22,6 +22,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     tmux-switcher.url = "github:percygt/tmux-switcher";
+    tmux-nvim.url = "github:aserowy/tmux.nvim";
     fzf-url = {
       url = "github:wfxr/tmux-fzf-url";
       flake = false;

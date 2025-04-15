@@ -1,7 +1,7 @@
 { inputs, pkgs }:
 let
   tmuxPluginSrc = {
-    inherit (inputs) fzf-url;
+    inherit (inputs) fzf-url tmux-nvim;
   };
 
   mkStashTmuxPlugin =
