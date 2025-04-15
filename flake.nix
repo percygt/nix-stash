@@ -23,6 +23,7 @@
     };
     tmux-switcher.url = "github:percygt/tmux-switcher";
     tmux-nvim.url = "github:aserowy/tmux.nvim";
+    tmux-nvim.flake = false;
     fzf-url = {
       url = "github:wfxr/tmux-fzf-url";
       flake = false;
