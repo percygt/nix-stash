@@ -12,11 +12,6 @@
   inputs = {
     nix-sources.url = "github:percygt/nix-sources";
     nixpkgs.follows = "nix-sources/nixpkgs";
-    # aagl.url = "github:ezKEa/aagl-gtk-on-nix";
-    # aagl.inputs.nixpkgs.follows = "nixpkgs";
-
-    yaml2nix.url = "github:euank/yaml2nix";
-    yaml2nix.inputs.nixpkgs.follows = "nixpkgs";
     nix-your-shell = {
       url = "github:MercuryTechnologies/nix-your-shell";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -24,10 +19,6 @@
     tmux-switcher.url = "github:percygt/tmux-switcher";
     tmux-nvim.url = "github:aserowy/tmux.nvim";
     tmux-nvim.flake = false;
-    fzf-url = {
-      url = "github:wfxr/tmux-fzf-url";
-      flake = false;
-    };
     naersk = {
       url = "github:nix-community/naersk/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -37,6 +28,29 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.naersk.follows = "naersk";
     };
+    hyprlock.url = "github:hyprwm/hyprlock";
+    hyprlock.inputs.nixpkgs.follows = "nixpkgs";
+
+    television = {
+      url = "github:alexpasmantier/television";
+      inputs.naersk.follows = "naersk";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    noogle-cli = {
+      url = "github:juliamertz/noogle-cli";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs-master.follows = "nix-sources/nixpkgs-master";
+    };
+    elephant.url = "github:abenz1267/elephant";
+    elephant.inputs.nixpkgs.follows = "nixpkgs";
+
+    walker = {
+      url = "github:abenz1267/walker";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.elephant.follows = "elephant";
+    };
+
   };
   outputs =
     { self, ... }@inputs:
@@ -66,8 +80,30 @@
       forAllSystems = packagesFrom inputs.nixpkgs;
     in
     {
-      packages = forAllSystems (pkgs: import ./packages { inherit pkgs inputs; });
       formatter = forAllSystems (pkgs: pkgs.nixfmt-rfc-style);
-      overlays = import ./overlays { inherit inputs outputs; };
+      packages = forAllSystems (pkgs: {
+        tmux-switcher = inputs.tmux-switcher.packages."${pkgs.system}".default;
+        hyprlock = inputs.hyprlock.packages."${pkgs.system}".default;
+        television = inputs.television.packages."${pkgs.system}".default;
+        noogle-cli = inputs.noogle-cli.packages."${pkgs.system}".default;
+        walker = inputs.walker.packages."${pkgs.system}".default;
+        simple-completion-language-server =
+          inputs.simple-completion-language-server.defaultPackage.${pkgs.system};
+      });
+      overlays = {
+        default = final: prev: {
+          inherit (outputs.packages.${prev.system})
+            simple-completion-language-server
+            hyprlock
+            television
+            noogle-cli
+            walker
+            ;
+          tmuxPlugins = prev.tmuxPlugins // {
+            inherit (outputs.packages.${prev.system}) tmux-switcher;
+          };
+        };
+      };
+
     };
 }

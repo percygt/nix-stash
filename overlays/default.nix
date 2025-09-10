@@ -3,6 +3,9 @@
   default = final: prev: {
     inherit (outputs.packages.${prev.system})
       simple-completion-language-server
+      hyprlock
+      television
+
       ;
     inherit (inputs.nix-vscode-extensions.extensions.${prev.system}) vscode-marketplace;
     tmuxPlugins =
