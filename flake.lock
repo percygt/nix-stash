@@ -120,11 +120,11 @@
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1757439276,
-        "narHash": "sha256-7wtGVB+mh+1B54NsbwV1D1tqiqNi2GYp4f0MHvOs9mc=",
+        "lastModified": 1757603546,
+        "narHash": "sha256-SBU907te/7j2C76pFUm7wmnEvjPl3Rnuxlw1YdIR7Es=",
         "owner": "abenz1267",
         "repo": "elephant",
-        "rev": "a3d7de77b49f4ae0798d9aa0748f6417a52cffca",
+        "rev": "5f367e383787102243a1e36855127ac05a4cfc66",
         "type": "github"
       },
       "original": {
