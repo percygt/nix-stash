@@ -51,6 +51,10 @@
       inputs.elephant.follows = "elephant";
     };
 
+    anyrun = {
+      url = "github:/anyrun-org/anyrun";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs =
     { self, ... }@inputs:
@@ -81,12 +85,34 @@
     in
     {
       formatter = forAllSystems (pkgs: pkgs.nixfmt-rfc-style);
+      homeManagerModules = {
+        inherit (inputs.anyrun.homeManagerModules) anyrun;
+      };
       packages = forAllSystems (pkgs: {
         tmux-switcher = inputs.tmux-switcher.packages."${pkgs.system}".default;
         hyprlock = inputs.hyprlock.packages."${pkgs.system}".default;
         television = inputs.television.packages."${pkgs.system}".default;
         noogle-cli = inputs.noogle-cli.packages."${pkgs.system}".default;
         walker = inputs.walker.packages."${pkgs.system}".default;
+        elephant = inputs.elephant.packages."${pkgs.system}".default;
+        inherit (inputs.anyrun.packages."${pkgs.system}")
+          default
+          anyrun-with-all-plugins
+          applications
+          dictionary
+          kidex
+          nix-run
+          randr
+          rink
+          shell
+          stdin
+          symbols
+          translate
+          websearch
+          niri-focus
+          anyrun-provider
+          ;
+
         simple-completion-language-server =
           inputs.simple-completion-language-server.defaultPackage.${pkgs.system};
       });
@@ -98,6 +124,21 @@
             television
             noogle-cli
             walker
+            elephant
+            default
+            anyrun-with-all-plugins
+            applications
+            dictionary
+            kidex
+            nix-run
+            randr
+            rink
+            shell
+            stdin
+            symbols
+            translate
+            websearch
+            niri-focus
             ;
           tmuxPlugins = prev.tmuxPlugins // {
             inherit (outputs.packages.${prev.system}) tmux-switcher;
