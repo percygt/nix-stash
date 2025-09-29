@@ -96,7 +96,7 @@
         walker = inputs.walker.packages."${pkgs.system}".default;
         elephant = inputs.elephant.packages."${pkgs.system}".default;
         inherit (inputs.anyrun.packages."${pkgs.system}")
-          default
+          anyrun
           anyrun-with-all-plugins
           applications
           dictionary
@@ -125,21 +125,26 @@
             noogle-cli
             walker
             elephant
-            default
-            anyrun-with-all-plugins
-            applications
-            dictionary
-            kidex
-            nix-run
-            randr
-            rink
-            shell
-            stdin
-            symbols
-            translate
-            websearch
-            niri-focus
             ;
+          anyrunPackages = {
+            inherit (outputs.packages.${prev.system})
+              anyrun
+              anyrun-with-all-plugins
+              applications
+              dictionary
+              kidex
+              nix-run
+              randr
+              rink
+              shell
+              stdin
+              symbols
+              translate
+              websearch
+              niri-focus
+              anyrun-provider
+              ;
+          };
           tmuxPlugins = prev.tmuxPlugins // {
             inherit (outputs.packages.${prev.system}) tmux-switcher;
           };
