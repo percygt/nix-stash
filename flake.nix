@@ -141,7 +141,7 @@
           #     niri-focus
           #     anyrun-provider
           #     ;
-          };
+          # };
           tmuxPlugins = prev.tmuxPlugins // {
             inherit (outputs.packages.${prev.system}) tmux-switcher;
           };
