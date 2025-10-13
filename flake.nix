@@ -91,7 +91,7 @@
         television = inputs.television.packages."${pkgs.system}".default;
         noogle-cli = inputs.noogle-cli.packages."${pkgs.system}".default;
         walker = inputs.walker.packages."${pkgs.system}".default;
-        elephant = inputs.elephant.packages."${pkgs.system}".default;
+        # elephant = inputs.elephant.packages."${pkgs.system}".default;
         # inherit (inputs.anyrun.packages."${pkgs.system}")
         #   anyrun
         #   anyrun-with-all-plugins
@@ -121,7 +121,7 @@
             television
             noogle-cli
             walker
-            elephant
+            # elephant
             ;
           # anyrunPackages = {
           #   inherit (outputs.packages.${prev.system})
