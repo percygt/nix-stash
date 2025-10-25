@@ -40,7 +40,7 @@
     "elephant": {
       "inputs": {
         "nixpkgs": [
-          "nixpkgs"
+          "nixpkgs-unstable"
         ],
         "systems": "systems"
       },
@@ -776,11 +776,11 @@
         "zen-browser": "zen-browser"
       },
       "locked": {
-        "lastModified": 1761390192,
-        "narHash": "sha256-BwSoJLBhWTP/BWMbUSGWKgSIYFhYVvH1zGXJh5Lqxbg=",
+        "lastModified": 1761390659,
+        "narHash": "sha256-oVPvCdCCngl/InCzv0XQ2N+hs0hbu6f38oB/nC92Qs0=",
         "owner": "percygt",
         "repo": "nix-sources",
-        "rev": "ed005e9ca8621144bd338d881293b02baf7187be",
+        "rev": "69e3cb4c728df6716212c54dc0c38e0b58963b73",
         "type": "github"
       },
       "original": {
@@ -823,11 +823,11 @@
     },
     "nixpkgs-master": {
       "locked": {
-        "lastModified": 1761389783,
-        "narHash": "sha256-sUgA4ezJ50BfFlGzjlDLO5QPta/8Veum9DaluhPexFM=",
+        "lastModified": 1761390372,
+        "narHash": "sha256-WxjkWKi8y9vipK9KjXSl2G7F9//xS4v9FiQfkVvEjW0=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "5992eb776de299cb9693d35d7d8e7320954132a0",
+        "rev": "47d496c904b057f64f67cc11e89387e2c8ed5dc9",
         "type": "github"
       },
       "original": {
@@ -1139,6 +1139,10 @@
         "nixpkgs": [
           "nix-sources",
           "nixpkgs"
+        ],
+        "nixpkgs-unstable": [
+          "nix-sources",
+          "nixpkgs-unstable"
         ],
         "noogle-cli": "noogle-cli",
         "simple-completion-language-server": "simple-completion-language-server",
@@ -1518,7 +1522,7 @@
           "elephant"
         ],
         "nixpkgs": [
-          "nixpkgs"
+          "nixpkgs-unstable"
         ],
         "systems": "systems_10"
       },
