@@ -12,6 +12,7 @@
   inputs = {
     nix-sources.url = "github:percygt/nix-sources";
     nixpkgs.follows = "nix-sources/nixpkgs";
+    nixpkgs-unstable.follows = "nix-sources/nixpkgs-unstable";
     tmux-switcher.url = "github:percygt/tmux-switcher";
     tmux-nvim.url = "github:aserowy/tmux.nvim";
     tmux-nvim.flake = false;
@@ -39,11 +40,11 @@
       inputs.nixpkgs-master.follows = "nix-sources/nixpkgs-master";
     };
     elephant.url = "github:abenz1267/elephant";
-    elephant.inputs.nixpkgs.follows = "nixpkgs";
+    elephant.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
     walker = {
       url = "github:abenz1267/walker";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
       inputs.elephant.follows = "elephant";
     };
 
