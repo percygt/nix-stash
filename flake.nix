@@ -12,10 +12,6 @@
   inputs = {
     nix-sources.url = "github:percygt/nix-sources";
     nixpkgs.follows = "nix-sources/nixpkgs";
-    nix-your-shell = {
-      url = "github:MercuryTechnologies/nix-your-shell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     tmux-switcher.url = "github:percygt/tmux-switcher";
     tmux-nvim.url = "github:aserowy/tmux.nvim";
     tmux-nvim.flake = false;
