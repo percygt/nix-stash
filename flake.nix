@@ -45,7 +45,7 @@
     noogle-cli = {
       url = "github:juliamertz/noogle-cli";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.nixpkgs-master.follows = "nix-sources/nixpkgs-master";
+      inputs.nixpkgs-master.follows = "nixpkgs-master";
     };
     elephant.url = "github:abenz1267/elephant";
     elephant.inputs.nixpkgs.follows = "nixpkgs-unstable";
