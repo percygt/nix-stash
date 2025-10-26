@@ -40,7 +40,7 @@
     "elephant": {
       "inputs": {
         "nixpkgs": [
-          "nixpkgs-unstable"
+          "nixpkgs"
         ],
         "systems": "systems"
       },
@@ -1009,7 +1009,7 @@
           "elephant"
         ],
         "nixpkgs": [
-          "nixpkgs-unstable"
+          "nixpkgs"
         ],
         "systems": "systems_8"
       },
