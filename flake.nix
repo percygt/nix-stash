@@ -10,10 +10,17 @@
   };
 
   inputs = {
-    nix-sources.url = "github:percygt/nix-sources";
-    nixpkgs.follows = "nix-sources/nixpkgs";
-    nixpkgs-stable.follows = "nix-sources/nixpkgs-stable";
-    nixpkgs-unstable.follows = "nix-sources/nixpkgs-unstable";
+    # nixpkgs.follows = "nixpkgs-stable";
+    nixpkgs-stable.url = "https://channels.nixos.org/nixos-25.05/nixexprs.tar.xz";
+    nixpkgs-old.url = "https://channels.nixos.org/nixos-24.11/nixexprs.tar.xz";
+    nixpkgs-unstable.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
+    # nixpkgs-master.url = "github:nixos/nixpkgs/master";
+    nixpkgs-master.url = "github:nixos/nixpkgs/master";
+    # nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    # nixpkgs-old.url = "github:nixos/nixpkgs/nixos-24.11";
+    # nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs.follows = "nixpkgs-unstable";
+
     tmux-switcher.url = "github:percygt/tmux-switcher";
     tmux-nvim.url = "github:aserowy/tmux.nvim";
     tmux-nvim.flake = false;
