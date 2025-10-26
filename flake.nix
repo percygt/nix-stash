@@ -48,11 +48,11 @@
       inputs.nixpkgs-master.follows = "nixpkgs-master";
     };
     elephant.url = "github:abenz1267/elephant";
-    elephant.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    elephant.inputs.nixpkgs.follows = "nixpkgs";
 
     walker = {
       url = "github:abenz1267/walker";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
       inputs.elephant.follows = "elephant";
     };
 
@@ -95,8 +95,8 @@
         hyprlock = inputs.hyprlock.packages."${pkgs.system}".default;
         television = inputs.television.packages."${pkgs.system}".default;
         noogle-cli = inputs.noogle-cli.packages."${pkgs.system}".default;
-        walker-git = inputs.walker.packages."${pkgs.system}".default;
-        elephant-git = inputs.elephant.packages."${pkgs.system}".default;
+        walker = inputs.walker.packages."${pkgs.system}".default;
+        elephant = inputs.elephant.packages."${pkgs.system}".default;
         # inherit (inputs.anyrun.packages."${pkgs.system}")
         #   anyrun
         #   anyrun-with-all-plugins
@@ -125,8 +125,8 @@
             hyprlock
             television
             noogle-cli
-            walker-git
-            elephant-git
+            walker
+            elephant
             ;
           # anyrunPackages = {
           #   inherit (outputs.packages.${prev.system})
