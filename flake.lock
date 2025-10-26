@@ -40,16 +40,16 @@
     "elephant": {
       "inputs": {
         "nixpkgs": [
-          "nixpkgs-unstable"
+          "nixpkgs"
         ],
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1761472710,
-        "narHash": "sha256-gYTd/QkJJ198qri8CYR0oCB8TGEKhc6pHQpNNifHfv0=",
+        "lastModified": 1761473783,
+        "narHash": "sha256-Nm+pkthdLJ17yQPkNGTF4s+UlmO7HfATw7gXOLo/EYk=",
         "owner": "abenz1267",
         "repo": "elephant",
-        "rev": "1232412afd8be8fcbd8372d41035e7bdebc91862",
+        "rev": "d35c04d06205415e50b362d2a4e9b92d9e3002ad",
         "type": "github"
       },
       "original": {
@@ -503,11 +503,11 @@
     },
     "nixpkgs-master": {
       "locked": {
-        "lastModified": 1761471995,
-        "narHash": "sha256-Bxok0WJpdca9OyvWBJRRfd0bPr5JeZDej1PL8HMhjpM=",
+        "lastModified": 1761473377,
+        "narHash": "sha256-+7gCrrQlDrfJrSFW4PqW0PFsq+eNhEJJXndmQype+wY=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "38b542ebd879e5e1300aa6cc8f6d5f553e7f1f74",
+        "rev": "cb4d42c3c6f2fcaa8142d93f32ef2820db02e1cc",
         "type": "github"
       },
       "original": {
@@ -1009,7 +1009,7 @@
           "elephant"
         ],
         "nixpkgs": [
-          "nixpkgs-unstable"
+          "nixpkgs"
         ],
         "systems": "systems_8"
       },
