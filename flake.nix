@@ -104,8 +104,8 @@
             hyprlock
             television
             noogle-cli
-            walker-git
-            elephant-git
+            walker
+            elephant
             ;
           # anyrunPackages = {
           #   inherit (outputs.packages.${prev.system})
