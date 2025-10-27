@@ -756,11 +756,11 @@
         "zen-browser": "zen-browser"
       },
       "locked": {
-        "lastModified": 1761498276,
-        "narHash": "sha256-S3oPwCXk8afVcEgkCIGiENZGAa7wh5cmlsBYA2CsBgQ=",
+        "lastModified": 1761584186,
+        "narHash": "sha256-ZMUBjJDgHscjnnK6bIizvGYhwk/6vM8qBD0QfRVmrbU=",
         "owner": "percygt",
         "repo": "nix-sources",
-        "rev": "a930cc1a7517ec151aeb69b369b7d59d76c9678d",
+        "rev": "6ce668f9551e9022828f22bcbc95fecbbf5d8d3f",
         "type": "github"
       },
       "original": {
