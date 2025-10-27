@@ -12,31 +12,16 @@
   inputs = {
     nix-sources.url = "github:percygt/nix-sources";
     nixpkgs.follows = "nix-sources/nixpkgs";
-    nixpkgs-old.follows = "nix-sources/nixpkgs-old";
-    nixpkgs-master.follows = "nix-sources/nixpkgs-master";
     nixpkgs-stable.follows = "nix-sources/nixpkgs-stable";
     nixpkgs-unstable.follows = "nix-sources/nixpkgs-unstable";
 
     tmux-switcher.url = "github:percygt/tmux-switcher";
     tmux-nvim.url = "github:aserowy/tmux.nvim";
     tmux-nvim.flake = false;
-    naersk = {
-      url = "github:nix-community/naersk/master";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    simple-completion-language-server = {
-      url = "github:estin/simple-completion-language-server";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.naersk.follows = "naersk";
-    };
     hyprlock.url = "github:hyprwm/hyprlock";
     hyprlock.inputs.nixpkgs.follows = "nixpkgs";
 
-    television = {
-      url = "github:alexpasmantier/television";
-      inputs.naersk.follows = "naersk";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    television.url = "github:alexpasmantier/television";
 
     noogle-cli = {
       url = "github:juliamertz/noogle-cli";
@@ -111,18 +96,15 @@
         #   anyrun-provider
         #   ;
         #
-        simple-completion-language-server =
-          inputs.simple-completion-language-server.defaultPackage.${pkgs.system};
       });
       overlays = {
         default = final: prev: {
           inherit (outputs.packages.${prev.system})
-            simple-completion-language-server
             hyprlock
             television
             noogle-cli
-            walker
-            elephant
+            walker-git
+            elephant-git
             ;
           # anyrunPackages = {
           #   inherit (outputs.packages.${prev.system})
