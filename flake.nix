@@ -14,6 +14,7 @@
     nixpkgs.follows = "nix-sources/nixpkgs";
     nixpkgs-stable.follows = "nix-sources/nixpkgs-stable";
     nixpkgs-unstable.follows = "nix-sources/nixpkgs-unstable";
+    nixpkgs-master.follows = "nix-sources/nixpkgs-master";
 
     tmux-switcher.url = "github:percygt/tmux-switcher";
     tmux-nvim.url = "github:aserowy/tmux.nvim";

@@ -1,5 +1,5 @@
 ---
-name: Test and cache flake packages
+name: Update and cache
 
 "on":
   push:
@@ -8,6 +8,7 @@ name: Test and cache flake packages
     # 12:00AM PHT Sat,Tue,Thu
     - cron: 0 16 * * 5,1,3
   workflow_dispatch:
+
 jobs:
   update:
     runs-on: ubuntu-latest
