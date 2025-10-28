@@ -2,9 +2,11 @@
   description = "My stash of nix overlays";
   nixConfig = {
     extra-substituters = [
+      "https://percygtdev.cachix.org"
       "https://nix-community.cachix.org"
     ];
     extra-trusted-public-keys = [
+      "percygtdev.cachix.org-1:AGd4bI4nW7DkJgniWF4tS64EX2uSYIGqjZih2UVoxko="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
     ];
   };
@@ -77,7 +79,6 @@
         zen-browser = inputs.zen-browser.packages."${pkgs.system}".default;
         zen-browser-beta = inputs.zen-browser.packages."${pkgs.system}".beta;
         zen-browser-twilight = inputs.zen-browser.packages."${pkgs.system}".twilight;
-
       });
       overlays = {
         default = final: prev: {
