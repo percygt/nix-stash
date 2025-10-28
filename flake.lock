@@ -128,7 +128,6 @@
     "home-manager": {
       "inputs": {
         "nixpkgs": [
-          "nix-sources",
           "zen-browser",
           "nixpkgs"
         ]
@@ -407,15 +406,14 @@
         "nixpkgs-old": "nixpkgs-old",
         "nixpkgs-stable": "nixpkgs-stable_3",
         "nixpkgs-unstable": "nixpkgs-unstable",
-        "swayfx-unwrapped-git": "swayfx-unwrapped-git",
-        "zen-browser": "zen-browser"
+        "swayfx-unwrapped-git": "swayfx-unwrapped-git"
       },
       "locked": {
-        "lastModified": 1761670240,
-        "narHash": "sha256-vZhlamBzCFTCysfcsofMk3xjF1SyzCmD7qTEkvG6/Fc=",
+        "lastModified": 1761672483,
+        "narHash": "sha256-3kxdWxGxYc0Fa9j2QZidgeoY4eVKtGi44Y4Sw5+xT/4=",
         "owner": "percygt",
         "repo": "nix-sources",
-        "rev": "e5c76ef8bcf8d98d423b8dde58921632cea694c9",
+        "rev": "778b3141900ecb5e52c3291092039187f8ddb582",
         "type": "github"
       },
       "original": {
@@ -647,7 +645,8 @@
         "television": "television",
         "tmux-nvim": "tmux-nvim",
         "tmux-switcher": "tmux-switcher",
-        "walker": "walker"
+        "walker": "walker",
+        "zen-browser": "zen-browser"
       }
     },
     "rust-analyzer-src": {
@@ -922,7 +921,6 @@
       "inputs": {
         "home-manager": "home-manager",
         "nixpkgs": [
-          "nix-sources",
           "nixpkgs-unstable"
         ]
       },
