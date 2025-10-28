@@ -32,6 +32,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.elephant.follows = "elephant";
     };
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      # IMPORTANT: we're using "libgbm" and is only available in unstable so ensure
+      # to have it up to date or simply don't specify the nixpkgs input
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
   outputs =
     { self, ... }@inputs:
@@ -41,7 +47,7 @@
         "aarch64-linux"
         "x86_64-linux"
       ];
-      # overlays = [ ];
+      # overlays = {};
       forEachSystem = inputs.nixpkgs.lib.genAttrs systems;
       packagesFrom =
         inputs-nixpkgs:
@@ -68,6 +74,10 @@
         television = inputs.television.packages."${pkgs.system}".default;
         walker = inputs.walker.packages."${pkgs.system}".default;
         elephant = inputs.elephant.packages."${pkgs.system}".default;
+        zen-browser = inputs.zen-browser.packages."${pkgs.system}".default;
+        zen-browser-beta = inputs.zen-browser.packages."${pkgs.system}".beta;
+        zen-browser-twilight = inputs.zen-browser.packages."${pkgs.system}".twilight;
+
       });
       overlays = {
         default = final: prev: {
@@ -76,6 +86,9 @@
             television
             walker
             elephant
+            zen-browser
+            zen-browser-beta
+            zen-browser-twilight
             ;
           tmuxPlugins = prev.tmuxPlugins // {
             inherit (outputs.packages.${prev.system}) tmux-switcher;
