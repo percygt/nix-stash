@@ -70,31 +70,42 @@
     in
     {
       formatter = forAllSystems (pkgs: pkgs.nixfmt-rfc-style);
-      packages = forAllSystems (pkgs: {
-        tmux-switcher = inputs.tmux-switcher.packages."${pkgs.system}".default;
-        hyprlock = inputs.hyprlock.packages."${pkgs.system}".default;
-        television = inputs.television.packages."${pkgs.system}".default;
-        walker = inputs.walker.packages."${pkgs.system}".default;
-        elephant = inputs.elephant.packages."${pkgs.system}".default;
-        zen-browser = inputs.zen-browser.packages."${pkgs.system}".default;
-        zen-browser-beta = inputs.zen-browser.packages."${pkgs.system}".beta;
-        zen-browser-twilight = inputs.zen-browser.packages."${pkgs.system}".twilight;
-      });
+      packages = forAllSystems (
+        pkgs:
+        let
+          inherit (pkgs.stdenv.hostPlatform) system;
+        in
+        {
+          tmux-switcher = inputs.tmux-switcher.packages."${system}".default;
+          hyprlock = inputs.hyprlock.packages."${system}".default;
+          television = inputs.television.packages."${system}".default;
+          walker = inputs.walker.packages."${system}".default;
+          elephant = inputs.elephant.packages."${system}".default;
+          zen-browser = inputs.zen-browser.packages."${system}".default;
+          zen-browser-beta = inputs.zen-browser.packages."${system}".beta;
+          zen-browser-twilight = inputs.zen-browser.packages."${system}".twilight;
+        }
+      );
       overlays = {
-        default = final: prev: {
-          inherit (outputs.packages.${prev.system})
-            hyprlock
-            television
-            walker
-            elephant
-            zen-browser
-            zen-browser-beta
-            zen-browser-twilight
-            ;
-          tmuxPlugins = prev.tmuxPlugins // {
-            inherit (outputs.packages.${prev.system}) tmux-switcher;
+        default =
+          final: prev:
+          let
+            inherit (prev.stdenv.hostPlatform) system;
+          in
+          {
+            inherit (outputs.packages.${system})
+              hyprlock
+              television
+              walker
+              elephant
+              zen-browser
+              zen-browser-beta
+              zen-browser-twilight
+              ;
+            tmuxPlugins = prev.tmuxPlugins // {
+              inherit (outputs.packages.${system}) tmux-switcher;
+            };
           };
-        };
       };
 
     };
