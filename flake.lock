@@ -854,11 +854,11 @@
         "nixpkgs-mozilla": "nixpkgs-mozilla"
       },
       "locked": {
-        "lastModified": 1762716652,
-        "narHash": "sha256-u7toQoscCkb8hvynJZDdVWvfMEuLxiMCGPzDthOOjcQ=",
+        "lastModified": 1763065932,
+        "narHash": "sha256-TBmqO9I67/5Te3DLhbH8iNiovwUQbKuiWrcX8RjiDKc=",
         "owner": "alexpasmantier",
         "repo": "television",
-        "rev": "2b1d96c56f95cee1faf814cf56b3c6caccd17176",
+        "rev": "adb29090419c2d472dcc40e4dfef9340e2f54c67",
         "type": "github"
       },
       "original": {
