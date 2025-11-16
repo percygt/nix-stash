@@ -97,6 +97,7 @@
           tilix = pkgs.callPackage ({ tilix }: tilix) { };
           xfce4-terminal = pkgs.callPackage ({ xfce }: xfce.xfce4-terminal) { };
           wezterm = pkgs.callPackage ({ wezterm }: wezterm) { };
+          cctv-viewer = pkgs.callPackage ({ cctv-viewer }: cctv-viewer) { };
           universal-android-debloater = pkgs.callPackage (
             { universal-android-debloater }: universal-android-debloater
           ) { };
@@ -117,24 +118,23 @@
             inherit (prev.stdenv.hostPlatform) system;
           in
           {
-            myBin = {
-              inherit (outputs.packages.${system})
-                emacs-unstable
-                neovim-unstable
-                nixos-cli
-                hyprlock
-                television
-                walker
-                elephant
-                zen-browser
-                zen-browser-beta
-                zen-browser-twilight
-                ghostty
-                tilix
-                xfce4-terminal
-                wezterm
-                ;
-            };
+            inherit (outputs.packages.${system})
+              emacs-unstable
+              neovim-unstable
+              nixos-cli
+              cctv-viewer
+              hyprlock
+              television
+              walker
+              elephant
+              zen-browser
+              zen-browser-beta
+              zen-browser-twilight
+              ghostty
+              tilix
+              xfce4-terminal
+              wezterm
+              ;
             tmuxPlugins = prev.tmuxPlugins // {
               inherit (outputs.packages.${system}) tmux-switcher;
             };
