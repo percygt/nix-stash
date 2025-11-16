@@ -88,15 +88,20 @@
           tmux-switcher = inputs.tmux-switcher.packages."${system}".default;
           hyprlock = inputs.hyprlock.packages."${system}".default;
           television = inputs.television.packages."${system}".default;
+
           walker = inputs.walker.packages."${system}".default;
           elephant = inputs.elephant.packages."${system}".default;
+
           zen-browser = inputs.zen-browser.packages."${system}".default;
           zen-browser-beta = inputs.zen-browser.packages."${system}".beta;
           zen-browser-twilight = inputs.zen-browser.packages."${system}".twilight;
+
           ghostty = pkgs.callPackage ({ ghostty }: ghostty) { };
           tilix = pkgs.callPackage ({ tilix }: tilix) { };
           xfce4-terminal = pkgs.callPackage ({ xfce }: xfce.xfce4-terminal) { };
           wezterm = pkgs.callPackage ({ wezterm }: wezterm) { };
+          foot = pkgs.callPackage ({ foot }: foot) { };
+
           cctv-viewer = pkgs.callPackage ({ cctv-viewer }: cctv-viewer) { };
           universal-android-debloater = pkgs.callPackage (
             { universal-android-debloater }: universal-android-debloater
