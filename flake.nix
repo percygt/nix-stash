@@ -4,10 +4,12 @@
     extra-substituters = [
       "https://percygtdev.cachix.org"
       "https://nix-community.cachix.org"
+      "https://watersucks.cachix.org"
     ];
     extra-trusted-public-keys = [
       "percygtdev.cachix.org-1:AGd4bI4nW7DkJgniWF4tS64EX2uSYIGqjZih2UVoxko="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "watersucks.cachix.org-1:6gadPC5R8iLWQ3EUtfu3GFrVY7X6I4Fwz/ihW25Jbv8="
     ];
   };
 
@@ -17,6 +19,10 @@
     nixpkgs-stable.follows = "nix-sources/nixpkgs-stable";
     nixpkgs-unstable.follows = "nix-sources/nixpkgs-unstable";
     nixpkgs-master.follows = "nix-sources/nixpkgs-master";
+
+    nixos-cli.url = "github:nix-community/nixos-cli";
+    emacs-overlay.url = "github:nix-community/emacs-overlay/";
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
 
     tmux-switcher.url = "github:percygt/tmux-switcher";
     tmux-nvim.url = "github:aserowy/tmux.nvim";
@@ -49,7 +55,10 @@
         "aarch64-linux"
         "x86_64-linux"
       ];
-      # overlays = {};
+      overlays = {
+        emacs = inputs.emacs-overlay.overlays.default;
+        neovim-nightly = inputs.neovim-nightly-overlay.overlays.default;
+      };
       forEachSystem = inputs.nixpkgs.lib.genAttrs systems;
       packagesFrom =
         inputs-nixpkgs:
@@ -60,7 +69,7 @@
             function (
               import inputs-nixpkgs {
                 inherit system;
-                # overlays = builtins.attrValues overlays;
+                overlays = builtins.attrValues overlays;
                 config.allowUnfree = true;
               }
             )
@@ -84,6 +93,21 @@
           zen-browser = inputs.zen-browser.packages."${system}".default;
           zen-browser-beta = inputs.zen-browser.packages."${system}".beta;
           zen-browser-twilight = inputs.zen-browser.packages."${system}".twilight;
+          ghostty = pkgs.callPackage ({ ghostty }: ghostty) { };
+          tilix = pkgs.callPackage ({ tilix }: tilix) { };
+          xfce4-terminal = pkgs.callPackage ({ xfce }: xfce.xfce4-terminal) { };
+          wezterm = pkgs.callPackage ({ wezterm }: wezterm) { };
+          universal-android-debloater = pkgs.callPackage (
+            { universal-android-debloater }: universal-android-debloater
+          ) { };
+          emacs-unstable = pkgs.callPackage (
+            { emacs-unstable }:
+            emacs-unstable.override {
+              withTreeSitter = true;
+            }
+          ) { };
+          neovim-unstable = pkgs.callPackage ({ neovim }: neovim) { };
+          nixos-cli = inputs.nixos-cli.packages.${system}.default;
         }
       );
       overlays = {
@@ -93,15 +117,24 @@
             inherit (prev.stdenv.hostPlatform) system;
           in
           {
-            inherit (outputs.packages.${system})
-              hyprlock
-              television
-              walker
-              elephant
-              zen-browser
-              zen-browser-beta
-              zen-browser-twilight
-              ;
+            myBin = {
+              inherit (outputs.packages.${system})
+                emacs-unstable
+                neovim-unstable
+                nixos-cli
+                hyprlock
+                television
+                walker
+                elephant
+                zen-browser
+                zen-browser-beta
+                zen-browser-twilight
+                ghostty
+                tilix
+                xfce4-terminal
+                wezterm
+                ;
+            };
             tmuxPlugins = prev.tmuxPlugins // {
               inherit (outputs.packages.${system}) tmux-switcher;
             };
