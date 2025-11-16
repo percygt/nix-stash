@@ -135,6 +135,8 @@
               zen-browser
               zen-browser-beta
               zen-browser-twilight
+
+              foot
               ghostty
               tilix
               xfce4-terminal
