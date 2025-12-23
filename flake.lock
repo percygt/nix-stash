@@ -454,11 +454,11 @@
         "swayfx-git": "swayfx-git"
       },
       "locked": {
-        "lastModified": 1766487683,
-        "narHash": "sha256-28icpSnAF5eOgD8s8NGNJ+38sOtKbpQo5Ftc6HCEhY8=",
+        "lastModified": 1766487932,
+        "narHash": "sha256-+CRG96PODgJtuC6utZnxjkpXr2bmfzyLKw8uKD9Yi6g=",
         "owner": "percygt",
         "repo": "nix-sources",
-        "rev": "5ccd00dde0ff7144c81c76fa3b929c3fcf45506a",
+        "rev": "fe82e329fe9860bcad9e7b92c07d393d896e6c7a",
         "type": "github"
       },
       "original": {
@@ -521,11 +521,11 @@
     },
     "nixpkgs-master": {
       "locked": {
-        "lastModified": 1766485062,
-        "narHash": "sha256-WJ4TxYiP5uwxWH+mrSBGbe5/lqC5pEhfDgM7dnYR6cw=",
+        "lastModified": 1766486978,
+        "narHash": "sha256-F5plWY/QL11LZjsgz5PkL5B3WeObIz5FUuty2iUDiY4=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "b3aa15d3deb466cf8fc14f3fa9b6d64831909510",
+        "rev": "3e125c9de4b43f0ca06c33301f34f1a15b00a2a1",
         "type": "github"
       },
       "original": {
