@@ -40,6 +40,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.elephant.follows = "elephant";
     };
+
+    fenix.url = "github:nix-community/fenix";
+    fenix.inputs.nixpkgs.follows = "nixpkgs";
+
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
       # IMPORTANT: we're using "libgbm" and is only available in unstable so ensure
@@ -58,6 +62,7 @@
       overlays = {
         emacs = inputs.emacs-overlay.overlays.default;
         neovim-nightly = inputs.neovim-nightly-overlay.overlays.default;
+        fenix = inputs.fenix.overlays.default;
       };
       forEachSystem = inputs.nixpkgs.lib.genAttrs systems;
       packagesFrom =
@@ -114,6 +119,9 @@
           ) { };
           neovim-unstable = pkgs.callPackage ({ neovim }: neovim) { };
           nixos-cli = inputs.nixos-cli.packages.${system}.default;
+
+          rust-analyzer-nightly = inputs.fenix.rust-analyzer;
+          rust-minimal-toolchain = inputs.fenix.minimal.toolchain;
         }
       );
       overlays = {
@@ -124,6 +132,8 @@
           in
           {
             inherit (outputs.packages.${system})
+              rust-analyzer-nightly
+              rust-minimal-toolchain
               emacs-unstable
               neovim-unstable
               nixos-cli
