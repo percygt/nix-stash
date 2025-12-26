@@ -120,8 +120,8 @@
           neovim-unstable = pkgs.callPackage ({ neovim }: neovim) { };
           nixos-cli = inputs.nixos-cli.packages.${system}.default;
 
-          rust-analyzer-nightly = inputs.fenix.rust-analyzer;
-          rust-minimal-toolchain = inputs.fenix.minimal.toolchain;
+          rust-analyzer-nightly = inputs.fenix.packages.${system}.rust-analyzer;
+          rust-minimal-toolchain = inputs.fenix.packages.${system}.minimal.toolchain;
         }
       );
       overlays = {
