@@ -117,6 +117,18 @@
               withTreeSitter = true;
             }
           ) { };
+          emacs-pgtk = pkgs.callPackage (
+            { emacs-pgtk }:
+            emacs-pgtk.override {
+              withTreeSitter = true;
+            }
+          ) { };
+          emacs-unstable-pgtk = pkgs.callPackage (
+            { emacs-unstable-pgtk }:
+            emacs-unstable-pgtk.override {
+              withTreeSitter = true;
+            }
+          ) { };
           neovim-unstable = pkgs.callPackage ({ neovim }: neovim) { };
           nixos-cli = inputs.nixos-cli.packages.${system}.default;
 
@@ -135,6 +147,8 @@
               rust-analyzer-nightly
               rust-minimal-toolchain
               emacs-unstable
+              emacs-pgtk
+              emacs-unstable-pgtk
               neovim-unstable
               nixos-cli
               cctv-viewer
