@@ -29,7 +29,6 @@
     tmux-nvim.flake = false;
 
     hyprlock.url = "github:hyprwm/hyprlock";
-    hyprlock.inputs.nixpkgs.follows = "nixpkgs";
 
     television.url = "github:alexpasmantier/television";
     elephant.url = "github:abenz1267/elephant";
