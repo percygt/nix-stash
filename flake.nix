@@ -49,6 +49,11 @@
       # to have it up to date or simply don't specify the nixpkgs input
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+    statix = {
+      url = "github:molybdenumsoftware/statix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
   outputs =
     { self, ... }@inputs:
@@ -82,13 +87,14 @@
       forAllSystems = packagesFrom inputs.nixpkgs;
     in
     {
-      formatter = forAllSystems (pkgs: pkgs.nixfmt-rfc-style);
+      formatter = forAllSystems (pkgs: pkgs.nixfmt);
       packages = forAllSystems (
         pkgs:
         let
           inherit (pkgs.stdenv.hostPlatform) system;
         in
         {
+          statix = inputs.statix.packages."${system}".default;
           tmux-switcher = inputs.tmux-switcher.packages."${system}".default;
           hyprlock = inputs.hyprlock.packages."${system}".default;
           television = inputs.television.packages."${system}".default;
@@ -164,6 +170,8 @@
               tilix
               xfce4-terminal
               wezterm
+
+              statix
               ;
             tmuxPlugins = prev.tmuxPlugins // {
               inherit (outputs.packages.${system}) tmux-switcher;
