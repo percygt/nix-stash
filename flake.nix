@@ -108,7 +108,7 @@
 
           ghostty = pkgs.callPackage ({ ghostty }: ghostty) { };
           tilix = pkgs.callPackage ({ tilix }: tilix) { };
-          xfce4-terminal = pkgs.callPackage ({ xfce }: xfce.xfce4-terminal) { };
+          xfce4-terminal = pkgs.callPackage ({ xfce4-terminal }: xfce4-terminal) { };
           wezterm = pkgs.callPackage ({ wezterm }: wezterm) { };
           foot = pkgs.callPackage ({ foot }: foot) { };
 
