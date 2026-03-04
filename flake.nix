@@ -160,6 +160,7 @@
               inherit (outputs.packages.${system})
                 rust-analyzer-nightly
                 rust-minimal-toolchain
+                sherlock
                 emacs-unstable
                 emacs-pgtk
                 emacs-unstable-pgtk
