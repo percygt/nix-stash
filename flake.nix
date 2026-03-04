@@ -99,54 +99,52 @@
           inherit (pkgs.stdenv.hostPlatform) system;
         in
         {
-          stax = {
-            sherlock = inputs.sherlock.packages."${system}".default;
-            statix = inputs.statix.packages."${system}".default;
-            tmux-switcher = inputs.tmux-switcher.packages."${system}".default;
-            hyprlock = inputs.hyprlock.packages."${system}".default;
-            television = inputs.television.packages."${system}".default;
+          sherlock = inputs.sherlock.packages."${system}".default;
+          statix = inputs.statix.packages."${system}".default;
+          tmux-switcher = inputs.tmux-switcher.packages."${system}".default;
+          hyprlock = inputs.hyprlock.packages."${system}".default;
+          television = inputs.television.packages."${system}".default;
 
-            walker = inputs.walker.packages."${system}".default;
-            elephant = inputs.elephant.packages."${system}".default;
+          walker = inputs.walker.packages."${system}".default;
+          elephant = inputs.elephant.packages."${system}".default;
 
-            zen-browser = inputs.zen-browser.packages."${system}".default;
-            zen-browser-beta = inputs.zen-browser.packages."${system}".beta;
-            zen-browser-twilight = inputs.zen-browser.packages."${system}".twilight;
+          zen-browser = inputs.zen-browser.packages."${system}".default;
+          zen-browser-beta = inputs.zen-browser.packages."${system}".beta;
+          zen-browser-twilight = inputs.zen-browser.packages."${system}".twilight;
 
-            ghostty = pkgs.callPackage ({ ghostty }: ghostty) { };
-            tilix = pkgs.callPackage ({ tilix }: tilix) { };
-            xfce4-terminal = pkgs.callPackage ({ xfce4-terminal }: xfce4-terminal) { };
-            wezterm = pkgs.callPackage ({ wezterm }: wezterm) { };
-            foot = pkgs.callPackage ({ foot }: foot) { };
+          ghostty = pkgs.callPackage ({ ghostty }: ghostty) { };
+          tilix = pkgs.callPackage ({ tilix }: tilix) { };
+          xfce4-terminal = pkgs.callPackage ({ xfce4-terminal }: xfce4-terminal) { };
+          wezterm = pkgs.callPackage ({ wezterm }: wezterm) { };
+          foot = pkgs.callPackage ({ foot }: foot) { };
 
-            cctv-viewer = pkgs.callPackage ({ cctv-viewer }: cctv-viewer) { };
-            universal-android-debloater = pkgs.callPackage (
-              { universal-android-debloater }: universal-android-debloater
-            ) { };
-            emacs-unstable = pkgs.callPackage (
-              { emacs-unstable }:
-              emacs-unstable.override {
-                withTreeSitter = true;
-              }
-            ) { };
-            emacs-pgtk = pkgs.callPackage (
-              { emacs-pgtk }:
-              emacs-pgtk.override {
-                withTreeSitter = true;
-              }
-            ) { };
-            emacs-unstable-pgtk = pkgs.callPackage (
-              { emacs-unstable-pgtk }:
-              emacs-unstable-pgtk.override {
-                withTreeSitter = true;
-              }
-            ) { };
-            neovim-unstable = pkgs.callPackage ({ neovim }: neovim) { };
-            nixos-cli = inputs.nixos-cli.packages.${system}.default;
+          cctv-viewer = pkgs.callPackage ({ cctv-viewer }: cctv-viewer) { };
+          universal-android-debloater = pkgs.callPackage (
+            { universal-android-debloater }: universal-android-debloater
+          ) { };
+          emacs-unstable = pkgs.callPackage (
+            { emacs-unstable }:
+            emacs-unstable.override {
+              withTreeSitter = true;
+            }
+          ) { };
+          emacs-pgtk = pkgs.callPackage (
+            { emacs-pgtk }:
+            emacs-pgtk.override {
+              withTreeSitter = true;
+            }
+          ) { };
+          emacs-unstable-pgtk = pkgs.callPackage (
+            { emacs-unstable-pgtk }:
+            emacs-unstable-pgtk.override {
+              withTreeSitter = true;
+            }
+          ) { };
+          neovim-unstable = pkgs.callPackage ({ neovim }: neovim) { };
+          nixos-cli = inputs.nixos-cli.packages.${system}.default;
 
-            rust-analyzer-nightly = inputs.fenix.packages.${system}.rust-analyzer;
-            rust-minimal-toolchain = inputs.fenix.packages.${system}.minimal.toolchain;
-          };
+          rust-analyzer-nightly = inputs.fenix.packages.${system}.rust-analyzer;
+          rust-minimal-toolchain = inputs.fenix.packages.${system}.minimal.toolchain;
         }
       );
       overlays = {
