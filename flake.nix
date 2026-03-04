@@ -40,6 +40,11 @@
       inputs.elephant.follows = "elephant";
     };
 
+    sherlock = {
+      url = "github:Skxxtz/sherlock";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     fenix.url = "github:nix-community/fenix";
     fenix.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -94,51 +99,54 @@
           inherit (pkgs.stdenv.hostPlatform) system;
         in
         {
-          statix = inputs.statix.packages."${system}".default;
-          tmux-switcher = inputs.tmux-switcher.packages."${system}".default;
-          hyprlock = inputs.hyprlock.packages."${system}".default;
-          television = inputs.television.packages."${system}".default;
+          stax = {
+            sherlock = inputs.sherlock.packages."${system}".default;
+            statix = inputs.statix.packages."${system}".default;
+            tmux-switcher = inputs.tmux-switcher.packages."${system}".default;
+            hyprlock = inputs.hyprlock.packages."${system}".default;
+            television = inputs.television.packages."${system}".default;
 
-          walker = inputs.walker.packages."${system}".default;
-          elephant = inputs.elephant.packages."${system}".default;
+            walker = inputs.walker.packages."${system}".default;
+            elephant = inputs.elephant.packages."${system}".default;
 
-          zen-browser = inputs.zen-browser.packages."${system}".default;
-          zen-browser-beta = inputs.zen-browser.packages."${system}".beta;
-          zen-browser-twilight = inputs.zen-browser.packages."${system}".twilight;
+            zen-browser = inputs.zen-browser.packages."${system}".default;
+            zen-browser-beta = inputs.zen-browser.packages."${system}".beta;
+            zen-browser-twilight = inputs.zen-browser.packages."${system}".twilight;
 
-          ghostty = pkgs.callPackage ({ ghostty }: ghostty) { };
-          tilix = pkgs.callPackage ({ tilix }: tilix) { };
-          xfce4-terminal = pkgs.callPackage ({ xfce4-terminal }: xfce4-terminal) { };
-          wezterm = pkgs.callPackage ({ wezterm }: wezterm) { };
-          foot = pkgs.callPackage ({ foot }: foot) { };
+            ghostty = pkgs.callPackage ({ ghostty }: ghostty) { };
+            tilix = pkgs.callPackage ({ tilix }: tilix) { };
+            xfce4-terminal = pkgs.callPackage ({ xfce4-terminal }: xfce4-terminal) { };
+            wezterm = pkgs.callPackage ({ wezterm }: wezterm) { };
+            foot = pkgs.callPackage ({ foot }: foot) { };
 
-          cctv-viewer = pkgs.callPackage ({ cctv-viewer }: cctv-viewer) { };
-          universal-android-debloater = pkgs.callPackage (
-            { universal-android-debloater }: universal-android-debloater
-          ) { };
-          emacs-unstable = pkgs.callPackage (
-            { emacs-unstable }:
-            emacs-unstable.override {
-              withTreeSitter = true;
-            }
-          ) { };
-          emacs-pgtk = pkgs.callPackage (
-            { emacs-pgtk }:
-            emacs-pgtk.override {
-              withTreeSitter = true;
-            }
-          ) { };
-          emacs-unstable-pgtk = pkgs.callPackage (
-            { emacs-unstable-pgtk }:
-            emacs-unstable-pgtk.override {
-              withTreeSitter = true;
-            }
-          ) { };
-          neovim-unstable = pkgs.callPackage ({ neovim }: neovim) { };
-          nixos-cli = inputs.nixos-cli.packages.${system}.default;
+            cctv-viewer = pkgs.callPackage ({ cctv-viewer }: cctv-viewer) { };
+            universal-android-debloater = pkgs.callPackage (
+              { universal-android-debloater }: universal-android-debloater
+            ) { };
+            emacs-unstable = pkgs.callPackage (
+              { emacs-unstable }:
+              emacs-unstable.override {
+                withTreeSitter = true;
+              }
+            ) { };
+            emacs-pgtk = pkgs.callPackage (
+              { emacs-pgtk }:
+              emacs-pgtk.override {
+                withTreeSitter = true;
+              }
+            ) { };
+            emacs-unstable-pgtk = pkgs.callPackage (
+              { emacs-unstable-pgtk }:
+              emacs-unstable-pgtk.override {
+                withTreeSitter = true;
+              }
+            ) { };
+            neovim-unstable = pkgs.callPackage ({ neovim }: neovim) { };
+            nixos-cli = inputs.nixos-cli.packages.${system}.default;
 
-          rust-analyzer-nightly = inputs.fenix.packages.${system}.rust-analyzer;
-          rust-minimal-toolchain = inputs.fenix.packages.${system}.minimal.toolchain;
+            rust-analyzer-nightly = inputs.fenix.packages.${system}.rust-analyzer;
+            rust-minimal-toolchain = inputs.fenix.packages.${system}.minimal.toolchain;
+          };
         }
       );
       overlays = {
@@ -148,33 +156,37 @@
             inherit (prev.stdenv.hostPlatform) system;
           in
           {
-            inherit (outputs.packages.${system})
-              rust-analyzer-nightly
-              rust-minimal-toolchain
-              emacs-unstable
-              emacs-pgtk
-              emacs-unstable-pgtk
-              neovim-unstable
-              nixos-cli
-              cctv-viewer
-              hyprlock
-              television
-              walker
-              elephant
-              zen-browser
-              zen-browser-beta
-              zen-browser-twilight
+            stax = {
+              inherit (outputs.packages.${system})
+                rust-analyzer-nightly
+                rust-minimal-toolchain
+                emacs-unstable
+                emacs-pgtk
+                emacs-unstable-pgtk
+                neovim-unstable
+                nixos-cli
+                cctv-viewer
+                hyprlock
+                television
+                walker
+                elephant
+                zen-browser
+                zen-browser-beta
+                zen-browser-twilight
 
-              foot
-              ghostty
-              tilix
-              xfce4-terminal
-              wezterm
+                foot
+                ghostty
+                tilix
+                xfce4-terminal
+                wezterm
 
-              statix
-              ;
+                statix
+                ;
+            };
             tmuxPlugins = prev.tmuxPlugins // {
-              inherit (outputs.packages.${system}) tmux-switcher;
+              stax = {
+                inherit (outputs.packages.${system}) tmux-switcher;
+              };
             };
           };
       };
