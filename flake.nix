@@ -41,7 +41,7 @@
     };
 
     sherlock = {
-      url = "github:Skxxtz/sherlock";
+      url = "github:Skxxtz/sherlock/unstable";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
