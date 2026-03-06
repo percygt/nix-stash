@@ -91,63 +91,87 @@
           ))
         );
       forAllSystems = packagesFrom inputs.nixpkgs;
+
+      forAllStableSystems = packagesFrom inputs.nixpkgs-stable;
+
+      stablePkgs = forAllStableSystems (pkgs: {
+        wezterm = pkgs.callPackage ({ wezterm }: wezterm) { };
+        foot = pkgs.callPackage ({ foot }: foot) { };
+        mesa = pkgs.callPackage ({ mesa }: mesa) { };
+        mesa-32 = pkgs.callPackage ({ pkgsi686Linux }: pkgsi686Linux.mesa) { };
+        intel-vaapi-driver = pkgs.callPackage (
+          { intel-vaapi-driver }:
+          intel-vaapi-driver.override {
+            enableHybridCodec = true;
+          }
+        ) { };
+        intel-vaapi-driver-32 = pkgs.callPackage (
+          { driversi686Linux }:
+          driversi686Linux.intel-vaapi-driver.override {
+            enableHybridCodec = true;
+          }
+        ) { };
+        intel-media-driver = pkgs.callPackage ({ intel-media-driver }: intel-media-driver) { };
+        intel-media-driver-32 = pkgs.callPackage (
+          { driversi686Linux }: driversi686Linux.intel-media-driver
+        ) { };
+        intel-ocl = pkgs.callPackage ({ intel-ocl }: intel-ocl) { };
+        intel-compute-runtime = pkgs.callPackage ({ intel-compute-runtime }: intel-compute-runtime) { };
+        vpl-gpu-rt = pkgs.callPackage ({ vpl-gpu-rt }: vpl-gpu-rt) { };
+      });
     in
     {
       formatter = forAllSystems (pkgs: pkgs.nixfmt);
-      packages = forAllSystems (
-        pkgs:
-        let
-          inherit (pkgs.stdenv.hostPlatform) system;
-        in
-        {
-          sherlock = inputs.sherlock.packages."${system}".default;
-          statix = inputs.statix.packages."${system}".default;
-          tmux-switcher = inputs.tmux-switcher.packages."${system}".default;
-          hyprlock = inputs.hyprlock.packages."${system}".default;
-          television = inputs.television.packages."${system}".default;
+      packages =
+        stablePkgs
+        // (forAllSystems (
+          pkgs:
+          let
+            inherit (pkgs.stdenv.hostPlatform) system;
+          in
+          {
+            sherlock = inputs.sherlock.packages."${system}".default;
+            statix = inputs.statix.packages."${system}".default;
+            tmux-switcher = inputs.tmux-switcher.packages."${system}".default;
+            hyprlock = inputs.hyprlock.packages."${system}".default;
+            television = inputs.television.packages."${system}".default;
 
-          walker = inputs.walker.packages."${system}".default;
-          elephant = inputs.elephant.packages."${system}".default;
+            walker = inputs.walker.packages."${system}".default;
+            elephant = inputs.elephant.packages."${system}".default;
 
-          zen-browser = inputs.zen-browser.packages."${system}".default;
-          zen-browser-beta = inputs.zen-browser.packages."${system}".beta;
-          zen-browser-twilight = inputs.zen-browser.packages."${system}".twilight;
+            zen-browser = inputs.zen-browser.packages."${system}".default;
+            zen-browser-beta = inputs.zen-browser.packages."${system}".beta;
+            zen-browser-twilight = inputs.zen-browser.packages."${system}".twilight;
 
-          ghostty = pkgs.callPackage ({ ghostty }: ghostty) { };
-          tilix = pkgs.callPackage ({ tilix }: tilix) { };
-          xfce4-terminal = pkgs.callPackage ({ xfce4-terminal }: xfce4-terminal) { };
-          wezterm = pkgs.callPackage ({ wezterm }: wezterm) { };
-          foot = pkgs.callPackage ({ foot }: foot) { };
+            cctv-viewer = pkgs.callPackage ({ cctv-viewer }: cctv-viewer) { };
+            universal-android-debloater = pkgs.callPackage (
+              { universal-android-debloater }: universal-android-debloater
+            ) { };
+            emacs-unstable = pkgs.callPackage (
+              { emacs-unstable }:
+              emacs-unstable.override {
+                withTreeSitter = true;
+              }
+            ) { };
+            emacs-pgtk = pkgs.callPackage (
+              { emacs-pgtk }:
+              emacs-pgtk.override {
+                withTreeSitter = true;
+              }
+            ) { };
+            emacs-unstable-pgtk = pkgs.callPackage (
+              { emacs-unstable-pgtk }:
+              emacs-unstable-pgtk.override {
+                withTreeSitter = true;
+              }
+            ) { };
+            neovim-unstable = pkgs.callPackage ({ neovim }: neovim) { };
+            nixos-cli = inputs.nixos-cli.packages.${system}.default;
 
-          cctv-viewer = pkgs.callPackage ({ cctv-viewer }: cctv-viewer) { };
-          universal-android-debloater = pkgs.callPackage (
-            { universal-android-debloater }: universal-android-debloater
-          ) { };
-          emacs-unstable = pkgs.callPackage (
-            { emacs-unstable }:
-            emacs-unstable.override {
-              withTreeSitter = true;
-            }
-          ) { };
-          emacs-pgtk = pkgs.callPackage (
-            { emacs-pgtk }:
-            emacs-pgtk.override {
-              withTreeSitter = true;
-            }
-          ) { };
-          emacs-unstable-pgtk = pkgs.callPackage (
-            { emacs-unstable-pgtk }:
-            emacs-unstable-pgtk.override {
-              withTreeSitter = true;
-            }
-          ) { };
-          neovim-unstable = pkgs.callPackage ({ neovim }: neovim) { };
-          nixos-cli = inputs.nixos-cli.packages.${system}.default;
-
-          rust-analyzer-nightly = inputs.fenix.packages.${system}.rust-analyzer;
-          rust-minimal-toolchain = inputs.fenix.packages.${system}.minimal.toolchain;
-        }
-      );
+            rust-analyzer-nightly = inputs.fenix.packages.${system}.rust-analyzer;
+            rust-minimal-toolchain = inputs.fenix.packages.${system}.minimal.toolchain;
+          }
+        ));
       overlays = {
         default =
           final: prev:
@@ -157,30 +181,53 @@
           {
             stax = {
               inherit (outputs.packages.${system})
-                rust-analyzer-nightly
-                rust-minimal-toolchain
+
+                statix
                 sherlock
-                emacs-unstable
-                emacs-pgtk
-                emacs-unstable-pgtk
-                neovim-unstable
                 nixos-cli
                 cctv-viewer
                 hyprlock
                 television
+
+                # walker
                 walker
                 elephant
+
+                # zen browser
                 zen-browser
                 zen-browser-beta
                 zen-browser-twilight
 
+                # graphics
+                mesa
+                mesa-32
+                intel-vaapi-driver
+                intel-vaapi-driver-32
+                intel-media-driver
+                intel-media-driver-32
+                intel-ocl
+                intel-compute-runtime
+                vpl-gpu-rt
+
+                # rust
+                rust-analyzer-nightly
+                rust-minimal-toolchain
+
+                # emacs
+                emacs-unstable
+                emacs-pgtk
+                emacs-unstable-pgtk
+
+                # neovim
+                neovim-unstable
+
+                # stable builds
                 foot
                 ghostty
                 tilix
                 xfce4-terminal
                 wezterm
 
-                statix
                 ;
             };
             tmuxPlugins = prev.tmuxPlugins // {
