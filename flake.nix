@@ -4,12 +4,10 @@
     extra-substituters = [
       "https://percygtdev.cachix.org"
       "https://nix-community.cachix.org"
-      "https://watersucks.cachix.org"
     ];
     extra-trusted-public-keys = [
       "percygtdev.cachix.org-1:AGd4bI4nW7DkJgniWF4tS64EX2uSYIGqjZih2UVoxko="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      "watersucks.cachix.org-1:6gadPC5R8iLWQ3EUtfu3GFrVY7X6I4Fwz/ihW25Jbv8="
     ];
   };
 
@@ -24,12 +22,10 @@
     nixpkgs-master.follows = "nix-sources/nixpkgs-master";
 
     nixos-cli.url = "github:nix-community/nixos-cli";
-    emacs-overlay.url = "github:nix-community/emacs-overlay/";
+    emacs-overlay.url = "github:nix-community/emacs-overlay";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
 
     tmux-switcher.url = "github:percygt/tmux-switcher";
-    tmux-nvim.url = "github:aserowy/tmux.nvim";
-    tmux-nvim.flake = false;
 
     hyprlock.url = "github:hyprwm/hyprlock";
 
@@ -155,13 +151,8 @@
             };
           };
 
-        systems = [
-          "x86_64-linux"
-          "x86_64-darwin"
-          "aarch64-linux"
-          "aarch64-darwin"
-        ];
-
+        # after — pull from nixpkgs lib
+        systems = inputs.flake-parts.lib.defaultSystems;
       }
     );
 }
