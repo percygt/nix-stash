@@ -14,6 +14,9 @@
   };
 
   inputs = {
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    flake-parts.inputs.nixpkgs-lib.follows = "nixpkgs";
+
     nix-sources.url = "github:percygt/nix-sources";
     nixpkgs.follows = "nix-sources/nixpkgs";
     nixpkgs-stable.follows = "nix-sources/nixpkgs-stable";
@@ -31,9 +34,9 @@
     hyprlock.url = "github:hyprwm/hyprlock";
 
     television.url = "github:alexpasmantier/television";
+
     elephant.url = "github:abenz1267/elephant";
     elephant.inputs.nixpkgs.follows = "nixpkgs";
-
     walker = {
       url = "github:abenz1267/walker";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -62,169 +65,103 @@
 
   };
   outputs =
-    { self, ... }@inputs:
-    let
-      inherit (self) outputs;
-      systems = [
-        "aarch64-linux"
-        "x86_64-linux"
-      ];
-      overlays = {
-        emacs = inputs.emacs-overlay.overlays.default;
-        neovim-nightly = inputs.neovim-nightly-overlay.overlays.default;
-        fenix = inputs.fenix.overlays.default;
-      };
-      forEachSystem = inputs.nixpkgs.lib.genAttrs systems;
-      packagesFrom =
-        inputs-nixpkgs:
-        (
-          function:
-          (forEachSystem (
-            system:
-            function (
-              import inputs-nixpkgs {
-                inherit system;
-                overlays = builtins.attrValues overlays;
-                config.allowUnfree = true;
-              }
-            )
-          ))
-        );
-      forAllSystems = packagesFrom inputs.nixpkgs;
-
-      forAllStableSystems = packagesFrom inputs.nixpkgs-stable;
-
-      stablePkgs = forAllStableSystems (pkgs: {
-        wezterm = pkgs.callPackage ({ wezterm }: wezterm) { };
-        foot = pkgs.callPackage ({ foot }: foot) { };
-        mesa = pkgs.callPackage ({ mesa }: mesa) { };
-        mesa-32 = pkgs.callPackage ({ pkgsi686Linux }: pkgsi686Linux.mesa) { };
-        intel-vaapi-driver = pkgs.callPackage (
-          { intel-vaapi-driver }:
-          intel-vaapi-driver.override {
-            enableHybridCodec = true;
-          }
-        ) { };
-        intel-vaapi-driver-32 = pkgs.callPackage (
-          { driversi686Linux }:
-          driversi686Linux.intel-vaapi-driver.override {
-            enableHybridCodec = true;
-          }
-        ) { };
-        intel-media-driver = pkgs.callPackage ({ intel-media-driver }: intel-media-driver) { };
-        intel-media-driver-32 = pkgs.callPackage (
-          { driversi686Linux }: driversi686Linux.intel-media-driver
-        ) { };
-        intel-ocl = pkgs.callPackage ({ intel-ocl }: intel-ocl) { };
-        intel-compute-runtime = pkgs.callPackage ({ intel-compute-runtime }: intel-compute-runtime) { };
-        vpl-gpu-rt = pkgs.callPackage ({ vpl-gpu-rt }: vpl-gpu-rt) { };
-      });
-    in
-    {
-      formatter = forAllSystems (pkgs: pkgs.nixfmt);
-      packages =
-        stablePkgs
-        // (forAllSystems (
-          pkgs:
-          let
-            inherit (pkgs.stdenv.hostPlatform) system;
-          in
+    inputs:
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } (
+      { inputs, ... }:
+      {
+        imports = [ inputs.flake-parts.flakeModules.easyOverlay ];
+        perSystem =
           {
-            sherlock = inputs.sherlock.packages."${system}".default;
-            statix = inputs.statix.packages."${system}".default;
-            tmux-switcher = inputs.tmux-switcher.packages."${system}".default;
-            hyprlock = inputs.hyprlock.packages."${system}".default;
-            television = inputs.television.packages."${system}".default;
-
-            walker = inputs.walker.packages."${system}".default;
-            elephant = inputs.elephant.packages."${system}".default;
-
-            zen-browser = inputs.zen-browser.packages."${system}".default;
-            zen-browser-beta = inputs.zen-browser.packages."${system}".beta;
-            zen-browser-twilight = inputs.zen-browser.packages."${system}".twilight;
-
-            cctv-viewer = pkgs.callPackage ({ cctv-viewer }: cctv-viewer) { };
-            universal-android-debloater = pkgs.callPackage (
-              { universal-android-debloater }: universal-android-debloater
-            ) { };
-            emacs-unstable = pkgs.callPackage (
-              { emacs-unstable }: emacs-unstable.override { withTreeSitter = true; }
-            ) { };
-            emacs-pgtk = pkgs.callPackage ({ emacs-pgtk }: emacs-pgtk.override { withTreeSitter = true; }) { };
-            emacs-unstable-pgtk = pkgs.callPackage (
-              { emacs-unstable-pgtk }: emacs-unstable-pgtk.override { withTreeSitter = true; }
-            ) { };
-            neovim-unstable = pkgs.callPackage ({ neovim }: neovim) { };
-            nixos-cli = inputs.nixos-cli.packages.${system}.default;
-
-            rust-analyzer-nightly = inputs.fenix.packages.${system}.rust-analyzer;
-            rust-minimal-toolchain = inputs.fenix.packages.${system}.minimal.toolchain;
-          }
-        ));
-      overlays = {
-        default =
-          final: prev:
+            inputs',
+            system,
+            pkgs,
+            pkgs-stable,
+            config,
+            ...
+          }:
           let
-            inherit (prev.stdenv.hostPlatform) system;
-          in
-          {
-            stax = {
-              inherit (outputs.packages.${system})
-
-                statix
-                sherlock
-                nixos-cli
-                cctv-viewer
-                hyprlock
-                television
-
-                # walker
-                walker
-                elephant
-
-                # zen browser
-                zen-browser
-                zen-browser-beta
-                zen-browser-twilight
-
-                # graphics
-                mesa
-                mesa-32
-                intel-vaapi-driver
-                intel-vaapi-driver-32
-                intel-media-driver
-                intel-media-driver-32
-                intel-ocl
-                intel-compute-runtime
-                vpl-gpu-rt
-
-                # rust
-                rust-analyzer-nightly
-                rust-minimal-toolchain
-
-                # emacs
-                emacs-unstable
-                emacs-pgtk
-                emacs-unstable-pgtk
-
-                # neovim
-                neovim-unstable
-
-                # stable builds
-                foot
-                ghostty
-                tilix
-                xfce4-terminal
-                wezterm
-                ;
+            pkgAttrs = {
+              inherit system;
+              config.allowUnfree = true;
+              overlays = [
+                inputs.emacs-overlay.overlays.default
+                inputs.neovim-nightly-overlay.overlays.default
+                inputs.fenix.overlays.default
+              ];
             };
-            tmuxPlugins = prev.tmuxPlugins // {
-              stax = {
-                inherit (outputs.packages.${system}) tmux-switcher;
-              };
+          in
+          {
+            _module.args = {
+              pkgs = import inputs.nixpkgs pkgAttrs;
+              pkgs-stable = import inputs.nixpkgs-stable pkgAttrs;
+            };
+            overlayAttrs.stax = config.packages;
+            packages = {
+              sherlock = inputs'.sherlock.packages.default;
+              statix = inputs'.statix.packages.default;
+              tmux-switcher = inputs'.tmux-switcher.packages.default;
+              hyprlock = inputs'.hyprlock.packages.default;
+              television = inputs'.television.packages.default;
+              walker = inputs'.walker.packages.default;
+              elephant = inputs'.elephant.packages.default;
+              zen-browser = inputs'.zen-browser.packages.default;
+              zen-browser-beta = inputs'.zen-browser.packages.beta;
+              zen-browser-twilight = inputs'.zen-browser.packages.twilight;
+              nixos-cli = inputs'.nixos-cli.packages.default;
+              rust-analyzer-nightly = inputs'.fenix.packages.rust-analyzer;
+              rust-minimal-toolchain = inputs'.fenix.packages.minimal.toolchain;
+
+              cctv-viewer = pkgs.callPackage ({ cctv-viewer }: cctv-viewer) { };
+              universal-android-debloater = pkgs.callPackage (
+                { universal-android-debloater }: universal-android-debloater
+              ) { };
+              emacs-unstable = pkgs.callPackage (
+                { emacs-unstable }: emacs-unstable.override { withTreeSitter = true; }
+              ) { };
+              emacs-pgtk = pkgs.callPackage ({ emacs-pgtk }: emacs-pgtk.override { withTreeSitter = true; }) { };
+              emacs-unstable-pgtk = pkgs.callPackage (
+                { emacs-unstable-pgtk }: emacs-unstable-pgtk.override { withTreeSitter = true; }
+              ) { };
+
+              neovim-unstable = pkgs.callPackage ({ neovim }: neovim) { };
+
+              wezterm = pkgs-stable.callPackage ({ wezterm }: wezterm) { };
+              foot = pkgs-stable.callPackage ({ foot }: foot) { };
+
+              mesa = pkgs-stable.callPackage ({ mesa }: mesa) { };
+              mesa-32 = pkgs-stable.callPackage ({ pkgsi686Linux }: pkgsi686Linux.mesa) { };
+              intel-vaapi-driver = pkgs-stable.callPackage (
+                { intel-vaapi-driver }:
+                intel-vaapi-driver.override {
+                  enableHybridCodec = true;
+                }
+              ) { };
+              intel-vaapi-driver-32 = pkgs-stable.callPackage (
+                { driversi686Linux }:
+                driversi686Linux.intel-vaapi-driver.override {
+                  enableHybridCodec = true;
+                }
+              ) { };
+              intel-media-driver = pkgs-stable.callPackage ({ intel-media-driver }: intel-media-driver) { };
+              intel-media-driver-32 = pkgs-stable.callPackage (
+                { driversi686Linux }: driversi686Linux.intel-media-driver
+              ) { };
+              intel-ocl = pkgs-stable.callPackage ({ intel-ocl }: intel-ocl) { };
+              intel-compute-runtime = pkgs-stable.callPackage (
+                { intel-compute-runtime }: intel-compute-runtime
+              ) { };
+              vpl-gpu-rt = pkgs-stable.callPackage ({ vpl-gpu-rt }: vpl-gpu-rt) { };
+
             };
           };
-      };
 
-    };
+        systems = [
+          "x86_64-linux"
+          "x86_64-darwin"
+          "aarch64-linux"
+          "aarch64-darwin"
+        ];
+
+      }
+    );
 }
