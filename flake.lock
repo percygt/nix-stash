@@ -846,7 +846,6 @@
         "sherlock": "sherlock",
         "statix": "statix",
         "television": "television",
-        "tmux-nvim": "tmux-nvim",
         "tmux-switcher": "tmux-switcher",
         "walker": "walker",
         "zen-browser": "zen-browser"
@@ -1081,22 +1080,6 @@
       "original": {
         "owner": "alexpasmantier",
         "repo": "television",
-        "type": "github"
-      }
-    },
-    "tmux-nvim": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1742369261,
-        "narHash": "sha256-/XIjqQr9loWVTXZDaZx2bSQgco46z7yam50dCnM5p1U=",
-        "owner": "aserowy",
-        "repo": "tmux.nvim",
-        "rev": "2c1c3be0ef287073cef963f2aefa31a15c8b9cd8",
-        "type": "github"
-      },
-      "original": {
-        "owner": "aserowy",
-        "repo": "tmux.nvim",
         "type": "github"
       }
     },
